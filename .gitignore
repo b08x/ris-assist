@@ -181,6 +181,7 @@ logs/
 tmp/
 temp/
 
+.codemap/
 # ─────────────────────────────────────────────────────────────────────────────
 #  If something sensitive was already committed, this file will not remove it.
 #  Untrack it, then rewrite history before the repository is made public:
