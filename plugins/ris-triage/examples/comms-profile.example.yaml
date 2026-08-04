@@ -1,0 +1,99 @@
+# Example comms profile — fictional site
+#
+# Riverside Regional Imaging. Every name here is invented. This file
+# demonstrates the schema; a real profile is written by /comms-tune to a local
+# path outside the plugin directory and never enters this repository.
+
+version: 1
+site: Riverside Regional Imaging
+
+conventions:
+  timezone: America/New_York
+  time_format: 12h
+  placeholder_token: "[TBD]"
+  cause_marking: required        # confirmed | suspected
+  incident_ref_format: "INC0#######"
+  quiet_hours: "22:00-06:00 — page instead of email for severity 1"
+
+distribution:
+  # Names the site actually uses. Unknown entries stay unknown.
+  radiologists: "DL-Radiology-Physicians"
+  technologists: "DL-Imaging-Techs"
+  front_desk: "DL-Imaging-Scheduling"
+  referring: "DL-Ambulatory-Clinicians"
+  it_noc: "#imaging-ops"
+  leadership: "DL-Imaging-Leadership"
+
+approval:
+  severity_1: "Drafted by analyst, approved by on-call manager, sent by service desk"
+  severity_2: "Drafted and sent by analyst; manager copied"
+  severity_3: "Analyst discretion"
+
+workflow_language:
+  # Site-local names. /downtime must use these verbatim for clinical audiences.
+  downtime_procedure: "Imaging Downtime Packet (Form IMG-14)"
+  paper_requisition: "yellow requisition slips"
+  dictation_fallback: "phone dictation line, extension 4412"
+  pacs_direct_read: "read direct from PACS worklist, do not wait for RIS status"
+
+update_cadence:
+  severity_1: "every 30 minutes"
+  severity_2: "every 2 hours"
+  severity_3: "at resolution"
+
+voice:
+  formality: operational
+  person: "first person plural (we)"
+  apology_language: "resolution notices only, one sentence maximum"
+  banned_phrasing:
+    - "we apologize for any inconvenience"
+    - "please be patient"
+    - any wording implying clinical guidance
+
+variants:
+
+  - key: unplanned / technologists / email
+    required_fields: [incident_ref, start_time, affected_workflows, workaround, next_update_time]
+    lead_with: action
+    sections: [what_is_happening, what_to_do_now, what_not_to_do, next_update]
+    notes: "Must name the Imaging Downtime Packet explicitly."
+
+  - key: unplanned / radiologists / teams
+    required_fields: [incident_ref, affected_workflows, workaround, next_update_time]
+    lead_with: action
+    sections: [impact, read_path, next_update]
+    notes: "Short. Radiologists read the first two lines only."
+
+  - key: unplanned / leadership / email
+    required_fields: [incident_ref, start_time, scope, business_impact, eta, owner]
+    lead_with: scope
+    sections: [summary, scope, impact, actions_underway, eta]
+
+  - key: interval_update / all / teams
+    required_fields: [incident_ref, elapsed, status_change, next_update_time]
+    lead_with: delta
+    continuity: required          # carries forward ref, start time, prior impact
+    notes: "State explicitly when a previously published fact has changed."
+
+  - key: planned / technologists / email
+    required_fields: [window_start, window_end, affected_workflows, workaround, contact]
+    lead_with: schedule
+    lead_time: "5 business days, reminder at 24 hours"
+
+  - key: resolved / all / email
+    required_fields: [incident_ref, start_time, end_time, cause_status, residual_actions]
+    lead_with: resolution
+    continuity: required
+    notes: "Cause marked confirmed or suspected. Residual actions listed even when none."
+
+  - key: degraded / it_noc / teams
+    required_fields: [interface_name, symptom, queue_state, ticket_ref]
+    lead_with: failure
+    notes: "Technical register. Interface and queue names, not workflow language."
+
+gaps:
+  # Recorded by /comms-tune review. Present so the absence is visible.
+  - "front_desk audience — no variant defined for any event class"
+  - "referring clinicians — distribution list confirmed, no template agreed"
+  - "status page channel — site has no status page"
+  - "additional languages — not required per site"

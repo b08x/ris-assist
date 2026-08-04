@@ -1,0 +1,193 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  RIS Triage — .gitignore
+#
+#  The first three sections are the ones that matter. Everything below them is
+#  ordinary toolchain noise; the top blocks are the difference between a
+#  publishable repo and an incident.
+#
+#  Git ignores only UNTRACKED files. Anything already committed stays tracked
+#  regardless of what is written here — see the note at the bottom.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Site profiles — NEVER COMMIT ─────────────────────────────────────────────
+# Written by /setup to a local path outside the plugin. A profile holds real
+# interface names, distribution lists, escalation contacts, and procedure
+# names. Example files are re-included below.
+site-profile.y*ml
+site_profile.y*ml
+comms-profile.y*ml
+comms_profile.y*ml
+*-profile.y*ml
+*.profile.y*ml
+profiles/
+.ris-triage/
+
+# ── Clinical and operational data — NEVER COMMIT ─────────────────────────────
+# All test data here is synthetic from birth (docs/DATA-PROVENANCE.md). These
+# patterns exist so an accidental drop of real message or ticket data cannot
+# become a commit.
+*.hl7
+*.hl7v2
+*.er7
+*.mllp
+*.ack
+*.dcm
+*.dicom
+messages/
+captures/
+samples/
+*-messages.txt
+*_messages.txt
+
+# Ticket, worklog, and KB exports
+*-incidents.csv
+*_incidents.csv
+*-tickets.csv
+*_tickets.csv
+worklog*.txt
+kb-export*
+servicenow-export*
+
+# ── Re-includes: synthetic fixtures and examples are tracked ─────────────────
+!**/examples/
+!**/examples/**
+!**/fixtures/
+!**/fixtures/**
+!.env.example
+!docs/assets/**
+!.vscode/extensions.json
+
+# ── Local overrides and secrets ──────────────────────────────────────────────
+.env
+.env.*
+*.local
+local/
+secrets/
+credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+.mcp.local.json
+.claude/settings.local.json
+
+# ── Narration and demo build output ──────────────────────────────────────────
+demo/build/
+demo/**/build/
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.mp4
+*.mov
+
+# Supertonic model assets — large, fetched on first run, licensed separately
+# (OpenRAIL-M). Do not vendor them into this repository.
+models/
+assets/supertonic*/
+*.onnx
+*.safetensors
+*.gguf
+*.bin
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+.mypy_cache/
+.dmypy.json
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.ipynb_checkpoints/
+
+# ── Node ─────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/
+.pnp.*
+.cache/
+.parcel-cache/
+
+# ── Editors and IDEs ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.settings/
+.classpath
+*~
+\#*\#
+.\#*
+.dir-locals.el
+
+# ── Operating systems ────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+.fuse_hidden*
+.nfs*
+.directory
+.Trash-*
+
+# ── Archives, logs, temp ─────────────────────────────────────────────────────
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+tmp/
+temp/
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  If something sensitive was already committed, this file will not remove it.
+#  Untrack it, then rewrite history before the repository is made public:
+#
+#    git rm --cached <path>
+#    git filter-repo --path <path> --invert-paths
+#
+#  A force-push after rewriting is required, and any existing clone still has
+#  the old objects.
+# ─────────────────────────────────────────────────────────────────────────────

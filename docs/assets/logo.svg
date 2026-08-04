@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="t d">
+  <title id="t">RIS Triage</title>
+  <desc id="d">A single continuous looping stroke crossing itself at a central node, drawn in violet fading to near-black, with one amber point at the crossing.</desc>
+  <defs>
+    <linearGradient id="ink" x1="0.62" y1="0.02" x2="0.28" y2="1">
+      <stop offset="0"    stop-color="#A32BD6"/>
+      <stop offset="0.42" stop-color="#8317B4"/>
+      <stop offset="0.78" stop-color="#3D1150"/>
+      <stop offset="1"    stop-color="#14101A"/>
+    </linearGradient>
+  </defs>
+  <path d="M256,256 C178.2,208.7 143.7,84.2 205.1,54.2 C253.9,39.6 301.9,171.8 256.0,256.0 C205.1,323.9 85.4,345.9 62.3,287.0 C52.7,241.1 180.9,207.2 256.0,256.0 C309.7,325.1 305.1,457.9 244.3,469.8 C198.6,470.1 193.7,325.7 256.0,256.0 C331.7,203.0 455.2,225.4 454.0,296.9 C445.0,349.6 308.7,336.8 256.0,256.0 C346,136 436,66 387,122" fill="none" stroke="url(#ink)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="256" r="13" fill="#E8A13D"/>
+</svg>

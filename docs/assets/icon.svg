@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="t d">
+  <title id="t">RIS Triage</title>
+  <desc id="d">A single continuous looping stroke crossing itself at a central node, in violet on a dark plate, with one amber point at the crossing.</desc>
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#1B1230"/>
+      <stop offset="1" stop-color="#0B0A14"/>
+    </linearGradient>
+    <linearGradient id="inkd" x1="0.62" y1="0.02" x2="0.28" y2="1">
+      <stop offset="0"    stop-color="#C46BEB"/>
+      <stop offset="0.45" stop-color="#9B2FD1"/>
+      <stop offset="0.85" stop-color="#5A1B7A"/>
+      <stop offset="1"    stop-color="#3A1550"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#plate)"/>
+  <g transform="translate(256 256) scale(0.82) translate(-256 -256)">
+    <path d="M256,256 C178.2,208.7 143.7,84.2 205.1,54.2 C253.9,39.6 301.9,171.8 256.0,256.0 C205.1,323.9 85.4,345.9 62.3,287.0 C52.7,241.1 180.9,207.2 256.0,256.0 C309.7,325.1 305.1,457.9 244.3,469.8 C198.6,470.1 193.7,325.7 256.0,256.0 C331.7,203.0 455.2,225.4 454.0,296.9 C445.0,349.6 308.7,336.8 256.0,256.0 C346,136 436,66 387,122" fill="none" stroke="url(#inkd)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="256" cy="256" r="15" fill="#E8A13D"/>
+  </g>
+</svg>
