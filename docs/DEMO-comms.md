@@ -15,10 +15,13 @@ differently, and says so each time.
 
 ## Setup
 
-Give the session two things:
+Give the session three things:
 
-1. The comms skill instructions (`skills/comms/SKILL.md`)
-2. The example comms profile (`examples/comms-profile.example.yaml`)
+1. The persona spec (`docs/PERSONA-SPEC.md`) — the comms skill defers its
+   audience-register and confidence-marking rules here rather than restating
+   them
+2. The comms skill instructions (`skills/comms/SKILL.md`)
+3. The example comms profile (`examples/comms-profile.example.yaml`)
 
 Then state: *"Treat the profile as this site's configuration. Assume no
 ServiceNow access."*
@@ -39,13 +42,13 @@ an audience and produce something.
 
 **Expected shape**
 
-> Which audience — radiologists, technologists, or IT/NOC?
+> Which audience — radiologists and techs, or operations and IT?
 
-Answer: `radiologists`.
+Answer: `radiologists and techs`.
 
 **Expected draft characteristics**
 
-- Uses the `unplanned / radiologists / teams` variant
+- Uses the `unplanned / radiologists_and_techs / teams` variant
 - Leads with the action, not the failure
 - Short — the profile notes radiologists read the first two lines
 - Names the read path in site language: read direct from the PACS worklist
@@ -64,25 +67,25 @@ it that voice, not because the model guessed well.
 **Input**
 
 ```
-Same outage. Now one for the front desk.
+Same outage. Now one for next shift.
 ```
 
-**What to watch for.** The profile has no front-desk variant — it is listed
+**What to watch for.** The profile has no next-shift variant — it is listed
 explicitly under `gaps`. This is the branch that separates a useful tool from a
 confident one.
 
 **Expected behavior**
 
-- Substitutes the nearest defined variant (technologists / email)
+- Substitutes the nearest defined variant (radiologists_and_techs / email)
 - **Says** it substituted, and why
-- Adapts register toward scheduling workflow rather than silently reusing tech
-  instructions
+- Adapts register toward handoff context — what's still open, what changed —
+  rather than silently reusing the clinical-audience instructions
 - Offers `/comms-tune capture` to define the real variant
-- Does not fabricate a distribution list — `distribution.front_desk` is
+- Does not fabricate a distribution list — `distribution.next_shift` is
   defined, but the *template* is not, and the output distinguishes those
 
 **The demo point:** the gap is visible in the output. A tool that quietly
-produced a plausible front-desk notice would be worse, not better.
+produced a plausible next-shift notice would be worse, not better.
 
 ---
 

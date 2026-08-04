@@ -102,8 +102,9 @@ came from my environment, then building structure on them.
 conversation from you rather than from me, name it as an assumption on first
 use. Do not let it silently become schema.
 
-*Live example:* "front desk" — my invention, propagated into the profile, the
-demo grid, the narration, and an entire argument, before anyone questioned it.
+*Live example:* an invented audience label — my invention, propagated into
+the profile, the demo grid, the narration, and an entire argument, before
+anyone questioned it.
 
 ### G3 — Assumption laundering
 
@@ -195,17 +196,26 @@ They become evidence when a night analyst uses the tool at 3 AM.
 
 ## Current state
 
-Pre-alpha, phase 0. Sequence: repository scaffold → audience taxonomy rework →
-visual demo update → audio narration. The repo goes first so the commit history
-is a real record rather than a reconstruction.
+Pre-alpha, phase 0 (foundation). Persona spec, site profile schema, comms
+profile schema, and all five skills (triage, knowledge, comms, explainer,
+setup) are implemented against `docs/PERSONA-SPEC.md` as the single source
+of truth; `/comms-tune`'s interview modes and some slash-command wiring are
+still open. See `docs/BACKLOG.md` for exact per-item status.
+
+Resolved:
+
+- The invented-audience-label problem (see G2) is fixed. The specific
+  invented term has been scrubbed from every doc, demo, and example rather
+  than kept as a case study — it doesn't belong in this project at all, so
+  it doesn't get retained as an illustration either. `docs/PERSONA-SPEC.md`
+  plus the site-profile schema now state explicitly that no audience roster
+  ships as a hardcoded default — it comes from the cold-start interview,
+  every time, for every site. `demo/persona-narration.md` narrates the
+  general lesson (an unconfirmed default was shipped, then removed) without
+  naming the specific term.
 
 Open items:
 
-- The "front desk" audience label is an invention (see G2) and needs replacing
-  with overnight-reachable audiences: on-call radiologist, night techs, house
-  supervisor, next shift, on-call manager.
-- The audience axis should come from the cold-start interview rather than
-  shipping hardcoded.
 - Overnight technical distinctions — change-window faults, idle-timeout drops,
   monitoring-dependent detection, night-only teleradiology routing, DST boundary
   cases — are asserted from general healthcare IT patterns, not confirmed

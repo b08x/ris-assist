@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RIS Triage — the analyst persona</title>
+<style>
+  :root{
+    --ink:#14101A;
+    --console:#1B1230;
+    --console-2:#241838;
+    --violet:#8317B4;
+    --violet-bright:#A32BD6;
+    --violet-pale:#C46BEB;
+    --amber:#E8A13D;
+    --paper:#F2EEE6;
+    --paper-ink:#241F2B;
+    --paper-rule:#CFC6B8;
+    --dim:#9A86B8;
+
+    --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --data:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(120% 80% at 78% -10%, rgba(163,43,214,.18), transparent 60%),
+      var(--ink);
+    color:#E8DFF5;
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:40px 24px 72px}
+
+  .masthead{display:flex;gap:20px;align-items:flex-start;margin-bottom:14px}
+  .mark{flex:0 0 auto;width:64px;height:64px}
+  .masthead h1{
+    font-family:var(--display);
+    font-size:clamp(28px,4vw,40px);
+    font-weight:600;letter-spacing:-.01em;margin:0 0 4px;
+    color:#F3EAFB;
+  }
+  .thesis{margin:0;max-width:66ch;color:#C3B2DC;font-size:16px}
+  .fiction{
+    margin-top:18px;display:inline-block;
+    font-family:var(--data);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--amber);border:1px solid rgba(232,161,61,.45);
+    border-radius:2px;padding:5px 10px;
+  }
+
+  .rule{height:1px;background:linear-gradient(90deg,var(--violet),rgba(131,23,180,0));margin:30px 0 26px}
+
+  section{scroll-margin-top:24px}
+  h2{
+    font-family:var(--data);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--violet-pale);font-weight:600;margin:0 0 6px;
+  }
+  .sub{margin:0 0 18px;color:#A895C4;font-size:14px;max-width:70ch}
+
+  /* ---------- FTM triad ---------- */
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .triad .card{
+    background:linear-gradient(180deg,var(--console),#150E26);
+    border:1px solid rgba(163,43,214,.28);border-radius:8px;padding:20px;
+  }
+  .triad .card h3{
+    font-family:var(--display);font-size:19px;margin:0 0 4px;color:#F3EAFB;font-weight:600;
+  }
+  .triad .card .tag{
+    font-family:var(--data);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:10px;display:block;
+  }
+  .triad .card p{margin:0 0 10px;font-size:14px;color:#D6C9EB}
+  .triad .card ul{margin:0;padding-left:18px;font-size:13.5px;color:#B9A6D6}
+  .triad .card li{margin-bottom:5px}
+
+  /* ---------- confidence scale ---------- */
+  .scale{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .chip{
+    flex:1 1 220px;border-radius:6px;padding:16px 18px;
+    background:var(--console-2);border:1px solid rgba(163,43,214,.25);
+  }
+  .chip .mark{
+    font-family:var(--data);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    display:inline-block;padding:3px 9px;border-radius:3px;margin-bottom:10px;
+  }
+  .chip.confirmed .mark{background:rgba(163,214,120,.18);color:#A9E08A;border:1px solid rgba(163,214,120,.4)}
+  .chip.likely .mark{background:rgba(232,161,61,.18);color:var(--amber);border:1px solid rgba(232,161,61,.4)}
+  .chip.possible .mark{background:rgba(196,107,235,.18);color:var(--violet-pale);border:1px solid rgba(196,107,235,.4)}
+  .chip p{margin:0;font-size:13.5px;color:#C3B2DC}
+
+  /* ---------- boundary callout ---------- */
+  .boundary{
+    border-left:3px solid var(--amber);background:rgba(232,161,61,.09);
+    padding:16px 18px;border-radius:0 6px 6px 0;
+  }
+  .boundary strong{color:var(--amber)}
+  .boundary p{margin:0 0 8px;font-size:14.5px;color:#EFE1C6}
+  .boundary p:last-child{margin-bottom:0}
+
+  /* ---------- register bench ---------- */
+  .bench{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:26px;align-items:start}
+  .console{
+    background:linear-gradient(180deg,var(--console),#150E26);
+    border:1px solid rgba(163,43,214,.28);border-radius:8px;padding:22px;
+  }
+  .console p.facts{
+    font-family:var(--data);font-size:12.5px;color:var(--violet-pale);
+    background:#120C1F;border:1px solid rgba(163,43,214,.25);border-radius:4px;
+    padding:11px 12px;margin:0 0 16px;line-height:1.6;
+  }
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .tabs button{
+    flex:1 1 auto;padding:11px 10px;border:1px solid rgba(163,43,214,.32);border-radius:4px;
+    background:#120C1F;color:#C3B2DC;cursor:pointer;
+    font-family:var(--data);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .tabs button:hover{border-color:var(--violet-pale)}
+  .tabs button.sel{background:linear-gradient(120deg,var(--violet-bright),var(--violet));color:#fff;border-color:transparent}
+  .tabs button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+  .paper{
+    background:var(--paper);color:var(--paper-ink);border-radius:5px;
+    padding:26px 28px;min-height:220px;
+    box-shadow:0 18px 44px rgba(0,0,0,.5);
+    animation:rise .3s ease both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .paper .stamp{
+    font-family:var(--data);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:#6B5C7E;border-bottom:1px solid var(--paper-rule);padding-bottom:10px;margin-bottom:16px;
+  }
+  .paper .draft{white-space:pre-wrap;font-size:15px;line-height:1.62}
+  .paper .why{
+    margin-top:16px;padding-top:12px;border-top:1px solid var(--paper-rule);
+    font-size:13px;color:#6B5C7E;
+  }
+
+  footer{margin-top:44px;font-size:12.5px;color:#7A688F;max-width:76ch}
+  footer code{font-family:var(--data);color:#A895C4}
+
+  @media (max-width:880px){
+    .triad{grid-template-columns:1fr}
+    .bench{grid-template-columns:1fr}
+    .masthead{flex-direction:column;gap:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead" id="s1-identity">
+    <svg class="mark" viewBox="0 0 512 512" aria-hidden="true">
+      <defs><linearGradient id="ink" x1="0.62" y1="0" x2="0.28" y2="1">
+        <stop offset="0" stop-color="#C46BEB"/><stop offset=".5" stop-color="#9B2FD1"/>
+        <stop offset="1" stop-color="#4A1668"/></linearGradient></defs>
+      <path d="M256,256 C178.2,208.7 143.7,84.2 205.1,54.2 C253.9,39.6 301.9,171.8 256,256 C205.1,323.9 85.4,345.9 62.3,287 C52.7,241.1 180.9,207.2 256,256 C309.7,325.1 305.1,457.9 244.3,469.8 C198.6,470.1 173.2,341.1 256,256 C334.5,213.3 460.5,238.7 457.2,301.1 C450.5,347.6 318.6,338.6 256,256 C346,136 391,66 402,58"
+        fill="none" stroke="url(#ink)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="256" cy="256" r="14" fill="#E8A13D"/>
+    </svg>
+    <div>
+      <h1>The analyst persona</h1>
+      <p class="thesis">Fifteen years in radiology IT. Calm, allergic to filler. Every RIS Triage skill talks through the same persona — this page is that persona on its own, without a ticket attached to it.</p>
+      <span class="fiction">Fictional site examples · Riverside Regional Imaging</span>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <section id="s2-field">
+    <h2>Field, Tenor, Mode</h2>
+    <p class="sub">Three questions, asked of every response: what does it know, how does it relate, how is it organized. <code>docs/PERSONA-SPEC.md</code> is the source; this is the shape.</p>
+    <div class="triad">
+      <div class="card">
+        <span class="tag">Field</span>
+        <h3>What it knows</h3>
+        <p>Order lifecycle, interface topology, ITSM/SLA vocabulary, incident comms, KB capture — bounded, not general IT knowledge.</p>
+        <ul>
+          <li>Not clinical decision-making</li>
+          <li>Not HL7 segment-level parsing — separate plugin</li>
+          <li>Not any state-changing action</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag">Tenor</span>
+        <h3>How it relates</h3>
+        <p>A collaborator handing off a draft, never the decision-maker. Confidence-marks every conclusion. Cites or declines — never invents a source.</p>
+        <ul>
+          <li>Read-only toward the system</li>
+          <li>Careful curator toward content</li>
+          <li>Register shifts by audience, not by the facts</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag">Mode</span>
+        <h3>How it's organized</h3>
+        <p>Draft first. Outstanding items and suggestions kept visibly separate from the draft body. A changed fact is flagged as changed, never quietly corrected.</p>
+        <ul>
+          <li>Per-skill output schema, same conventions</li>
+          <li>Unknown stays unknown — placeholder, not a guess</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section id="s3-confidence">
+    <h2>Confidence marking</h2>
+    <p class="sub">The single mechanic underneath everything else this persona does — every conclusion carries one of three marks, and the mark decides how much evidence is required.</p>
+    <div class="scale">
+      <div class="chip confirmed">
+        <span class="mark">confirmed</span>
+        <p>Directly stated in the ticket, worklog, or a cited source. Quote it or cite it.</p>
+      </div>
+      <div class="chip likely">
+        <span class="mark">likely</span>
+        <p>Consistent with available evidence, not directly stated. Say what evidence, and what would confirm it.</p>
+      </div>
+      <div class="chip possible">
+        <span class="mark">possible</span>
+        <p>Plausible given the differential, not yet supported. Say what would move it to likely.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section id="s4-boundary">
+    <h2>The boundary that got tested</h2>
+    <p class="sub">Not a hypothetical — this is a real correction this project made to itself.</p>
+    <div class="boundary">
+      <p><strong>What happened:</strong> an early draft of this project hardcoded a specific notification audience as a default — an invented category, never confirmed against a real site.</p>
+      <p><strong>Why it mattered:</strong> the persona's own rule is cite-or-decline — name the source, or say none exists. Shipping an unconfirmed default would have quietly broken the rule it exists to enforce.</p>
+      <p><strong>What changed:</strong> the audience roster now comes from the cold-start interview, every time. A reasonable starting checklist is offered as prompts during setup — never assumed as a default.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section id="s5-register">
+    <h2>Same facts, different register</h2>
+    <p class="sub">One incident. Pick an audience — the underlying facts don't move, only the framing does.</p>
+    <div class="bench">
+      <div class="console">
+        <p class="facts">RIS-to-PACS order interface down since 02:14. Orders not reaching modality worklist. Cause suspected, not confirmed. Workaround: paper requisitions per Imaging Downtime Packet (Form IMG-14). Next update 02:45.</p>
+        <div class="tabs" id="tabs"></div>
+      </div>
+      <div class="paper" id="paper">
+        <div class="stamp">Draft output</div>
+        <div class="draft" id="draft"></div>
+        <div class="why" id="why"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <footer id="s6-close">
+    This persona is the substrate every RIS Triage skill runs on top of — <code>agents/analyst.md</code>
+    and <code>docs/PERSONA-SPEC.md</code> are the same rules this page describes, not a simplified
+    version of them. The site and incident on this page are invented. Nothing here derives from a
+    real hospital, and no patient data touches any part of this plugin.
+  </footer>
+</div>
+
+<script>
+const REGISTERS = [
+  {
+    id: "clinical", label: "Clinical",
+    draft: "Orders are not reaching the PACS worklist as of 02:14. Read direct from PACS worklist per Imaging Downtime Packet (Form IMG-14). Next update by 02:45.",
+    why: "Leads with the action. No interface name, no cause — the profile notes this audience reads the first two lines and stops."
+  },
+  {
+    id: "technical", label: "Technical",
+    draft: "RIS-to-PACS order interface down since 02:14 (INC0004821). Orders queuing at the interface engine, not reaching PACS worklist. Cause: suspected engine-side, not yet confirmed. Next update 02:45.",
+    why: "Leads with the failure. Interface named precisely, ticket referenced, cause explicitly marked suspected rather than stated as fact."
+  },
+  {
+    id: "leadership", label: "Leadership",
+    draft: "Imaging order delivery has been delayed sitewide since 02:14 (31 minutes as of this update). All modalities affected; staff are working from paper requisitions per standard downtime procedure. Engineering is investigating the interface engine. Next update 02:45.",
+    why: "Leads with scope and duration — what leadership needs to judge whether to escalate further. Cause is present but subordinate."
+  }
+];
+
+const tabs = document.getElementById("tabs");
+const draftEl = document.getElementById("draft");
+const whyEl = document.getElementById("why");
+
+function render(id){
+  const r = REGISTERS.find(x => x.id === id);
+  draftEl.textContent = r.draft;
+  whyEl.textContent = r.why;
+  [...tabs.children].forEach(b => b.classList.toggle("sel", b.dataset.id === id));
+}
+
+REGISTERS.forEach((r, i) => {
+  const b = document.createElement("button");
+  b.textContent = r.label;
+  b.dataset.id = r.id;
+  b.addEventListener("click", () => render(r.id));
+  tabs.appendChild(b);
+});
+
+render(REGISTERS[0].id);
+</script>
+</body>
+</html>

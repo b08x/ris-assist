@@ -1,0 +1,70 @@
+RIS TRIAGE — THE PERSONA MODULE NARRATION
+Import copy for ElevenCreative Studio. See narration-studio.md for setup
+conventions (same project, same settings) and persona-narration.md for
+screen directions and pronunciation notes.
+
+Each block below is ONE Studio paragraph — the atomic unit for generation,
+regeneration, and locking. Blank lines separate paragraphs. Do not merge them;
+paragraph boundaries are your only cheap undo.
+
+Six chapters, matching the six screens on persona-card.html. Create them in
+the Chapters sidebar and paste one section into each. Do not paste the
+chapter headings — they will be narrated.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 1 — The persona, named
+═══════════════════════════════════════════════════════════════════
+
+Every skill in this plugin — clarifying a ticket, drafting a notification, writing up a resolution — talks through the same voice. Fifteen years in radiology IT. Calm. Allergic to filler.
+
+That voice isn't a writing style. It's a set of rules, and this is what they look like on their own, without a ticket attached to them.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 2 — Field, tenor, mode
+═══════════════════════════════════════════════════════════════════
+
+The persona is built on three questions, asked of every response. What does it know. How does it relate to the person reading it. How is what it says organized.
+
+What it knows is bounded on purpose. Order lifecycle, interfaces, S L A vocabulary, incident communications, K B capture. Not clinical decision-making. Not message-level H L seven parsing — that's a separate tool. Not anything that changes a production system.
+
+How it relates is the part that matters most. It hands off a draft. It does not decide for you. And every conclusion it reaches carries a mark for how sure it actually is.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 3 — Confidence marking
+═══════════════════════════════════════════════════════════════════
+
+Three marks. Confirmed means it's stated somewhere — a ticket, a worklog, a source you can point to. Likely means the evidence points that way, but nobody said it outright, and the persona will tell you what would confirm it. Possible means it fits the shape of the problem, and nothing more than that.
+
+An unmarked claim is not a stylistic miss. It's a defect. That's a stronger word than most tools would use about their own output, and it's used on purpose.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 4 — The boundary that got tested
+═══════════════════════════════════════════════════════════════════
+
+Here's a real example, not a hypothetical. An early draft of this project hardcoded a specific notification audience as a default. Nobody had confirmed that any real site actually organizes it that way.
+
+The persona's own rule is cite the source, or say none exists. Shipping an unconfirmed default would have quietly broken the rule it exists to enforce.
+
+So it stopped being a default. The audience list now comes from an interview, every time, for every site. That's what this rule costs when it's actually followed, and it's a small enough cost that there's no excuse not to pay it.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 5 — One incident, three registers
+═══════════════════════════════════════════════════════════════════
+
+Same underlying facts, every time. An interface went down at two fourteen in the morning. What changes is who's reading.
+
+The clinical version leads with what to do right now, and stops after three sentences, because that's what this audience actually reads.
+
+The technical version leads with what broke, names the interface, and marks the cause suspected, because it hasn't been confirmed yet.
+
+The leadership version leads with scope and duration, because that's the information that decides whether this gets escalated further.
+
+Nothing about the incident changed across those three. Only the shape of what's told first.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 6 — The close
+═══════════════════════════════════════════════════════════════════
+
+This isn't a simplified version of the persona for a demo. The rules on this screen are the same rules every skill in the plugin actually runs on.
+
+The site and the incident in this walkthrough are invented, the same as everywhere else in this project. Nothing here comes from a real hospital, and no patient data touches any part of it.

@@ -20,26 +20,34 @@ RIS_Triage/
 │   │   ├── explain.md
 │   │   ├── setup.md
 │   │   └── comms-tune.md
-│   ├── skills/               # 5 skills (SKILL.md files)
-│   │   ├── triage/
-│   │   ├── knowledge/
-│   │   ├── comms/
-│   │   ├── explainer/
-│   │   └── setup/
-│   ├── examples/             # Fictional site examples
+│   ├── skills/               # 5 skills (SKILL.md files); 4 have a references/ dir
+│   │   ├── triage/           #   no references/ — differential logic lives in SKILL.md itself
+│   │   ├── knowledge/        #   references/kb-template.md
+│   │   ├── comms/            #   references/{comms-profile.schema,generic-templates,register-guide}.md
+│   │   ├── explainer/        #   references/{order-lifecycle,accession-vs-order-number,modality-worklist,report-status-flow,topology-patterns}.md
+│   │   └── setup/            #   references/site-profile.schema.md
+│   ├── agents/
+│   │   └── analyst.md        # Persona as an invocable subagent (operational summary of PERSONA-SPEC.md)
+│   ├── examples/             # Fictional site examples ("Riverside Regional Imaging")
+│   │   ├── site-profile.example.yaml
 │   │   └── comms-profile.example.yaml
 │   └── .claude-plugin/
 │       ├── plugin.json       # Plugin metadata
 │       └── marketplace.json  # Makes this repo its own marketplace
 ├── demo/                     # Non-functional demo scripts
-│   └── build_narration.py    # Generates audio for demos using Supertonic
+│   ├── build_narration.py    # Generates audio for demos using Supertonic
+│   ├── coverage-demo.html / narration*.{md,txt}      # Comms-only demo (companion: docs/DEMO-comms.md)
+│   └── persona-card.html / persona-narration*.{md,txt} # Persona-only demo (companion: docs/DEMO-full.md)
 ├── docs/                     # Project documentation
 │   ├── adr/                  # Architectural decision records
 │   ├── BACKLOG.md            # Feature prioritization
 │   ├── DATA-PROVENANCE.md    # Synthetic data policy
+│   ├── DEMO-comms.md         # Scripted walkthrough — comms skill alone
+│   ├── DEMO-full.md          # Scripted walkthrough — all five skills, one incident thread
 │   ├── FORENSICS-BACKLOG.md  # Message forensics work (parked)
 │   ├── GUARDRAILS.md         # Guardrails/G1-G10 patterns
 │   ├── NON-GOALS.md          # Explicit non-goals and boundaries
+│   ├── PERSONA-SPEC.md       # Single source of truth for the analyst persona (Field/Tenor/Mode)
 │   ├── PROJECT-INSTRUCTIONS.md # Project rules for collaborative work
 │   ├── USER_STORIES.md       # Feature requirements
 │   └── assets/               # Icons and logos
@@ -95,6 +103,24 @@ Every skill degrades honestly:
 - Missing profile field → says "not in your site profile", never invents.
 - Untuned template → labels output "generic — not yet tuned to this site".
 - Unknown system name → records as unknown, does not assume a value.
+
+### 5. Persona Has One Source of Truth
+
+`docs/PERSONA-SPEC.md` is the single source for the analyst persona — stance,
+confidence marking, audience register, boundaries. `agents/analyst.md` (the
+invocable subagent) and each skill's `SKILL.md` reference it rather than
+restating it; if a skill's instructions and the spec disagree, the spec wins
+and the skill gets fixed. **Do not duplicate persona rules into a skill file**
+— link to the relevant section of `PERSONA-SPEC.md` instead.
+
+The audience register in that spec is deliberately generic (Clinical /
+Technical / Leadership, by tenor) and never hardcodes a specific roster — an
+earlier draft hardcoded a specific audience label as a default without
+confirming it against a real site (GUARDRAILS G2). The label itself has since
+been scrubbed from every doc, demo, and example; the fix is that the roster
+is interview-derived, every time, with the general lesson (not the specific
+invented term) documented in the spec and demonstrated in
+`demo/persona-narration.md`.
 
 ---
 
@@ -197,7 +223,9 @@ Every skill degrades honestly:
 
 **Rules**:
 
-- Generic domain claims come from `references/` (TODO: references directory not yet populated)
+- Generic domain claims come from `references/` (order lifecycle, accession vs.
+  order number, MWL, report status flow, RIS↔PACS↔EHR topology — each with
+  three depth tiers)
 - Site-specific claims come from the site profile
 - If profile lacks the detail, say so and answer generically with that caveat stated
 - Default to the shortest answer that actually answers, then offer to go deeper
@@ -222,7 +250,7 @@ Every skill degrades honestly:
 - Never invent a system name, interface name, distribution list, procedure name, or approval chain. Unknown is recorded as unknown.
 - Accept "we don't distinguish that" as a complete answer and record it.
 - The audience set is site- and shift-specific. Ask separately about who is reachable overnight (usually different from daytime).
-- Site profile schema is TODO (E2.1 in BACKLOG.md)
+- Site profile schema: `skills/setup/references/site-profile.schema.md` (E2.1)
 
 ### `/comms-tune` - Customize Profiles
 

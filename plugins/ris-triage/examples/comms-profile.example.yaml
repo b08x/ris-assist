@@ -17,11 +17,11 @@ conventions:
 
 distribution:
   # Names the site actually uses. Unknown entries stay unknown.
-  radiologists: "DL-Radiology-Physicians"
-  technologists: "DL-Imaging-Techs"
-  front_desk: "DL-Imaging-Scheduling"
-  referring: "DL-Ambulatory-Clinicians"
-  it_noc: "#imaging-ops"
+  # radiologists_and_techs covers both roles: they read the same alerts,
+  # they just need different specifics depending on channel.
+  radiologists_and_techs: "DL-Imaging-Clinical"
+  operations_it: "#imaging-ops"
+  next_shift: "#imaging-handoff"
   leadership: "DL-Imaging-Leadership"
 
 approval:
@@ -52,13 +52,13 @@ voice:
 
 variants:
 
-  - key: unplanned / technologists / email
+  - key: unplanned / radiologists_and_techs / email
     required_fields: [incident_ref, start_time, affected_workflows, workaround, next_update_time]
     lead_with: action
     sections: [what_is_happening, what_to_do_now, what_not_to_do, next_update]
-    notes: "Must name the Imaging Downtime Packet explicitly."
+    notes: "Must name the Imaging Downtime Packet explicitly. Longer form — the paper-process detail techs need."
 
-  - key: unplanned / radiologists / teams
+  - key: unplanned / radiologists_and_techs / teams
     required_fields: [incident_ref, affected_workflows, workaround, next_update_time]
     lead_with: action
     sections: [impact, read_path, next_update]
@@ -75,7 +75,7 @@ variants:
     continuity: required          # carries forward ref, start time, prior impact
     notes: "State explicitly when a previously published fact has changed."
 
-  - key: planned / technologists / email
+  - key: planned / radiologists_and_techs / email
     required_fields: [window_start, window_end, affected_workflows, workaround, contact]
     lead_with: schedule
     lead_time: "5 business days, reminder at 24 hours"
@@ -86,14 +86,13 @@ variants:
     continuity: required
     notes: "Cause marked confirmed or suspected. Residual actions listed even when none."
 
-  - key: degraded / it_noc / teams
+  - key: degraded / operations_it / teams
     required_fields: [interface_name, symptom, queue_state, ticket_ref]
     lead_with: failure
     notes: "Technical register. Interface and queue names, not workflow language."
 
 gaps:
   # Recorded by /comms-tune review. Present so the absence is visible.
-  - "front_desk audience — no variant defined for any event class"
-  - "referring clinicians — distribution list confirmed, no template agreed"
+  - "next_shift audience — distribution channel confirmed, no variant defined for any event class"
   - "status page channel — site has no status page"
   - "additional languages — not required per site"

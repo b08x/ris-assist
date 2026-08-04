@@ -42,35 +42,35 @@ E9 (forensics) moved there. Epic numbers are not reused.
 
 ## E2 — Shared Foundation: Site Profile  (P0 · stories US-22, US-23, US-04, US-09)
 
-- [ ] E2.1 (M) — Design site profile schema: systems inventory, interface
+- [x] E2.1 (M) — Design site profile schema: systems inventory, interface
       names/directions, identifier formats, escalation matrix, SLA tiers,
       downtime procedure names, comms audiences
-- [ ] E2.2 (M) — Build **cold-start interview skill**: guided first-run
+- [x] E2.2 (M) — Build **cold-start interview skill**: guided first-run
       interview → writes profile to a local path outside the plugin cache
 - [ ] E2.3 (S) — Build **customize skill**: single-field profile edits without
       re-interview
-- [ ] E2.4 (S) — Define graceful-degradation convention: how every skill
+- [x] E2.4 (S) — Define graceful-degradation convention: how every skill
       behaves when a profile field is missing (state the gap; never improvise)
-- [ ] E2.5 (S) — Author the fictional example site profile ("worked example"
+- [x] E2.5 (S) — Author the fictional example site profile ("worked example"
       demonstrating the schema) for `examples/`
 
 ## E4 — Persona & Agent Definition  (P0 · stories US-01…US-19 cross-cutting)
 
-- [ ] E4.1 (M) — Author persona spec: stance, observation/inference separation,
+- [x] E4.1 (M) — Author persona spec: stance, observation/inference separation,
       confidence marking (confirmed/likely/possible), cite-or-decline rule,
       audience register shifting, human-decision boundaries
-- [ ] E4.2 (S) — Encode persona as `agents/` subagent definition
-- [ ] E4.3 (S) — Embed persona behavioral rules into each skill's instructions
+- [x] E4.2 (S) — Encode persona as `agents/` subagent definition
+- [x] E4.3 (S) — Embed persona behavioral rules into each skill's instructions
       (Desktop-chat path) — single source file, referenced not duplicated
 - [ ] E4.4 (S) — Promote boundary rules to `docs/NON-GOALS.md` (US-27)
 
 ## E5 — Domain Explainer Skill  (P1 · stories US-07, US-20)
 
-- [ ] E5.1 (M) — Author reference docs: order lifecycle, accession vs. order
+- [x] E5.1 (M) — Author reference docs: order lifecycle, accession vs. order
       number, MWL, report status flow, RIS↔PACS↔EHR topology patterns
-- [ ] E5.2 (S) — Build explainer skill: depth-adjustable answers; site-specific
+- [x] E5.2 (S) — Build explainer skill: depth-adjustable answers; site-specific
       claims grounded in profile; generic claims grounded in reference docs
-- [ ] E5.3 (M) — Build onboarding path: sequenced explainer curriculum for a
+- [x] E5.3 (M) — Build onboarding path: sequenced explainer curriculum for a
       new analyst (US-20)
 - [ ] E5.4 (S) — Validation pass: use explainer to stress-test topology schema
       accuracy (cheap end-to-end test of E2)
@@ -89,30 +89,31 @@ E9 (forensics) moved there. Epic numbers are not reused.
 
 ## E7 — KB Pipeline  (P2 · stories US-11…US-14 · DEP-1)
 
-- [ ] E7.1 (M) — Adapt existing ServiceNow KB generator skill into the plugin;
+- [x] E7.1 (M) — Adapt existing ServiceNow KB generator skill into the plugin;
       conform output to KCS template shape from site profile
-- [ ] E7.2 (S) — Manual-mode path: article draft as paste-ready output with
+- [x] E7.2 (S) — Manual-mode path: article draft as paste-ready output with
       field checklist (works with zero ServiceNow access)
 - [ ] E7.3 (M) — MCP-mode path: read resolved incident → draft → push with
       category/workflow state  *(blocked: DEP-1)*
 - [ ] E7.4 (M) — KB gap detection: recurring-symptom clusters without matching
-      articles → candidate list (US-12) *(needs incident read: DEP-1)*
-- [ ] E7.5 (S) — Stale-article flagger keyed to change/upgrade events (US-13)
+      articles → candidate list (US-12) *(needs incident read: DEP-1 — manual-
+      mode partial: skill now prompts explicitly when a pattern is described)*
+- [x] E7.5 (S) — Stale-article flagger keyed to change/upgrade events (US-13)
 - [ ] E7.6 (S) — `/kb-draft` slash command
 
 ## E8 — Ticket Clarification Skill  (P3 · stories US-03…US-06)
 
-- [ ] E8.1 (M) — Design differential model (RIS config / interface / PACS /
+- [x] E8.1 (M) — Design differential model (RIS config / interface / PACS /
       workstation / user) + discriminating-question selection logic
-- [ ] E8.2 (M) — Build clarification skill: one-question-at-a-time elicitation;
+- [x] E8.2 (M) — Build clarification skill: one-question-at-a-time elicitation;
       stop condition = routable
-- [ ] E8.3 (S) — Triage artifact output format: symptom, scope, timeline,
+- [x] E8.3 (S) — Triage artifact output format: symptom, scope, timeline,
       differential w/ confidence, recommended queue
-- [ ] E8.4 (S) — Routing + severity justification against site SLA vocabulary
+- [x] E8.4 (S) — Routing + severity justification against site SLA vocabulary
       (US-04)
-- [ ] E8.5 (M) — Escalation package assembler (US-05)
+- [x] E8.5 (M) — Escalation package assembler (US-05)
 - [ ] E8.6 (S) — `/triage` slash command
-- [ ] E8.7 (M) — Known-error matching against KB *(blocked: DEP-1 for live;
+- [x] E8.7 (M) — Known-error matching against KB *(blocked: DEP-1 for live;
       manual paste-mode works without)*
 
 ## E10 — Governance & Approvals  (P0, longest lead time · US-28, US-29)
@@ -165,7 +166,7 @@ approval clocks started. Everything else stacks behind those.
 too much between sites and audiences. E6 is revised to make the profile the
 product and the templates the fallback.
 
-- [ ] E6.5 (M) — Define comms profile schema: variants keyed by
+- [x] E6.5 (M) — Define comms profile schema: variants keyed by
       `event class × audience × channel`, plus conventions, distribution,
       approval chain, workflow language, cadence, voice rules, and a recorded
       `gaps` list
@@ -183,9 +184,9 @@ product and the templates the fallback.
 - [ ] E6.11 (S) — Incident continuity: interval updates and all-clears carry
       forward reference, start time, and prior impact; changed facts flagged
       as changed
-- [ ] E6.12 (S) — Author `references/generic-templates.md` fallbacks, labelled
+- [x] E6.12 (S) — Author `references/generic-templates.md` fallbacks, labelled
       untuned in output
-- [ ] E6.13 (S) — Author `references/register-guide.md` — clinical vs.
+- [x] E6.13 (S) — Author `references/register-guide.md` — clinical vs.
       technical vs. leadership register, with worked examples
 
 Stories served: US-15, US-16, US-17, US-23. New story implied — *as a support

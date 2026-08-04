@@ -51,7 +51,7 @@ message to everyone has one variant, and that is a legitimate answer.
 | Axis | Typical values |
 |---|---|
 | **Event class** | planned maintenance · unplanned outage · degraded performance · interval update · extended/revised ETA · resolved · post-incident summary |
-| **Audience** | radiologists · technologists · front desk / scheduling · referring clinicians · IT and NOC · service desk agents · leadership · vendor |
+| **Audience** | radiologists · technologists · next shift · referring clinicians · IT and NOC · service desk agents · leadership · vendor |
 | **Channel** | email · Teams/Slack · ITSM broadcast · status page · in-application banner · paging/overhead · printed downtime packet |
 | **Scope** | single modality · single reading room · one site · enterprise · interface-only (invisible to clinical users) |
 | **Severity mapping** | how site severity tiers map to notification urgency and to who must approve |

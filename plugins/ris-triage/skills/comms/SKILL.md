@@ -9,6 +9,11 @@ Notifications go out under time pressure, to people who will act on them. The
 value of this skill is not prose quality — it is that nothing required is
 missing and nothing unknown is invented.
 
+Persona: `docs/PERSONA-SPEC.md`. The audience-register table (clinical /
+technical / leadership) and the never-invent-a-required-field rule are
+defined there — the steps below are this skill's application of them, not a
+second copy.
+
 ## Files this skill reads
 
 | File | Contents | If absent |
@@ -29,17 +34,15 @@ survive plugin updates.
 3. **Fill slots from stated facts only.** Every required slot the user has not
    provided gets the placeholder token and appears in an outstanding-items list
    under the draft. An ETA, a cause, or an impact scope is never inferred.
-4. **Apply audience register.**
-   - *Clinical audiences* lead with the action they must take, name the
-     downtime procedure as the site names it, and describe impact in workflow
-     terms — "orders will not reach the modality worklist" rather than
-     "ORM_O01 delivery is failing".
-   - *Technical audiences* lead with the failure, name interfaces and queues,
-     and include the ticket reference.
-   - *Leadership* leads with scope, duration, and what is being done, in that
-     order.
+4. **Apply audience register** per `docs/PERSONA-SPEC.md`'s Tenor table —
+   clinical leads with the required action (workflow terms, site-named
+   procedure — "orders will not reach the modality worklist," not "ORM_O01
+   delivery is failing"); technical leads with the failure, interfaces,
+   queues, and ticket reference; leadership leads with scope, duration, and
+   what's being done, in that order.
 5. **Mark causal claims.** `confirmed` or `suspected`, per the site's
-   convention. An unmarked cause is a defect.
+   convention (comms' two-tier instance of the persona's general
+   confidence-marking rule). An unmarked cause is a defect.
 6. **Maintain continuity across a running incident.** Interval updates and
    all-clears carry forward the incident reference, original start time, and
    previously stated impact, and require only the delta from the user. Never
