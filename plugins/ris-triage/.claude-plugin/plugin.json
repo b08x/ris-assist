@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "description": "Ticket clarification, knowledge capture, incident communications, and analyst onboarding for radiology information system support. Built for the overnight support engineer.",
   "author": {
-    "name": "TODO — maintainer name",
-    "url": "https://github.com/TODO"
+    "name": "Robert Pannick",
+    "url": "https://github.com/b08x/ris_triage"
   },
-  "homepage": "https://github.com/TODO/ris-triage",
-  "repository": "https://github.com/TODO/ris-triage",
+  "homepage": "https://github.com/b08x/ris_triage",
+  "repository": "https://github.com/b08x/ris_triage",
   "license": "Apache-2.0",
   "keywords": [
     "radiology",

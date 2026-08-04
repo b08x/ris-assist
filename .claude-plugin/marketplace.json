@@ -1,8 +1,8 @@
 {
   "name": "ris-triage",
   "owner": {
-    "name": "TODO — maintainer name",
-    "url": "https://github.com/TODO/ris-triage"
+    "name": "Robert Pannick",
+    "url": "https://github.com/b08x/ris_triage"
   },
   "metadata": {
     "description": "Triage tooling for radiology IT support, built for the overnight shift.",
@@ -15,9 +15,9 @@
       "description": "Ticket clarification, knowledge capture, incident communications, and analyst onboarding for radiology information system support.",
       "version": "0.1.0",
       "author": {
-        "name": "TODO — maintainer name"
+        "name": "Robert Pannick"
       },
-      "homepage": "https://github.com/TODO/ris-triage",
+      "homepage": "https://github.com/b08x/ris_triage",
       "license": "Apache-2.0",
       "keywords": [
         "radiology",

@@ -33,6 +33,7 @@ see the open item in the project instructions.
 As a support analyst, I want to paste a de-identified HL7 v2 message and receive
 a structured breakdown (message type, event, key identifiers, statuses,
 timestamps) so that I don't hand-count pipes under time pressure.
+
 - AC: Output identifies message type/trigger event, patient/order/accession
   identifiers, and relevant status fields, each labeled with segment-field
   coordinates (e.g., ORC-3, OBR-25).
@@ -44,6 +45,7 @@ timestamps) so that I don't hand-count pipes under time pressure.
 As a support analyst, I want to paste an ACK/NAK and get an interpretation of
 the error against this site's interfaces so that I know whether the fault is
 ours, the receiving system's, or the engine's.
+
 - AC: Distinguishes AA/AE/AR semantics and maps the error text to a likely
   fault origin using the site profile.
 
@@ -51,6 +53,7 @@ ours, the receiving system's, or the engine's.
 As a support analyst, I want the agent to generate the single most
 discriminating question to ask a reporter, given what the ticket already says,
 so that I reach a routable ticket in the fewest exchanges.
+
 - AC: Agent maintains a visible differential (RIS config / interface / PACS /
   workstation / user) and explains which branches each question separates.
 - AC: Questioning stops when a routing decision is determinable.
@@ -59,6 +62,7 @@ so that I reach a routable ticket in the fewest exchanges.
 As a support analyst, I want an assignment-group recommendation with a
 severity/priority justification written in the SLA's own vocabulary so that
 routing and priority disputes end faster.
+
 - AC: Recommendation cites the site escalation matrix and SLA definitions by
   name; if the site profile lacks the needed entry, the agent says so instead
   of improvising.
@@ -88,6 +92,7 @@ Owns the interface engine relationship; deeper HL7 fluency.
 **US-08 — Diff messages** [FORENSICS]
 As an interface analyst, I want to diff a failing message against a last-known
 -good message at segment/field granularity so that I can isolate what changed.
+
 - AC: Diff output is field-level, ignores expected variance (timestamps, control
   IDs) unless asked, and highlights structural differences separately from
   value differences.
@@ -96,12 +101,14 @@ As an interface analyst, I want to diff a failing message against a last-known
 As an interface analyst, I want to name a down interface and get the ordered
 downstream impact (which workflows fail, in what sequence symptoms will appear)
 so that I can brief the incident channel before the tickets arrive.
+
 - AC: Impact chain derives from the site topology file, not generic HL7 lore.
 
 **US-10 — Triage a queue backlog** [FORENSICS]
 As an interface analyst, I want guidance on which stuck message types are safe
 to replay versus which require sequence-aware handling (ADT merges, cancels) so
 that a replay doesn't corrupt downstream state.
+
 - AC: Agent never claims to have executed a replay; replay authorization is
   explicitly flagged as a human decision.
 
@@ -115,6 +122,7 @@ Accountable for KB health under the MSP's knowledge process.
 As a knowledge manager, I want a resolved ticket's worklog turned into a
 KCS-conformant article draft so that knowledge capture happens at resolution
 time instead of never.
+
 - AC: Output conforms to the site's KB template (structure, fields, audience
   labels); observation and inference are separated in the body.
 
@@ -143,6 +151,7 @@ As a support lead, I want a downtime alert generated from a template (planned /
 unplanned / degraded / resolved) with audience variants (clinical, IT,
 leadership) so that notifications go out fast, complete, and in the right
 register.
+
 - AC: Clinical variant references downtime procedures by their site-local
   names; all variants populate required fields (severity, affected workflows,
   workaround, ETA, next-update time) or explicitly mark them unknown.
@@ -176,6 +185,7 @@ Rotated onto the account with little or no radiology background.
 As a new analyst, I want a guided explainer path through the domain (topology,
 order lifecycle, key identifiers, common failure modes) so that I'm useful in
 days instead of weeks and stop consuming senior-analyst time.
+
 - AC: Explanations adjust depth on request and cite the site topology file for
   anything site-specific.
 
@@ -195,6 +205,7 @@ interface names, escalation contacts, and SLA tiers, and writes a local site
 profile outside the plugin directory so that the plugin becomes site-aware
 without my configuration ever touching the public repo or being lost on
 plugin update.
+
 - AC: All capability skills read the local profile at runtime and degrade
   gracefully (stating what's missing) when a field is unpopulated.
 
@@ -242,6 +253,7 @@ boundary explained, so that I can sign off quickly.
 As a governance stakeholder, I want the de-identification gate to be
 deterministic and inspectable (code, not a prompt request) so that the PHI
 control is auditable.
+
 - AC: PID/NK1/IN1/GT1 handling and free-text (OBX/NTE) second pass are
   implemented in reviewable script code with test coverage against the
   synthetic corpus.

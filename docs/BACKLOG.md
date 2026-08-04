@@ -5,6 +5,7 @@ L (multi-day / needs design). Epics list the user stories they serve
 (see `USER_STORIES.md`) and any external dependencies.
 
 **Phases** (from the platform-constraint sequencing):
+
 - **P0** — foundation & governance groundwork (parallel to everything)
 - **P1** — domain explainer + comms (no approval dependencies; ships first)
 - **P2** — KB pipeline (upgrades when ServiceNow MCP lands)
@@ -17,6 +18,7 @@ L (multi-day / needs design). Epics list the user stories they serve
 E9 (forensics) moved there. Epic numbers are not reused.
 
 **External dependencies (tracked, not owned):**
+
 - DEP-1: ServiceNow MCP access decision (scope: read incidents / write KB)
 - DEP-2: M365 Copilot PHI/BAA coverage confirmation
 - DEP-3: Employer/client IP + OSS publication approval
