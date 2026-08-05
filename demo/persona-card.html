@@ -84,13 +84,13 @@
     flex:1 1 220px;border-radius:6px;padding:16px 18px;
     background:var(--console-2);border:1px solid rgba(163,43,214,.25);
   }
-  .chip .mark{
+  .chip .badge{
     font-family:var(--data);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
     display:inline-block;padding:3px 9px;border-radius:3px;margin-bottom:10px;
   }
-  .chip.confirmed .mark{background:rgba(163,214,120,.18);color:#A9E08A;border:1px solid rgba(163,214,120,.4)}
-  .chip.likely .mark{background:rgba(232,161,61,.18);color:var(--amber);border:1px solid rgba(232,161,61,.4)}
-  .chip.possible .mark{background:rgba(196,107,235,.18);color:var(--violet-pale);border:1px solid rgba(196,107,235,.4)}
+  .chip.confirmed .badge{background:rgba(163,214,120,.18);color:#A9E08A;border:1px solid rgba(163,214,120,.4)}
+  .chip.likely .badge{background:rgba(232,161,61,.18);color:var(--amber);border:1px solid rgba(232,161,61,.4)}
+  .chip.possible .badge{background:rgba(196,107,235,.18);color:var(--violet-pale);border:1px solid rgba(196,107,235,.4)}
   .chip p{margin:0;font-size:13.5px;color:#C3B2DC}
 
   /* ---------- boundary callout ---------- */
@@ -217,15 +217,15 @@
     <p class="sub">The single mechanic underneath everything else this persona does — every conclusion carries one of three marks, and the mark decides how much evidence is required.</p>
     <div class="scale">
       <div class="chip confirmed">
-        <span class="mark">confirmed</span>
+        <span class="badge">confirmed</span>
         <p>Directly stated in the ticket, worklog, or a cited source. Quote it or cite it.</p>
       </div>
       <div class="chip likely">
-        <span class="mark">likely</span>
+        <span class="badge">likely</span>
         <p>Consistent with available evidence, not directly stated. Say what evidence, and what would confirm it.</p>
       </div>
       <div class="chip possible">
-        <span class="mark">possible</span>
+        <span class="badge">possible</span>
         <p>Plausible given the differential, not yet supported. Say what would move it to likely.</p>
       </div>
     </div>
