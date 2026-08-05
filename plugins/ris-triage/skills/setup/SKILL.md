@@ -35,13 +35,26 @@ Schema: `references/site-profile.schema.md`. Walk its sections in this order,
 one question at a time. Confirm each answer back before moving on — a
 misheard system name propagates into every skill that reads it.
 
+Any step whose answer is a list — systems, escalation tiers, SLA tiers,
+audiences (steps 2, 5, 6, 8) — can be supplied as an existing document
+instead of dictated: a spreadsheet export, a CMDB inventory, an on-call
+schedule. Offer this explicitly rather than waiting for the user to think of
+it. If what's offered is structured (CSV, a table, a spreadsheet), read it as
+rows and columns, not prose — per this project's symbolic-parse-before-
+interpretation commitment; free text still gets read and mapped by
+inference. Either way, confirm the mapped result back per field, same as a
+spoken answer — a pasted list is not exempt from the confirm-before-moving-on
+rule, and a spreadsheet typo propagates exactly like a misheard word.
+
 1. **Site name.** Used only in drafts and headers; not a distribution target.
 2. **Systems.** "What's your RIS? PACS? Do you have a separate dictation
-   platform?" One system per turn is fine, but don't force a rigid order —
-   if the user volunteers the interface engine next, take it. Ask `role`
-   before `product` so answers map cleanly onto the schema's controlled
-   vocabulary (`ris` / `pacs` / `ehr` / `dictation` / `interface_engine` /
-   `worklist` / `other`).
+   platform? If you already have this written down — an inventory
+   spreadsheet, a CMDB export — share that instead of typing it out." One
+   system per turn is fine, but don't force a rigid order — if the user
+   volunteers the interface engine next, take it. Ask `role` before
+   `product` so answers map cleanly onto the schema's controlled vocabulary
+   (`ris` / `pacs` / `ehr` / `dictation` / `interface_engine` / `worklist` /
+   `other`).
 3. **Interfaces.** For each pair of systems already named, ask if there's a
    named interface between them and what happens when it's down — that
    answer becomes `criticality`, which is what a differential branch will
@@ -81,6 +94,9 @@ empty placeholder) so the question doesn't recur in `edit` mode.
 - The audience set is site- and shift-specific. Ask; do not assume a default
   roster. Ask separately about who is reachable overnight — it is usually a
   different set from the daytime one.
+- An uploaded or pasted document is an input to confirm, not a shortcut past
+  confirmation. Map it onto schema fields, show the mapping, and get the same
+  per-field confirmation a spoken answer would get before moving on.
 
 ## Schema
 
