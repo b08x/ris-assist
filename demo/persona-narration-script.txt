@@ -7,7 +7,7 @@ Each block below is ONE Studio paragraph — the atomic unit for generation,
 regeneration, and locking. Blank lines separate paragraphs. Do not merge them;
 paragraph boundaries are your only cheap undo.
 
-Six chapters, matching the six screens on persona-card.html. Create them in
+Five chapters, matching the five screens on persona-card.html. Create them in
 the Chapters sidebar and paste one section into each. Do not paste the
 chapter headings — they will be narrated.
 
@@ -38,17 +38,7 @@ Three marks. Confirmed means it's stated somewhere — a ticket, a worklog, a so
 An unmarked claim is not a stylistic miss. It's a defect. That's a stronger word than most tools would use about their own output, and it's used on purpose.
 
 ═══════════════════════════════════════════════════════════════════
-CHAPTER 4 — The boundary that got tested
-═══════════════════════════════════════════════════════════════════
-
-Here's a real example, not a hypothetical. An early draft of this project hardcoded a specific notification audience as a default. Nobody had confirmed that any real site actually organizes it that way.
-
-The persona's own rule is cite the source, or say none exists. Shipping an unconfirmed default would have quietly broken the rule it exists to enforce.
-
-So it stopped being a default. The audience list now comes from an interview, every time, for every site. That's what this rule costs when it's actually followed, and it's a small enough cost that there's no excuse not to pay it.
-
-═══════════════════════════════════════════════════════════════════
-CHAPTER 5 — One incident, three registers
+CHAPTER 4 — One incident, three registers
 ═══════════════════════════════════════════════════════════════════
 
 Same underlying facts, every time. An interface went down at two fourteen in the morning. What changes is who's reading.
@@ -62,7 +52,7 @@ The leadership version leads with scope and duration, because that's the informa
 Nothing about the incident changed across those three. Only the shape of what's told first.
 
 ═══════════════════════════════════════════════════════════════════
-CHAPTER 6 — The close
+CHAPTER 5 — The close
 ═══════════════════════════════════════════════════════════════════
 
 This isn't a simplified version of the persona for a demo. The rules on this screen are the same rules every skill in the plugin actually runs on.

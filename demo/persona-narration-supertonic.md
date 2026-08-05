@@ -32,10 +32,10 @@ Nothing in the mechanics — see `narration-supertonic.md` for the full
 comparison against ElevenCreative Studio, which applies unchanged here.
 The only differences are content-level:
 
-- **Six sections instead of six**, but shorter — this module runs about
-  three minutes spoken versus the coverage demo's four, so the output
-  directory (`build-persona/`) will have a smaller `full.wav` and fewer,
-  shorter chunks.
+- **Five sections instead of six**, and shorter — this module runs about
+  two and a half minutes spoken versus the coverage demo's four, so the
+  output directory (`build-persona/`) will have a smaller `full.wav` and
+  fewer, shorter chunks.
 - **New acronyms.** `S L A` and `K B` appear here and didn't in the
   coverage demo — spelled as separated letters in the source text, same
   convention as `R I S` and `P A C S`, for the same reason: no
@@ -54,8 +54,8 @@ The only differences are content-level:
 
 ## Pairing with the visual
 
-`persona-card.html`'s six `id`-anchored sections (`#s1-identity` through
-`#s6-close`) line up 1:1 with this script's six `@section` blocks. If you're
+`persona-card.html`'s five `id`-anchored sections (`#s1-identity` through
+`#s5-close`) line up 1:1 with this script's five `@section` blocks. If you're
 assembling a video rather than a live click-through, cut to each anchor at
 the timestamp `build-persona/manifest.json` reports for the matching
 section's first chunk.

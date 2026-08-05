@@ -93,15 +93,6 @@
   .chip.possible .badge{background:rgba(196,107,235,.18);color:var(--violet-pale);border:1px solid rgba(196,107,235,.4)}
   .chip p{margin:0;font-size:13.5px;color:#C3B2DC}
 
-  /* ---------- boundary callout ---------- */
-  .boundary{
-    border-left:3px solid var(--amber);background:rgba(232,161,61,.09);
-    padding:16px 18px;border-radius:0 6px 6px 0;
-  }
-  .boundary strong{color:var(--amber)}
-  .boundary p{margin:0 0 8px;font-size:14.5px;color:#EFE1C6}
-  .boundary p:last-child{margin-bottom:0}
-
   /* ---------- register bench ---------- */
   .bench{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:26px;align-items:start}
   .console{
@@ -233,19 +224,7 @@
 
   <div class="rule"></div>
 
-  <section id="s4-boundary">
-    <h2>The boundary that got tested</h2>
-    <p class="sub">Not a hypothetical — this is a real correction this project made to itself.</p>
-    <div class="boundary">
-      <p><strong>What happened:</strong> an early draft of this project hardcoded a specific notification audience as a default — an invented category, never confirmed against a real site.</p>
-      <p><strong>Why it mattered:</strong> the persona's own rule is cite-or-decline — name the source, or say none exists. Shipping an unconfirmed default would have quietly broken the rule it exists to enforce.</p>
-      <p><strong>What changed:</strong> the audience roster now comes from the cold-start interview, every time. A reasonable starting checklist is offered as prompts during setup — never assumed as a default.</p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section id="s5-register">
+  <section id="s4-register">
     <h2>Same facts, different register</h2>
     <p class="sub">One incident. Pick an audience — the underlying facts don't move, only the framing does.</p>
     <div class="bench">
@@ -263,7 +242,7 @@
 
   <div class="rule"></div>
 
-  <footer id="s6-close">
+  <footer id="s5-close">
     This persona is the substrate every RIS Triage skill runs on top of — <code>agents/analyst.md</code>
     and <code>docs/PERSONA-SPEC.md</code> are the same rules this page describes, not a simplified
     version of them. The site and incident on this page are invented. Nothing here derives from a

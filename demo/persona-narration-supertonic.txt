@@ -51,25 +51,7 @@ An unmarked claim is not a stylistic miss. It's a defect. That's a stronger word
 
 @pause 1.0
 
-@section 04_boundary
-
-Here's a real example, not a hypothetical. An early draft of this project hardcoded a specific notification audience as a default. Nobody had confirmed that any real site actually organizes it that way.
-
-@pause 0.5
-
-The persona's own rule is cite the source, or say none exists. Shipping an unconfirmed default would have quietly broken the rule it exists to enforce.
-
-@pause 0.7
-
-So it stopped being a default.
-
-@pause 0.8
-
-The audience list now comes from an interview, every time, for every site. That's what this rule costs when it's actually followed, and it's a small enough cost that there's no excuse not to pay it.
-
-@pause 1.2
-
-@section 05_register
+@section 04_register
 
 Same underlying facts, every time. An interface went down at two fourteen in the morning. What changes is who's reading.
 
@@ -91,7 +73,7 @@ Nothing about the incident changed across those three. Only the shape of what's 
 
 @pause 0.8
 
-@section 06_close
+@section 05_close
 
 This isn't a simplified version of the persona for a demo. The rules on this screen are the same rules every skill in the plugin actually runs on.
 

@@ -222,11 +222,11 @@ which exist yet or apply here. Forensics is deliberately excluded — see
 The six turns above show the persona applied to an incident. `demo/persona-card.html`
 plus its narration (`demo/persona-narration.md` for ElevenCreative Studio,
 `demo/persona-narration-supertonic.md` for the fully-local path) is a
-three-minute module that isolates the persona itself — Field/Tenor/Mode,
-confidence marking, the audience-register example, and the hardcoded-default
-boundary story from `docs/PERSONA-SPEC.md` — with no ticket attached. Useful
-as a standalone credibility piece, or as a lead-in before Turn 1 if a
-stakeholder asks "why should I trust what it says" before "what does it do."
+two-and-a-half-minute module that isolates the persona itself — Field/Tenor/
+Mode, confidence marking, and the audience-register example — with no ticket
+attached. Useful as a standalone credibility piece, or as a lead-in before
+Turn 1 if a stakeholder asks "why should I trust what it says" before "what
+does it do."
 
 ## Running it for a stakeholder
 

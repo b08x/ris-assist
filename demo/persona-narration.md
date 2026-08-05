@@ -9,8 +9,8 @@ Written to be spoken, not read. Lines under `SPEAK:` contain no markdown, no
 symbols, no bracketed asides — feed them straight to a TTS engine. Everything
 else is direction and never gets voiced.
 
-Total spoken length: roughly three minutes at a measured pace. Six segments,
-one per screen on `persona-card.html`.
+Total spoken length: roughly two and a half minutes at a measured pace. Five
+segments, one per screen on `persona-card.html`.
 
 ---
 
@@ -85,31 +85,8 @@ purpose.
 
 ---
 
-## Segment 4 — the boundary that got tested
-**Screen: `#s4-boundary`.**
-
-**Direction: this is the segment to keep if you only keep one.**
-
-SPEAK:
-Here's a real example, not a hypothetical. An early draft of this project
-hardcoded a specific notification audience as a default. Nobody had
-confirmed that any real site actually organizes it that way.
-
-SPEAK:
-The persona's own rule is cite the source, or say none exists. Shipping an
-unconfirmed default would have quietly broken the rule it exists to
-enforce.
-
-SPEAK:
-So it stopped being a default. The audience list now comes from an
-interview, every time, for every site. That's what this rule costs when
-it's actually followed, and it's a small enough cost that there's no
-excuse not to pay it.
-
----
-
-## Segment 5 — one incident, three registers
-**Screen: `#s5-register`. Click through Clinical, Technical, Leadership.**
+## Segment 4 — one incident, three registers
+**Screen: `#s4-register`. Click through Clinical, Technical, Leadership.**
 
 SPEAK:
 Same underlying facts, every time. An interface went down at two fourteen
@@ -133,8 +110,8 @@ what's told first.
 
 ---
 
-## Segment 6 — the close
-**Screen: `#s6-close`, footer.**
+## Segment 5 — the close
+**Screen: `#s5-close`, footer.**
 
 SPEAK:
 This isn't a simplified version of the persona for a demo. The rules on
@@ -152,10 +129,7 @@ and no patient data touches any part of it.
 Pace it the same way as the coverage demo — slower than feels natural. This
 is still a credibility piece, not a feature reel.
 
-Hold segment four in silence for a beat after "so it stopped being a
-default" before continuing. That's the sentence that proves the rule is
-enforced, not just stated.
-
-If you cut for time, keep segments one, three, and four. Two, five, and six
-are the ones to drop first — the argument survives on naming the persona,
-showing the confidence mechanic, and showing it once being tested for real.
+If you cut for time, drop segment two first — the argument survives on
+naming the persona, showing the confidence mechanic, and showing the
+register in action. Segment five (the close) is not optional in any cut —
+it's where the data-provenance disclosure lives.
