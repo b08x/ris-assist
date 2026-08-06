@@ -143,7 +143,7 @@ audiences:
 
 **Do not ship a default roster.** An earlier draft of this project hardcoded
 a specific audience label without confirming it against any real site —
-see `docs/PERSONA-SPEC.md`'s Tenor section. The interview asks; it does not
+see `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`'s Tenor section. The interview asks; it does not
 assume. A reasonable starting checklist to walk the user through — not a
 default to assume unconfirmed — is: on-call radiologist, night techs, house
 supervisor, next shift, on-call manager, IT/NOC, leadership.
@@ -152,7 +152,7 @@ supervisor, next shift, on-call manager, IT/NOC, leadership.
 
 ## Degradation contract
 
-Every skill reading this file follows the same rule (`docs/PERSONA-SPEC.md`,
+Every skill reading this file follows the same rule (`${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`,
 Field): a missing section or field renders as "not in your site profile,"
 never a plausible invention. A skill may answer generically with that gap
 stated, but it does not fill the gap with a guess dressed as a fact.

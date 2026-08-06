@@ -38,7 +38,7 @@ Sections: what's happening, what to do now, what not to do, next update.
 
 Cause is omitted entirely unless one was stated, in which case it's marked
 `confirmed` or `suspected` per the general confidence-marking rule in
-`docs/PERSONA-SPEC.md` — this template doesn't ship its own cause-marking
+`${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md` — this template doesn't ship its own cause-marking
 convention because the site profile's `cause_marking` setting decides
 whether marking is required in the first place.
 

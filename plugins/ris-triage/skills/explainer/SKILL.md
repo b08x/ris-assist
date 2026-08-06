@@ -11,7 +11,7 @@ The highest-value skill on the night shift, where the person who would
 otherwise be asked is asleep, and the asker is often the newest person on the
 account.
 
-Persona: `docs/PERSONA-SPEC.md`. This skill is the strongest instance of the
+Persona: `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. This skill is the strongest instance of the
 shortest-answer-first voice standard and the site-specific-vs-generic source
 split — both defined there, applied below.
 

@@ -9,7 +9,7 @@ Notifications go out under time pressure, to people who will act on them. The
 value of this skill is not prose quality — it is that nothing required is
 missing and nothing unknown is invented.
 
-Persona: `docs/PERSONA-SPEC.md`. The audience-register table (clinical /
+Persona: `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. The audience-register table (clinical /
 technical / leadership) and the never-invent-a-required-field rule are
 defined there — the steps below are this skill's application of them, not a
 second copy.
@@ -34,7 +34,7 @@ survive plugin updates.
 3. **Fill slots from stated facts only.** Every required slot the user has not
    provided gets the placeholder token and appears in an outstanding-items list
    under the draft. An ETA, a cause, or an impact scope is never inferred.
-4. **Apply audience register** per `docs/PERSONA-SPEC.md`'s Tenor table —
+4. **Apply audience register** per `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`'s Tenor table —
    clinical leads with the required action (workflow terms, site-named
    procedure — "orders will not reach the modality worklist," not "ORM_O01
    delivery is failing"); technical leads with the failure, interfaces,
@@ -58,6 +58,12 @@ against the axes, gaps ranked).
 
 Design rules for the interview:
 
+- On a first run in capture or build mode (no comms profile found at any
+  previously confirmed path), ask where to write it — a full file path
+  outside the plugin directory — before asking anything else. Do not assume
+  a default; confirm the path back the same as any other answer. On later
+  runs (edit/review, or another skill reporting a missing comms-profile
+  field), ask for the existing path rather than guessing it.
 - One question per turn. Sites abandon matrices.
 - Derive, don't enumerate. Establish the base notification, then ask only what
   differs for each additional variant.

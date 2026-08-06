@@ -113,7 +113,7 @@ variants:
 ```
 
 `lead_with` is the mechanical instantiation of the register rule in
-`docs/PERSONA-SPEC.md`'s Tenor table and `references/register-guide.md`'s
+`${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`'s Tenor table and `references/register-guide.md`'s
 worked examples — one word, but it's what the comms skill's step 4 actually
 branches on.
 

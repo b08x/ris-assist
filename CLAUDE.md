@@ -41,6 +41,12 @@ repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
   `SKILL.md` reference it rather than restating it; if a skill's instructions
   and the spec disagree, the spec wins. **Do not duplicate persona rules into
   a skill file** — link to the relevant section instead.
+  **Packaging note:** only `plugins/ris-triage/` ships to the plugin cache on
+  install, so runtime references use `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`,
+  which resolves to `plugins/ris-triage/PERSONA-SPEC.md` — a packaged copy of
+  the root file. Edit `docs/PERSONA-SPEC.md`, then re-copy it to
+  `plugins/ris-triage/PERSONA-SPEC.md` before shipping; the two must not
+  drift.
 - **Site profile / comms profile** are user data written by `/setup` and
   `/comms-tune` to a **local path outside this repository**. Never write
   site-specific config into this repo. `plugins/ris-triage/examples/site-profile.example.yaml`

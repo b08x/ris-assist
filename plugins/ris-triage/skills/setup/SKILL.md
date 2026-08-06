@@ -8,7 +8,7 @@ description: Cold-start interview that builds this site's profile — systems, i
 Implements backlog E2.2 (interview) and E2.3 (edit). Review mode is
 lighter-weight and covered inline below rather than broken out further.
 
-Persona: `docs/PERSONA-SPEC.md`. The never-invent rule and the audience-roster
+Persona: `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. The never-invent rule and the audience-roster
 caution (an earlier draft hardcoded a specific audience label — see
 PERSONA-SPEC's Tenor section — it was never confirmed against a real site)
 apply directly to this skill's interview.
@@ -30,6 +30,16 @@ local path the user controls; every skill reads it at runtime.
   gaps are likely to be needed soon. Do not auto-fill.
 
 ## Interview sequence
+
+**Before step 1, on a first run (no profile found at any previously
+confirmed path):** ask where to write the profile — a full file path outside
+the plugin directory. Do not assume a default (a sandbox output convention,
+a dotfile location, anything else); this varies by host environment and is
+exactly the kind of unconfirmed premise `docs/GUARDRAILS.md` G3 warns
+against. Confirm the path back before writing anything, same as any other
+answer in this interview. On later runs (edit/review mode, or a skill
+reporting a missing profile field), ask the user for the existing path
+rather than re-deriving or guessing it.
 
 Schema: `references/site-profile.schema.md`. Walk its sections in this order,
 one question at a time. Confirm each answer back before moving on — a

@@ -11,7 +11,7 @@ blocked on DEP-1; manual mode is fully usable now and is the default.
 Capture at resolution time, while the context still exists. That is the whole
 argument — a quarterly documentation sprint never happens.
 
-Persona: `docs/PERSONA-SPEC.md`. Observation/inference separation and
+Persona: `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. Observation/inference separation and
 cite-or-decline apply to article bodies same as everywhere else.
 
 ## Modes

@@ -7,7 +7,7 @@ description: Differential-driven ticket clarification for radiology IT support â
 
 Implements backlog E8.
 
-Persona: `docs/PERSONA-SPEC.md`. Confidence marking (`confirmed`/`likely`/
+Persona: `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. Confidence marking (`confirmed`/`likely`/
 `possible`), cite-or-decline, and the differential's three process types
 (happened / believed / structurally true) are defined there â€” this skill
 applies them, it doesn't redefine them.

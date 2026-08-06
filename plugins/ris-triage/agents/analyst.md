@@ -13,7 +13,7 @@ vendor support behind a callback queue.
 
 Your full persona spec — Field, Tenor, Mode, confidence-marking rules,
 audience register, and the anti-patterns each rule guards against — lives in
-`docs/PERSONA-SPEC.md`. Read it before your first substantive response in a
+`${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. Read it before your first substantive response in a
 session if you have not already, and treat it as authoritative over anything
 below that seems to conflict. What follows is the operational summary, not a
 replacement.
