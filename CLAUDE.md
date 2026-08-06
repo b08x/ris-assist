@@ -27,14 +27,26 @@ repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
   skill: `/triage`, `/kb-draft`, `/downtime`, `/explain`, `/setup`, `/comms-tune`.
 - **Skills** (`plugins/ris-triage/skills/<name>/SKILL.md`) hold the actual
   behavior, each with `name`/`description` frontmatter and a **"Not this
-  skill"** section defining its boundary. Only `skills/comms/` is fully
-  implemented; the rest are stubs carrying correct frontmatter and behavioral
-  rules but no full implementation — check for a `STUB` marker before assuming
-  a skill does more than draft placeholder behavior.
+  skill"** section defining its boundary. All five (triage, knowledge, comms,
+  explainer, setup) are implemented; four of the five (all but `triage`) have
+  a `references/` subdirectory of supporting docs (schemas, templates, generic
+  fallbacks) — triage's differential logic lives directly in its `SKILL.md`.
+  What's still
+  missing is the `/comms-tune` build/capture/edit/review interview modes
+  themselves and some slash-command wiring — check `docs/BACKLOG.md` for
+  exact per-item status rather than assuming from a skill's presence alone.
+- **`docs/PERSONA-SPEC.md` is the single source of truth for the analyst
+  persona** — stance, confidence marking, audience register, boundaries.
+  `plugins/ris-triage/agents/analyst.md` (an invocable subagent) and every
+  `SKILL.md` reference it rather than restating it; if a skill's instructions
+  and the spec disagree, the spec wins. **Do not duplicate persona rules into
+  a skill file** — link to the relevant section instead.
 - **Site profile / comms profile** are user data written by `/setup` and
   `/comms-tune` to a **local path outside this repository**. Never write
-  site-specific config into this repo; `plugins/ris-triage/examples/comms-profile.example.yaml`
-  is the schema reference, keyed to the fictional site "Riverside Regional Imaging."
+  site-specific config into this repo. `plugins/ris-triage/examples/site-profile.example.yaml`
+  and `.../comms-profile.example.yaml` are the schema references (schemas
+  themselves live in each skill's `references/`), keyed to the fictional site
+  "Riverside Regional Imaging."
 - **Message forensics is a separate, not-yet-built plugin** (parked in
   `docs/FORENSICS-BACKLOG.md`). It waits on a symbolic (code, not model) HL7
   parse layer — see the "Symbolic parse before model interpretation"
@@ -73,9 +85,11 @@ allowed-tools: [...]
 ```
 
 SKILL.md frontmatter requires `name` and `description` (description is
-trigger-phrase rich — it's how the skill gets invoked). Stub skills should
-carry a `STUB — implements backlog <E##>` marker and end with a **"Not this
-skill"** section.
+trigger-phrase rich — it's how the skill gets invoked). Every skill ends with
+a **"Not this skill"** section defining its boundary, and states which
+backlog epic it implements (`Implements backlog E##`). Pieces blocked on an
+external dependency (e.g. ServiceNow MCP) say so inline and describe the
+manual-mode fallback rather than being left unbuilt silently.
 
 Naming: commands are `<action>.md`; skills are `<action>/SKILL.md`; example
 configs are `*.example.yaml`.
@@ -97,8 +111,15 @@ configs are `*.example.yaml`.
 
 ## Known pre-alpha state
 
-`SCAFFOLD-NOTES.md` and `docs/PROJECT-INSTRUCTIONS.md` track open items,
-including `TODO` placeholders in `plugin.json` / `marketplace.json` (owner,
-repo URL) and an in-progress audience-taxonomy rework (the "front desk" label
-in `demo/` is a flagged invention pending replacement). Check these before
+`docs/PROJECT-INSTRUCTIONS.md`'s "Current state" section tracks open items,
+currently just unconfirmed overnight technical assumptions (change-window
+faults, DST boundary cases) flagged under GUARDRAILS G3. Check it before
 assuming a name or field is final.
+
+Two demo pairs exist and are companions, not alternatives: `docs/DEMO-comms.md`
++ `demo/coverage-demo.html`/`narration*` goes deep on the comms skill alone;
+`docs/DEMO-full.md` + `demo/persona-card.html`/`persona-narration*` walks all
+five skills as one incident thread and then isolates the persona itself.
+Keep both in sync with `examples/site-profile.example.yaml` and
+`examples/comms-profile.example.yaml` — the two demos deliberately reference
+the same fictional site and incident details.

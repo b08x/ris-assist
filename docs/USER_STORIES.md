@@ -27,7 +27,7 @@ account.
 
 Audience labels used in stories below are placeholders. The real audience set
 comes from the cold-start interview (US-22) and varies by site and by shift —
-see the open item in the project instructions.
+see `docs/PERSONA-SPEC.md`'s Tenor section and `skills/setup/references/site-profile.schema.md`.
 
 **US-01 — Decode a message** [FORENSICS]
 As a support analyst, I want to paste a de-identified HL7 v2 message and receive

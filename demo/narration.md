@@ -35,9 +35,10 @@ engine reads it as "six colon fifteen," spell it out in the source line.
 SPEAK:
 Every hospital sends notifications when a system goes down. The order interface
 fails, and someone has to tell the radiologists, and the technologists, and the
-front desk, and each of those groups needs to hear something different. The
-radiologists need to know where to read from. The technologists need to know
-which paper process to start. Leadership needs to know how big this is.
+shift coming on next, and each of those groups needs to hear something
+different. The radiologists need to know where to read from. The technologists
+need to know which paper process to start. Leadership needs to know how big
+this is.
 
 SPEAK:
 So it isn't one message. It's a grid. Event class down one side, audience across
@@ -46,22 +47,22 @@ the top. And most sites have never written most of these down.
 ---
 
 ## Segment 2 — reading the grid
-**Screen: slow pan across the grid. Hold on the front desk column.**
+**Screen: slow pan across the grid. Hold on the next shift column.**
 
 SPEAK:
 This is one site's actual coverage. The filled cells are notifications they have
 a template for. Seven of them. The hatched cells are the ones they don't.
 
 SPEAK:
-Look at the front desk column. Nothing. Every unplanned outage, every planned
-maintenance window, and the people answering the phone get whatever someone
-types in the moment. That's not a criticism of the site. That's what normal
-looks like.
+Look at the next shift column. Nothing. Every unplanned outage, every planned
+maintenance window, and the incoming analyst gets whatever the outgoing one
+remembered to type in the handoff notes. That's not a criticism of the site.
+That's what normal looks like.
 
 ---
 
 ## Segment 3 — the happy path
-**Screen: click Unplanned / Radiologists. Draft appears.**
+**Screen: click Unplanned / Radiologists / Techs. Draft appears.**
 
 SPEAK:
 Start with one they do have. Unplanned outage, radiologists. Here are the facts
@@ -82,12 +83,12 @@ invented. That distinction is the whole product.
 ---
 
 ## Segment 4 — the gap
-**Screen: click Unplanned / Front desk. Hold on the substitution banner.**
+**Screen: click Unplanned / Next shift. Hold on the substitution banner.**
 
 **Direction: this is the segment to keep if you only keep one.**
 
 SPEAK:
-Now the interesting one. Same outage, front desk, and there is no template for
+Now the interesting one. Same outage, next shift, and there is no template for
 this cell.
 
 SPEAK:

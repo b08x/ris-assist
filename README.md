@@ -20,7 +20,7 @@ and analyst onboarding — for radiology IT support.</strong></p>
 ## What this is
 
 RIS support lives at a messy intersection: tickets arrive from radiologists,
-techs, and front-desk staff about a system wired into PACS, dictation, the
+techs, and scheduling staff about a system wired into PACS, dictation, the
 EHR, and a tangle of HL7 interfaces. Most "RIS problems" are really
 integration problems, most triage knowledge lives in one senior analyst's
 head, and most of it walks out the door at every staff rotation.
@@ -62,7 +62,8 @@ is tracked in [FORENSICS-BACKLOG.md](docs/FORENSICS-BACKLOG.md).
 ## The analyst persona
 
 Every skill speaks through the same persona: fifteen years in radiology IT,
-calm, allergic to filler. Its rules are structural, not cosmetic:
+calm, allergic to filler. Its rules are structural, not cosmetic — full spec
+in [`docs/PERSONA-SPEC.md`](docs/PERSONA-SPEC.md):
 
 - **Observation is separated from inference**, always.
 - Every diagnostic conclusion carries a confidence mark: *confirmed / likely / possible*.

@@ -202,7 +202,7 @@
 
   <section>
     <h2>Coverage</h2>
-    <p class="sub">Event class down the side, audience across the top. Seven templates cover thirty situations.</p>
+    <p class="sub">Event class down the side, audience across the top. Seven templates cover twenty situations.</p>
     <div class="gridscroll"><table class="cov" id="grid"></table></div>
     <div class="legend">
       <span><i class="sw d"></i> Template defined</span>
@@ -263,21 +263,18 @@ const EC = [
   {id:"resolved",        label:"Resolved"}
 ];
 const AUD = [
-  {id:"radiologists",  label:"Radiologists"},
-  {id:"technologists", label:"Technologists"},
-  {id:"front_desk",    label:"Front desk"},
-  {id:"referring",     label:"Referring"},
-  {id:"it_noc",        label:"IT / NOC"},
-  {id:"leadership",    label:"Leadership"}
+  {id:"radiologists_and_techs", label:"Radiologists / Techs"},
+  {id:"operations_it",          label:"Operations / IT"},
+  {id:"next_shift",             label:"Next shift"},
+  {id:"leadership",             label:"Leadership"}
 ];
 
 // Defined variants from the Riverside comms profile.
 const DEFINED = {
-  "unplanned/technologists": {ch:"email", lead:"action"},
-  "unplanned/radiologists":  {ch:"teams", lead:"action"},
-  "unplanned/leadership":    {ch:"email", lead:"scope"},
-  "planned/technologists":   {ch:"email", lead:"schedule"},
-  "degraded/it_noc":         {ch:"teams", lead:"failure"}
+  "unplanned/radiologists_and_techs": {ch:"teams", lead:"action"},
+  "unplanned/leadership":             {ch:"email", lead:"scope"},
+  "planned/radiologists_and_techs":   {ch:"email", lead:"schedule"},
+  "degraded/operations_it":           {ch:"teams", lead:"failure"}
 };
 // Variants defined for every audience at once.
 const ALL_AUD = {
@@ -294,16 +291,16 @@ workflow language (use verbatim for clinical audiences):
   paper requisition  = "yellow requisition slips"
   dictation fallback = "phone dictation line, extension 4412"
   pacs direct read   = "read direct from PACS worklist, do not wait for RIS status"
-distribution: radiologists DL-Radiology-Physicians; technologists DL-Imaging-Techs;
-  front_desk DL-Imaging-Scheduling; referring DL-Ambulatory-Clinicians; it_noc #imaging-ops;
-  leadership DL-Imaging-Leadership
+distribution: radiologists_and_techs DL-Imaging-Clinical; operations_it #imaging-ops;
+  next_shift #imaging-handoff; leadership DL-Imaging-Leadership
 approval: sev1 = drafted by analyst, approved by on-call manager, sent by service desk;
   sev2 = drafted and sent by analyst, manager copied; sev3 = analyst discretion
 update cadence: sev1 every 30 minutes; sev2 every 2 hours; sev3 at resolution
 voice: operational, first person plural, apology language only in resolution notices (one sentence max).
 BANNED: "we apologize for any inconvenience", "please be patient", anything implying clinical guidance.
 register: clinical audiences lead with the action and describe impact in workflow terms, never segment names;
-  technical audiences lead with the failure and name interfaces/queues; leadership leads with scope then duration.
+  technical audiences lead with the failure and name interfaces/queues; next shift leads with what's still
+  open and what changed since the last update; leadership leads with scope then duration.
 `;
 
 function resolve(ec, aud){

@@ -41,8 +41,9 @@ came from my environment, then building structure on them.
 conversation from you rather than from me, name it as an assumption on first
 use. Do not let it silently become schema.
 
-*Live example:* "front desk" — my invention, propagated into the profile, the
-demo grid, the narration, and an entire argument, before anyone questioned it.
+*Live example:* an invented audience label — my invention, propagated into
+the profile, the demo grid, the narration, and an entire argument, before
+anyone questioned it.
 
 ### G3 — Assumption laundering
 

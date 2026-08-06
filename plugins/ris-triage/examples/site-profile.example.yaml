@@ -1,0 +1,101 @@
+# Example site profile — fictional site
+#
+# Riverside Regional Imaging. Every name here is invented, and consistent
+# with examples/comms-profile.example.yaml (same fictional site). This file
+# demonstrates the schema in skills/setup/references/site-profile.schema.md;
+# a real profile is written by /setup to a local path outside the plugin
+# directory and never enters this repository.
+
+version: 1
+site: Riverside Regional Imaging
+
+systems:
+  - role: ris
+    product: (fictional) RIS vendor, product name withheld for the example
+    version: "unknown — not asked in this worked example"
+    notes: Primary order and report-status system of record.
+  - role: pacs
+    product: (fictional) PACS vendor
+    notes: Two-node HA pair; listener process is the usual overnight failure point.
+  - role: ehr
+    product: (fictional) ambulatory EHR
+    notes: Source of outside orders for referring clinicians.
+  - role: dictation
+    product: (fictional) dictation platform
+    notes: "Phone dictation fallback line exists — see downtime_procedures."
+  - role: interface_engine
+    product: (fictional) integration engine
+    notes: Routes all RIS<->PACS<->EHR traffic; queue backlog is the most common overnight symptom.
+
+interfaces:
+  - name: RIS-to-PACS order interface
+    from: ris
+    to: pacs
+    direction: unidirectional
+    criticality: "Orders stop reaching the modality worklist; techs can't find studies to perform."
+  - name: PACS listener
+    from: interface_engine
+    to: pacs
+    direction: unidirectional
+    criticality: "Images/orders queue at the engine but never post to PACS; this is the interface named in the Turn 4 correction case in docs/DEMO-comms.md."
+  - name: ADT feed
+    from: ehr
+    to: ris
+    direction: unidirectional
+    criticality: "Patient demographics go stale in RIS; registration mismatches follow within hours."
+
+identifier_formats:
+  accession_number: "IMG########"
+  order_number: "ORD-######"
+  mrn: "site MRN, 7 digits"
+  incident_ref: "INC0#######"
+
+escalation_matrix:
+  - tier: Tier 1 — overnight analyst
+    scope: First response, all RIS/PACS/interface tickets
+    contact: on-call analyst rotation
+    hours: "24/7"
+    escalates_to: Tier 2 — interface analyst
+  - tier: Tier 2 — interface analyst
+    scope: Interface engine, HL7-adjacent routing issues
+    contact: interface analyst on-call
+    hours: "on-call, 24/7 for Sev 1/2"
+    escalates_to: Vendor support
+  - tier: Vendor support
+    scope: RIS/PACS product defects
+    contact: vendor support queue (callback-gated overnight)
+    hours: "business hours guaranteed; overnight is best-effort callback"
+    escalates_to: none
+
+sla_tiers:
+  - severity: Sev 1
+    definition: "Sitewide or all-modality impact; no workaround available."
+    response_target: "15 minutes"
+    resolution_target: "not defined — engagement-dependent"
+  - severity: Sev 2
+    definition: "Single modality, single reading room, or workaround available."
+    response_target: "1 hour"
+  - severity: Sev 3
+    definition: "Single user or cosmetic; no workflow blocked."
+    response_target: "next business day"
+
+downtime_procedures:
+  - name: "Imaging Downtime Packet (Form IMG-14)"
+    trigger: "Any Sev 1/2 affecting order or report-status flow"
+    summary: "Techs revert to paper requisitions; radiologists read direct from PACS worklist."
+  - name: "Phone dictation fallback"
+    trigger: "Dictation platform unavailable"
+    summary: "Radiologists call the dictation line directly; transcription queues on recovery."
+
+audiences:
+  - label: radiologists_and_techs
+    reachable: 24/7
+    notes: "Overnight: on-call radiologist plus night techs — a smaller subset than day staff. Both read the same alerts; channel and content differ by role, not audience."
+  - label: operations_it
+    reachable: 24/7
+  - label: next_shift
+    reachable: 24/7
+    notes: "Handoff channel — incoming analyst, not a standing distribution list."
+  - label: leadership
+    reachable: business_hours
+    notes: "Sev 1 pages the on-call manager regardless of hour; see escalation_matrix."

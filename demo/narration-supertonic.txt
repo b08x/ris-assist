@@ -21,7 +21,7 @@
 
 @section 01_problem
 
-Every hospital sends notifications when a system goes down. The order interface fails, and someone has to tell the radiologists, and the technologists, and the front desk. Each of those groups needs to hear something different.
+Every hospital sends notifications when a system goes down. The order interface fails, and someone has to tell the radiologists, and the technologists, and the shift coming on next. Each of those groups needs to hear something different.
 
 The radiologists need to know where to read from. The technologists need to know which paper process to start. Leadership needs to know how big this is.
 
@@ -37,7 +37,7 @@ This is one site's actual coverage. The filled cells are notifications they have
 
 @pause 0.3
 
-Look at the front desk column. Nothing. Every unplanned outage, every planned maintenance window, and the people answering the phone get whatever someone types in the moment.
+Look at the next shift column. Nothing. Every unplanned outage, every planned maintenance window, and the incoming analyst gets whatever the outgoing one remembered to type in the handoff notes.
 
 @pause 0.5
 
@@ -63,7 +63,7 @@ That distinction is the whole product.
 
 @section 04_gap
 
-Now the interesting one. Same outage, front desk, and there is no template for this cell.
+Now the interesting one. Same outage, next shift, and there is no template for this cell.
 
 @pause 0.5
 

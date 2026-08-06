@@ -35,6 +35,16 @@ Work through the variation axes below, one question at a time. Do not present
 the whole matrix at once. Start from the single most common notification the
 site sends and derive the rest as deltas from it, so the interview stays short.
 
+Any axis can be answered with an existing document instead of dictated —
+a distribution-list export, an approval-chain org chart, a style guide for
+the **Voice** axis. Offer this explicitly rather than waiting for the user to
+think of it. Structured input (a spreadsheet, a table) is read as rows and
+columns, not prose, per this project's symbolic-parse-before-interpretation
+commitment; free text still gets read and mapped by inference. Either way,
+show the mapping and confirm it per axis before writing it — same as the
+capture-mode confirmation below, and for the same reason: a spreadsheet typo
+propagates exactly like a misheard answer.
+
 ### edit — change one thing
 Take the named variant (or ask which), show its current definition, change only
 what the user asks, and rewrite that entry. Do not re-run the interview.
@@ -51,7 +61,7 @@ message to everyone has one variant, and that is a legitimate answer.
 | Axis | Typical values |
 |---|---|
 | **Event class** | planned maintenance · unplanned outage · degraded performance · interval update · extended/revised ETA · resolved · post-incident summary |
-| **Audience** | radiologists · technologists · front desk / scheduling · referring clinicians · IT and NOC · service desk agents · leadership · vendor |
+| **Audience** | radiologists · technologists · next shift · referring clinicians · IT and NOC · service desk agents · leadership · vendor |
 | **Channel** | email · Teams/Slack · ITSM broadcast · status page · in-application banner · paging/overhead · printed downtime packet |
 | **Scope** | single modality · single reading room · one site · enterprise · interface-only (invisible to clinical users) |
 | **Severity mapping** | how site severity tiers map to notification urgency and to who must approve |
@@ -78,3 +88,6 @@ result immediately.
   Unknown stays unknown, recorded as such in the profile.
 - Preserve entries not under discussion. Editing one variant must not rewrite
   the others.
+- An uploaded or pasted document is an input to confirm, not a shortcut past
+  confirmation. Map it onto the relevant axis, show the mapping, and get the
+  same per-axis confirmation a spoken answer would get before writing it.

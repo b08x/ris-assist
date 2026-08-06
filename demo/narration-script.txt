@@ -12,7 +12,7 @@ each. Do not paste the chapter headings — they will be narrated.
 CHAPTER 1 — The problem
 ═══════════════════════════════════════════════════════════════════
 
-Every hospital sends notifications when a system goes down. The order interface fails, and someone has to tell the radiologists, and the technologists, and the front desk. Each of those groups needs to hear something different.
+Every hospital sends notifications when a system goes down. The order interface fails, and someone has to tell the radiologists, and the technologists, and the shift coming on next. Each of those groups needs to hear something different.
 
 The radiologists need to know where to read from. The technologists need to know which paper process to start. Leadership needs to know how big this is.
 
@@ -24,7 +24,7 @@ CHAPTER 2 — Reading the grid
 
 This is one site's actual coverage. The filled cells are notifications they have a template for. Seven of them. The hatched cells are the ones they don't.
 
-Look at the front desk column. Nothing. Every unplanned outage, every planned maintenance window, and the people answering the phone get whatever someone types in the moment.
+Look at the next shift column. Nothing. Every unplanned outage, every planned maintenance window, and the incoming analyst gets whatever the outgoing one remembered to type in the handoff notes.
 
 That's not a criticism of the site. That's what normal looks like.
 
@@ -44,7 +44,7 @@ That distinction is the whole product.
 CHAPTER 4 — The gap
 ═══════════════════════════════════════════════════════════════════
 
-Now the interesting one. Same outage, front desk, and there is no template for this cell.
+Now the interesting one. Same outage, next shift, and there is no template for this cell.
 
 A tool that wanted to look impressive would just write something. This one tells you first. It says which template it borrowed from, it says the structure is provisional, and then it gives you the draft anyway, so you are not stuck.
 
