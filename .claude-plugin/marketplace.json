@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Triage tooling for radiology IT support, built for the overnight shift.",
-    "version": "0.1.0"
+    "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "ris-triage",
       "source": "./plugins/ris-triage",
       "description": "Ticket clarification, knowledge capture, incident communications, and analyst onboarding for radiology information system support.",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "author": {
         "name": "Robert Pannick"
       },
