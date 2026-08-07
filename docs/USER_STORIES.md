@@ -18,12 +18,22 @@ post-approval-dependent.
 
 ---
 
-## Persona A — Support Analyst (L1/L2 triage)
+## Persona A — Support Analyst (overnight, senior)
 
-The primary user, and the overnight shift is the design target: working alone,
-no senior analyst to ask, vendor support behind a callback queue. Generalist IT
-background, variable radiology depth, often the least experienced person on the
-account.
+The primary user, and the overnight shift is the design target: an experienced
+analyst (years on this account), working remotely, with senior analysts
+reachable on-call but not always quickly, and vendor support behind a callback
+queue. Not a novice working in isolation — this changes the triage
+differential's starting prior (see the triage skill's "Overnight behavior":
+the change-window explanation gets checked first, not worked toward from a
+blank differential).
+
+Distinct from Persona D below: this persona's seniority is about triage
+judgment and domain depth, not about owning the incident-comms/handoff
+role — Persona D ("Support Lead / Shift Lead") is the one accountable for
+communications, handoffs, and cadence. The same person may hold both roles
+on a given account, but the personas describe different jobs-to-be-done, not
+a single hierarchy.
 
 Audience labels used in stories below are placeholders. The real audience set
 comes from the cold-start interview (US-22) and varies by site and by shift —
@@ -80,8 +90,8 @@ articles and open problem records so that I don't re-solve solved problems.
 **US-07 — Ask "why does it work this way"**
 As a support analyst, I want to ask domain questions (accession vs. order
 number, MWL, report status flow, order lifecycle) and get answers grounded in
-the site topology, at the depth I ask for, so that I stop shoulder-tapping the
-senior analyst.
+the site topology, at the depth I ask for, so that I don't have to page the
+on-call senior analyst for something I can confirm myself.
 
 ---
 

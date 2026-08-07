@@ -13,11 +13,16 @@ plugin marketplace). Five capabilities: HL7 message forensics, ticket
 clarification, KB/knowledge capture, incident communications, and domain
 explanation.
 
-Primary user: the overnight support engineer — working alone, no senior analyst
-to ask, vendor support gated behind callbacks, often the least experienced person
-on the account. Design for that hour and let it degrade gracefully into daylight.
-Secondary: support specialists generally. Only the forensics capability is
-radiology-specific; the rest is shape-identical for any 24/7 support desk.
+Primary user: the overnight support engineer — an experienced analyst (years on
+this account), working remotely, serving as team lead on the support side, with
+senior analysts reachable on-call but not always quickly, and vendor support
+gated behind callbacks. This is not a novice-in-isolation framing: it inverts
+the standard triage differential's prior, because an analyst who already knows
+the environment reaches for the change-window explanation first rather than
+working the differential from scratch. Design for that hour and let it degrade
+gracefully into daylight. Secondary: support specialists generally. Only the
+forensics capability is radiology-specific; the rest is shape-identical for any
+24/7 support desk.
 
 Deployment context: Claude Desktop plugin, with a possible M365 Copilot parallel
 track for anything requiring live PHI. The client's support services are
@@ -219,7 +224,11 @@ Open items:
 - Overnight technical distinctions — change-window faults, idle-timeout drops,
   monitoring-dependent detection, night-only teleradiology routing, DST boundary
   cases — are asserted from general healthcare IT patterns, not confirmed
-  against this environment. Unconfirmed under G3.
+  against this environment. Unconfirmed under G3. The persona's on-account
+  experience doesn't resolve this: a veteran analyst's institutional
+  knowledge is real but isn't a citable source any more than a generic
+  pattern is (`docs/PERSONA-SPEC.md`'s "Experience is not a citable source").
+  Only a real site profile confirms it.
 - Whether Word's HTML import preserves `<ul>`/`<ol>` as real list formatting is
   unconfirmed under G6 (ADR-0010). LibreOffice's filter flattens them to plain
   paragraphs; Word could not be tested where this was built. First real use on

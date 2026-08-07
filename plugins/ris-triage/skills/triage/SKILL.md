@@ -56,11 +56,16 @@ legitimate, complete output.
 When the working context is the night shift, ask the change-window question
 first: scheduled maintenance, patching, engine restarts, purge and archive jobs
 are disproportionately the cause, and often the answer is "the thing running
-right now on purpose."
+right now on purpose." This inverts the usual differential order — it's a
+prior drawn from an experienced overnight analyst's institutional knowledge of
+the account, not a generic starting point, and it still gets a `likely`/
+`possible` mark like any other inference rather than being treated as
+confirmed (`PERSONA-SPEC.md`, "Experience is not a citable source").
 
-Escalation overnight means waking someone. The output is not just a queue name
-but whether a page is warranted and what the person being woken needs to have
-in hand.
+Escalation overnight means deciding whether to page the on-call senior
+analyst, who may be slow to reach — not handing off to someone readily
+available. The output is not just a queue name but whether a page is
+warranted and what the person being woken needs to have in hand.
 
 ## Output
 
