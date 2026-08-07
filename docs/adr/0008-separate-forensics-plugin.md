@@ -27,7 +27,7 @@ anyway, since it is the most impressive of the five.
 
 ## Decision
 
-Split forensics into a second plugin, `ris-triage-forensics`, published from the
+Split forensics into a second plugin, `ris-assist-forensics`, published from the
 same repository and listed in the same `marketplace.json`.
 
 Moves to the forensics plugin: E3 (synthetic corpus, de-identification gate) and

@@ -12,6 +12,15 @@
 
 - Merge tag 'v1.0.0' into development
 
+### 🚜 Refactor
+
+- Rename plugin from ris-triage to ris-assist and update all references
+
+### 📚 Documentation
+
+- Reconcile Word-openable HTML default with ADR-0010; update changelog
+- Update overnight analyst persona from novice to senior framing
+- Update changelog with refactor commit
 ## [1.0.0] - 2026-08-06
 
 ### 🚀 Features
@@ -24,6 +33,10 @@
 
 - Resolve selector collision inflating persona-card confidence badges
 
+### 💼 Other
+
+- Merge branch 'release/1.0.0'
+
 ### 📚 Documentation
 
 - Drop out-of-context boundary segment from persona demo
@@ -33,3 +46,4 @@
 - Initialize RIS Triage plugin with Claude Desktop scaffold
 - Add .codemap/ to .gitignore
 - Complete initial project setup with maintainer info and formatting
+- *(release)* 1.0.0

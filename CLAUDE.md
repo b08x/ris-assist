@@ -4,15 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-RIS Triage is a **Claude plugin**, not an application. There is no build, lint,
+RIS Assist is a **Claude plugin**, not an application. There is no build, lint,
 or test command — the repository is markdown (slash commands, skills, docs),
 one non-functional demo script, and one shipped script that does run but is
-off the critical path: `plugins/ris-triage/skills/knowledge/scripts/html_to_docx.py`,
+off the critical path: `plugins/ris-assist/skills/knowledge/scripts/html_to_docx.py`,
 an optional KB renderer for macOS/Linux/WSL (ADR-0009, demoted by ADR-0010).
 Verify a markdown change by reading the frontmatter and prose for internal
 consistency; verify a change to the renderer or to the Word header in
 `skills/knowledge/references/servicenow-format.md` by opening
-`plugins/ris-triage/examples/kb-article-*.example.html` in Word.
+`plugins/ris-assist/examples/kb-article-*.example.html` in Word.
 
 **The target is MSP-managed Windows.** No Python, no `pip`, and PowerShell as
 the shell unless Git for Windows is installed. Anything on a default path must
@@ -24,20 +24,20 @@ command.
 ```bash
 claude plugin validate .                              # validate plugin structure
 /plugin marketplace add /absolute/path/to/this/repo    # local install for testing
-/plugin install ris-triage@ris-triage
+/plugin install ris-assist@ris-assist
 ```
 
 The repo doubles as its own plugin marketplace: root `.claude-plugin/marketplace.json`
-points at `plugins/ris-triage/`. This layout (rather than a manifest at repo
+points at `plugins/ris-assist/`. This layout (rather than a manifest at repo
 root) exists so a second plugin — message forensics — can ship from the same
 repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
 
 ## Architecture
 
-- **Commands** (`plugins/ris-triage/commands/*.md`) are thin stubs with YAML
+- **Commands** (`plugins/ris-assist/commands/*.md`) are thin stubs with YAML
   frontmatter (`description`, `argument-hint`, `allowed-tools`) that invoke a
   skill: `/triage`, `/kb-draft`, `/downtime`, `/explain`, `/setup`, `/comms-tune`.
-- **Skills** (`plugins/ris-triage/skills/<name>/SKILL.md`) hold the actual
+- **Skills** (`plugins/ris-assist/skills/<name>/SKILL.md`) hold the actual
   behavior, each with `name`/`description` frontmatter and a **"Not this
   skill"** section defining its boundary. All five (triage, knowledge, comms,
   explainer, setup) are implemented; four of the five (all but `triage`) have
@@ -49,19 +49,19 @@ repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
   exact per-item status rather than assuming from a skill's presence alone.
 - **`docs/PERSONA-SPEC.md` is the single source of truth for the analyst
   persona** — stance, confidence marking, audience register, boundaries.
-  `plugins/ris-triage/agents/analyst.md` (an invocable subagent) and every
+  `plugins/ris-assist/agents/analyst.md` (an invocable subagent) and every
   `SKILL.md` reference it rather than restating it; if a skill's instructions
   and the spec disagree, the spec wins. **Do not duplicate persona rules into
   a skill file** — link to the relevant section instead.
-  **Packaging note:** only `plugins/ris-triage/` ships to the plugin cache on
+  **Packaging note:** only `plugins/ris-assist/` ships to the plugin cache on
   install, so runtime references use `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`,
-  which resolves to `plugins/ris-triage/PERSONA-SPEC.md` — a packaged copy of
+  which resolves to `plugins/ris-assist/PERSONA-SPEC.md` — a packaged copy of
   the root file. Edit `docs/PERSONA-SPEC.md`, then re-copy it to
-  `plugins/ris-triage/PERSONA-SPEC.md` before shipping; the two must not
+  `plugins/ris-assist/PERSONA-SPEC.md` before shipping; the two must not
   drift.
 - **Site profile / comms profile** are user data written by `/setup` and
   `/comms-tune` to a **local path outside this repository**. Never write
-  site-specific config into this repo. `plugins/ris-triage/examples/site-profile.example.yaml`
+  site-specific config into this repo. `plugins/ris-assist/examples/site-profile.example.yaml`
   and `.../comms-profile.example.yaml` are the schema references (schemas
   themselves live in each skill's `references/`), keyed to the fictional site
   "Riverside Regional Imaging."

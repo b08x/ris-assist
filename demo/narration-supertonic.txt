@@ -1,4 +1,4 @@
-# RIS Triage — coverage demo narration
+# RIS Assist — coverage demo narration
 # Source file for Supertonic 3. Rendered by build_narration.py
 #
 # Format:

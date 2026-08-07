@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-#  RIS Triage — .gitignore
+#  RIS Assist — .gitignore
 #
 #  The first three sections are the ones that matter. Everything below them is
 #  ordinary toolchain noise; the top blocks are the difference between a
@@ -20,13 +20,13 @@ comms_profile.y*ml
 *-profile.y*ml
 *.profile.y*ml
 profiles/
-.ris-triage/
+.ris-assist/
 
 # ── Real-session material — NEVER COMMIT ────────────────────────────────
 # Anything user-generated or user-provided that carries real site,
 # interface, vendor, or identifier vocabulary — transcripts, screenshots,
 # logs, exports, and findings derived from them — lives OUTSIDE this
-# repository, in ~/NotebookV3/RIS_TRIAGE/. See the README there.
+# repository, in ~/NotebookV3/RIS_ASSIST/. See the README there.
 #
 # Location is the real control. These patterns are a second line of
 # defence for the case where something lands in the tree by accident.

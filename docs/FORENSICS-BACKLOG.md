@@ -1,4 +1,4 @@
-# RIS Triage Forensics — long-term backlog
+# RIS Assist Forensics — long-term backlog
 
 Parked, not scheduled. Split out of the core plugin per
 [ADR-0008](adr/0008-separate-forensics-plugin.md).

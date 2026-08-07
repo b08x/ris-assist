@@ -1,8 +1,8 @@
-# AGENTS.md - RIS Triage
+# AGENTS.md - RIS Assist
 
 ## What This Is
 
-RIS Triage is a Claude plugin for Radiology Information System (RIS) support work. It is **not** source code you build and run — it is documentation, commands, and skills that shape the Claude Desktop experience for overnight support engineers.
+RIS Assist is a Claude plugin for Radiology Information System (RIS) support work. It is **not** source code you build and run — it is documentation, commands, and skills that shape the Claude Desktop experience for overnight support engineers.
 
 The repository **doubles as a plugin marketplace** (see `.claude-plugin/marketplace.json`).
 
@@ -11,8 +11,8 @@ The repository **doubles as a plugin marketplace** (see `.claude-plugin/marketpl
 ## Repository Layout
 
 ```
-RIS_Triage/
-├── plugins/ris-triage/        # The main plugin content
+RIS_Assist/
+├── plugins/ris-assist/        # The main plugin content
 │   ├── commands/             # 5 slash commands
 │   │   ├── triage.md
 │   │   ├── kb-draft.md
@@ -131,7 +131,7 @@ invented term) documented in the spec and demonstrated in
 
 **Purpose**: Differential-driven clarification of vague tickets. Asks one discriminating question at a time until the ticket is routable.
 
-**File**: `plugins/ris-triage/commands/triage.md` → invokes `skills/triage/SKILL.md`
+**File**: `plugins/ris-assist/commands/triage.md` → invokes `skills/triage/SKILL.md`
 
 **Behavior**:
 
@@ -148,8 +148,8 @@ invented term) documented in the spec and demonstrated in
 
 **Files**:
 
-- Command: `plugins/ris-triage/commands/kb-draft.md`
-- Skill: `plugins/ris-triage/skills/knowledge/SKILL.md`
+- Command: `plugins/ris-assist/commands/kb-draft.md`
+- Skill: `plugins/ris-assist/skills/knowledge/SKILL.md`
 
 **Modes**:
 
@@ -173,8 +173,8 @@ invented term) documented in the spec and demonstrated in
 
 **Files**:
 
-- Command: `plugins/ris-triage/commands/downtime.md`
-- Skill: `plugins/ris-triage/skills/comms/SKILL.md`
+- Command: `plugins/ris-assist/commands/downtime.md`
+- Skill: `plugins/ris-assist/skills/comms/SKILL.md`
 
 **Key concept**: Comms variants are keyed by three axes: `event_class × audience × channel`.
 
@@ -192,7 +192,7 @@ invented term) documented in the spec and demonstrated in
 
 **If comms profile missing**: say so in one line and offer `/comms-tune`. Then continue with built-in generic templates, labelling output clearly.
 
-**Comms profile structure** (example in `plugins/ris-triage/examples/comms-profile.example.yaml`):
+**Comms profile structure** (example in `plugins/ris-assist/examples/comms-profile.example.yaml`):
 
 - `version`, `site` (fictional in example)
 - `conventions`: timezone, time format, placeholder token, cause marking (required), incident ref format, quiet hours
@@ -215,8 +215,8 @@ invented term) documented in the spec and demonstrated in
 
 **Files**:
 
-- Command: `plugins/ris-triage/commands/explain.md`
-- Skill: `plugins/ris-triage/skills/explainer/SKILL.md`
+- Command: `plugins/ris-assist/commands/explain.md`
+- Skill: `plugins/ris-assist/skills/explainer/SKILL.md`
 
 **Coverage** (backlog E5.1):
 
@@ -241,8 +241,8 @@ invented term) documented in the spec and demonstrated in
 
 **Files**:
 
-- Command: `plugins/ris-triage/commands/setup.md`
-- Skill: `plugins/ris-triage/skills/setup/SKILL.md`
+- Command: `plugins/ris-assist/commands/setup.md`
+- Skill: `plugins/ris-assist/skills/setup/SKILL.md`
 
 **Modes**:
 
@@ -261,7 +261,7 @@ invented term) documented in the spec and demonstrated in
 
 **Purpose**: Customizes the comms profile (build variants, edit templates, review gaps).
 
-**File**: `plugins/ris-triage/commands/comms-tune.md`
+**File**: `plugins/ris-assist/commands/comms-tune.md`
 
 Four modes:
 
@@ -407,11 +407,11 @@ When a guardrail fires, say so in the response rather than routing around it. Bi
 
 ### Adding New Skills or Commands
 
-1. Create the directory structure: `plugins/ris-triage/skills/<new_skill>/` or `plugins/ris-triage/commands/<new_command>.md`
+1. Create the directory structure: `plugins/ris-assist/skills/<new_skill>/` or `plugins/ris-assist/commands/<new_command>.md`
 2. Create SKILL.md or command markdown file with proper YAML frontmatter
 3. Add name and description to the skill
 4. Implement STUB marker if implementing backlog item
-5. Add relevant references to `plugins/ris-triage/skills/<skill>/references/` if needed
+5. Add relevant references to `plugins/ris-assist/skills/<skill>/references/` if needed
 6. Document in BACKLOG.md under the appropriate epic and phase
 7. Update THIS FILE (AGENTS.md) if adding cross-cutting knowledge
 
@@ -464,7 +464,7 @@ When referring to these in docs, use "DEP-#".
 
 ## Additional Resources
 
-- **Installation**: `/plugin marketplace add <owner>/ris-triage` → `/plugin install ris-triage@ris-triage` (per README.md)
+- **Installation**: `/plugin marketplace add <owner>/ris-assist` → `/plugin install ris-assist@ris-assist` (per README.md)
 - **Data Provenance**: Why synthetic-only data policy exists (docs/DATA-PROVENANCE.md)
 - **Architectural Decisions**: Rejected alternatives and design choices (docs/adr/)
 - **Project Instructions**: Collaborative work rules (docs/PROJECT-INSTRUCTIONS.md)

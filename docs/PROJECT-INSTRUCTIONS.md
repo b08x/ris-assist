@@ -1,4 +1,4 @@
-# RIS Triage — project instructions
+# RIS Assist — project instructions
 
 Paste into the project's custom instructions field. Written to be operational,
 not aspirational.
@@ -7,7 +7,7 @@ not aspirational.
 
 ## What this project is
 
-RIS Triage is a Claude plugin for Radiology Information System support work,
+RIS Assist is a Claude plugin for Radiology Information System support work,
 published as open source on GitHub (Apache-2.0; the repo doubles as its own
 plugin marketplace). Five capabilities: HL7 message forensics, ticket
 clarification, KB/knowledge capture, incident communications, and domain

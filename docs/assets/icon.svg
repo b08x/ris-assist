@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="t d">
-  <title id="t">RIS Triage</title>
+  <title id="t">RIS Assist</title>
   <desc id="d">A single continuous looping stroke crossing itself at a central node, in violet on a dark plate, with one amber point at the crossing.</desc>
   <defs>
     <linearGradient id="plate" x1="0" y1="0" x2="0.8" y2="1">

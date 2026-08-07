@@ -1,4 +1,4 @@
-# RIS Triage — persona module narration
+# RIS Assist — persona module narration
 # Source file for Supertonic 3. Rendered by build_narration.py
 #
 # Format: see narration-supertonic.txt for the full comment — unchanged here.

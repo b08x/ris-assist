@@ -1,4 +1,4 @@
-RIS TRIAGE — THE PERSONA MODULE NARRATION
+RIS ASSIST — THE PERSONA MODULE NARRATION
 Import copy for ElevenCreative Studio. See narration-studio.md for setup
 conventions (same project, same settings) and persona-narration.md for
 screen directions and pronunciation notes.

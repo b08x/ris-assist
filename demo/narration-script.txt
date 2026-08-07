@@ -1,4 +1,4 @@
-RIS TRIAGE — COVERAGE DEMO NARRATION
+RIS ASSIST — COVERAGE DEMO NARRATION
 Import copy for ElevenCreative Studio. See narration-studio.md for setup.
 
 Each block below is ONE Studio paragraph — the atomic unit for generation,
