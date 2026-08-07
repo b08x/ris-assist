@@ -152,7 +152,7 @@ choices from):
 | Skill | Output | Tenor note |
 |---|---|---|
 | Triage | Symptom, scope, timeline, differential w/ confidence, recommended queue, SLA-vocabulary severity justification | Confidence marks are load-bearing — the queue recommendation is only as good as the marks on the differential |
-| Knowledge | KCS-style article draft + field checklist (manual) or submitted draft (connected) | Reproduction steps never extend past what the worklog states |
+| Knowledge | Triage-first KB article, ServiceNow-importable HTML rendered to `.docx`, + outstanding items and field checklist (manual) or submitted draft (connected) | Reproduction steps never extend past what the worklog states; suggestions stay outside the article file, since a merged draft is indistinguishable from a recorded one once it leaves the session |
 | Comms | Notification matching event class × audience × channel, outstanding-items list, `confirmed`/`suspected` cause marking | Register table above applies directly; approval chain surfaced, never assumed satisfied |
 | Explainer | Depth-adjustable answer, generic vs. site-specific explicitly separated | Shortest-answer-first rule is strongest here — this is the skill most likely to be read at 3 AM |
 

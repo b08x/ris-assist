@@ -1,0 +1,96 @@
+<!--
+Example KB article — identifier form mismatch
+
+Fictional site: Riverside Regional Imaging. Every name and identifier here is
+invented and consistent with site-profile.example.yaml
+(accession_number: IMG########). Synthetic from birth — see
+docs/DATA-PROVENANCE.md.
+
+Demonstrates a case the template handles awkwardly on purpose: an article
+with NO underlying resolved incident. Cause is left explicitly unestablished
+rather than confidence-marked, no resolution ladder exists because nothing
+was resolved, and the actionable next steps sit in suggestions. This is what
+cite-or-decline looks like when there is genuinely nothing to cite.
+
+It also shows the shape degrading honestly: an article can consist of Step 1
+alone. Emitting a workstation, application, or interface heading here would
+imply checks that nobody has established.
+
+--- Outstanding items (printed in the response, not in the article) ---
+  - Ladder layers omitted, no source: workstation/user, application,
+    interface, advanced — no incident was worked
+  - Cause: not established; no candidate offered in the source
+  - Resolution: none exists
+  - Verification: not applicable
+  - Ticket reference: none
+  - KB number: unassigned
+
+--- Suggestions (offered, not included — GUARDRAILS G1) ---
+  - Establish where the prefix is applied, with whoever owns the integration
+    engine. This is the single question that turns a recognition aid into an
+    actionable article.
+  - Confirm whether MRN follows the same convention as accession. It should
+    not be assumed to.
+  - Cross-reference from any triage path handling "study not found".
+-->
+<h1>Study not found when searching PACS with an accession copied from the raw HL7 order</h1>
+<p class="metadata">KB[TBD] | v1.0 | 2026-08-07</p>
+
+<h2>🛠️ Introduction</h2>
+<p>A recognition aid, not a resolution procedure. A "study not found" report
+may be an identifier <strong>form</strong> mismatch rather than a missing
+study — rule this out before treating it as a delivery or interface
+failure.</p>
+<ul>
+  <li><strong>Applies to:</strong> integration engine, RIS, PACS</li>
+  <li><strong>STOP conditions:</strong> this article does not resolve
+      anything. No incident underlies it and no fix is recorded; it exists to
+      stop a lookup failure being misrouted as a delivery failure.</li>
+</ul>
+
+<h2>🔎 Step 1: Confirm the symptom and scope</h2>
+<p>The accession number carried in the raw HL7 order message and the
+accession displayed in the RIS and PACS <strong>are not the same
+string</strong>. The raw message carries an unprefixed sequence; downstream
+systems display the site-prefixed form defined in the site profile.</p>
+<table>
+  <tr><th></th><th>Raw HL7 order</th><th>Displayed in RIS / PACS</th></tr>
+  <tr><td>Accession</td><td><code>40551827</code></td><td><code>IMG40551827</code></td></tr>
+</table>
+<ul>
+  <li>A PACS search using a value copied from the raw message returns
+      nothing, and the reverse also fails. This presents as "the study
+      doesn't exist" when the study does exist.</li>
+  <li>Scope observed: not user-scoped — applies to identifier lookups
+      generally.</li>
+  <li><strong>Confidence: confirmed</strong> — read directly from both
+      systems side by side.</li>
+</ul>
+
+<h2>✅ Verification</h2>
+<p>Not applicable — nothing was resolved.</p>
+
+<h2>🧭 Cause</h2>
+<p><strong>Cause not established — deliberately unmarked.</strong> Where in
+the pipeline the prefix is applied has not been determined. It was not
+confirmed as the integration engine, and no candidate cause was offered.</p>
+<p>Confidence marks (<code>confirmed</code> / <code>likely</code> /
+<code>possible</code>) are not applied here because there is nothing to mark.
+Recording a guess would be worse than the gap — an article that names the
+wrong component sends the next analyst to the wrong owner.</p>
+
+<h2>🚀 Escalation</h2>
+<ul>
+  <li>Whoever owns the integration engine, to establish where the prefix is
+      applied. Not an incident escalation — this is the open question the
+      article exists to surface.</li>
+</ul>
+
+<h2>📎 Related</h2>
+<ul>
+  <li>Ticket reference: <code>[none]</code> — surfaced during site-profile
+      setup, not during an incident.</li>
+  <li>Site profile fields cited:
+      <code>identifier_formats.accession_number</code></li>
+  <li>Related articles: <code>[none known]</code></li>
+</ul>

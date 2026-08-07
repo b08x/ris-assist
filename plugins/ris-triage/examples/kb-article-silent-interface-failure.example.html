@@ -1,0 +1,126 @@
+<!--
+Example KB article — silent interface failure
+
+Fictional site: Riverside Regional Imaging. Every name, identifier, and
+timestamp here is invented and consistent with site-profile.example.yaml.
+Synthetic from birth — see docs/DATA-PROVENANCE.md. Nothing in this file
+derives from production clinical data.
+
+Demonstrates the knowledge skill's manual-mode output in the triage-first
+ServiceNow shape (skills/knowledge/references/kb-template.md, ADR-0009).
+Three behaviours worth noticing:
+
+  1. Only the ladder layers the worklog supports are emitted. Workstation/user
+     and application layers are absent because nothing in the worklog speaks
+     to them — they appear in outstanding items below, not as empty headings.
+  2. Cause carries an explicit confidence mark, and the mark is `likely`
+     rather than `confirmed` because no root-cause statement was recorded.
+  3. Outstanding items and suggestions are NOT in this file. They were
+     printed in the response, under the draft. They are reproduced at the
+     bottom of this comment only so the example is self-contained — in real
+     output they never enter the HTML, and therefore never enter the .docx.
+
+Run: python3 ../skills/knowledge/scripts/html_to_docx.py \
+       kb-article-silent-interface-failure.example.html article.docx
+
+--- Outstanding items (printed in the response, not in the article) ---
+  - Ladder layer omitted, no source: workstation/user
+  - Ladder layer omitted, no source: application (RIS / PACS)
+  - Verification: not stated in the worklog
+  - Where the force-send was performed: not stated
+  - Permanent fix: not documented — this article records a workaround
+  - KB number: unassigned
+
+--- Suggestions (offered, not included — GUARDRAILS G1) ---
+  - Add a proactive check for reports aging in Signed status past a
+    threshold. Detection depended entirely on a human noticing.
+  - Confirm whether the force-send is safe to run in bulk, and by whom. The
+    worklog says "one-by-one" but not whether that was a constraint or a
+    choice.
+  - Capture what the engine vendor ultimately changed. Without it this
+    article documents a workaround only.
+-->
+<h1>Finalized reports remain in Signed status and are never transmitted</h1>
+<p class="metadata">KB[TBD] | v1.0 | 2026-08-07</p>
+
+<h2>🛠️ Introduction</h2>
+<p>Recognising and working around a silent transmission failure between the
+dictation platform and PACS, in which finalized reports stop advancing
+without any alarm, error, or alert.</p>
+<ul>
+  <li><strong>Applies to:</strong> dictation platform, integration engine,
+      PACS</li>
+  <li><strong>STOP conditions:</strong> this article covers recognition and
+      the recorded workaround only. A permanent fix is
+      <code>[not documented]</code> — engage the vendors rather than
+      improvising one.</li>
+  <li><span class="warning">Absence of an alert does not rule this out.</span>
+      Nothing errors; reports quietly stop advancing.</li>
+</ul>
+
+<h2>🔎 Step 1: Confirm the symptom and scope</h2>
+<p>The dictation platform stops sending finalized reports. Affected reports
+sit in <strong>Signed</strong> status without advancing — approximately four
+hours in the recorded incident.</p>
+<ul>
+  <li>Scope observed: broad. Multiple reports queue-wide, not one user and
+      not one interface.</li>
+  <li>Detection: an operations analyst noticed reports were not moving. No
+      alarm, error, or alert accompanied the failure.</li>
+  <li><strong>Confidence: confirmed</strong> — this is what was reported,
+      not inferred.</li>
+</ul>
+<p>Scope is the split that matters here. Engine-wide failures tend to be
+broad; individual interface failures are typically scoped to one feed at a
+time. <strong>Confidence: likely</strong> — reported as a general pattern,
+not measured.</p>
+
+<h2>🔌 Step 2: Interface and integration</h2>
+<h3>1. Clear the backlog</h3>
+<ul>
+  <li>Operations agents force-send the affected reports individually.</li>
+  <li>System the force-send is performed in: <code>[not stated]</code></li>
+  <li>Whether this is safe to run in bulk: <code>[not stated]</code> — the
+      worklog records one-by-one without saying whether that was a
+      constraint or a choice.</li>
+</ul>
+
+<h2>🚀 Step 3: Advanced and vendor</h2>
+<h3>1. Escalate through the component admin</h3>
+<ol>
+  <li>Raise the issue to the dictation vendor, who confirms a problem
+      exists.</li>
+  <li>The dictation vendor contacts the integration engine vendor
+      directly.</li>
+</ol>
+<p>Escalation shape worth knowing: vendors are reached <em>through</em>
+component admins, and vendors sometimes resolve between themselves without
+the site brokering the fix.</p>
+
+<h2>✅ Verification</h2>
+<p><code>[not stated]</code>. The worklog does not record how resolution was
+confirmed.</p>
+
+<h2>🧭 Cause</h2>
+<p>An issue with the integration engine. <strong>Confidence: likely</strong>
+— the worklog attributes it to the engine and vendor engagement went there,
+but no root-cause statement was recorded and no independent verification is
+documented. A permanent fix is <strong>not documented</strong>; this article
+records a workaround.</p>
+
+<h2>🚀 Escalation</h2>
+<ul>
+  <li>Dictation platform vendor, via the component admin — the path the
+      recorded incident actually took.</li>
+  <li>What the vendor needs in hand: report count and status, the window in
+      which reports stopped advancing, and whether the force-send cleared
+      them.</li>
+</ul>
+
+<h2>📎 Related</h2>
+<ul>
+  <li>Ticket reference: <code>INC0104412</code></li>
+  <li>Site profile fields cited: <code>systems</code>,
+      <code>escalation_matrix</code></li>
+  <li>Related articles: <code>[none known]</code></li>
+</ul>

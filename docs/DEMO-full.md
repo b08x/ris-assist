@@ -144,11 +144,18 @@ restart.
 - No site-specific KB template on file → uses `skills/knowledge/references/kb-template.md`,
   labeled generic in the output
 - Title is symptom-oriented, not a ticket number
+- Article opens with scope, then carries only the interface layer — the
+  workstation/user and application layers have nothing behind them in this
+  worklog, so they are omitted and listed as outstanding rather than filled in
 - Cause marked `confirmed` — the worklog states it as confirmed, not inferred
 - Resolution steps trace exactly to the worklog — two steps, nothing added
 - Outstanding: incident reference, not stated
+- HTML written and rendered to `.docx` via `scripts/html_to_docx.py`, ready to
+  attach to a KB record — the point of capturing at resolution time is that
+  nothing is left to re-key later
 - A suggestion (post-restart verification step for the runbook) appears in a
-  visibly separate suggestions block, never merged into the article body
+  visibly separate suggestions block in the response, never merged into the
+  article body and never inside the `.docx`
 
 **The demo point:** the same incident that generated a page in Turn 1 and a
 notification in Turns 2–3 becomes institutional knowledge in Turn 4, at the

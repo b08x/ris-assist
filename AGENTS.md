@@ -22,7 +22,7 @@ RIS_Triage/
 │   │   └── comms-tune.md
 │   ├── skills/               # 5 skills (SKILL.md files); 4 have a references/ dir
 │   │   ├── triage/           #   no references/ — differential logic lives in SKILL.md itself
-│   │   ├── knowledge/        #   references/kb-template.md
+│   │   ├── knowledge/        #   references/{kb-template,servicenow-format}.md + scripts/html_to_docx.py
 │   │   ├── comms/            #   references/{comms-profile.schema,generic-templates,register-guide}.md
 │   │   ├── explainer/        #   references/{order-lifecycle,accession-vs-order-number,modality-worklist,report-status-flow,topology-patterns}.md
 │   │   └── setup/            #   references/site-profile.schema.md
@@ -30,7 +30,8 @@ RIS_Triage/
 │   │   └── analyst.md        # Persona as an invocable subagent (operational summary of PERSONA-SPEC.md)
 │   ├── examples/             # Fictional site examples ("Riverside Regional Imaging")
 │   │   ├── site-profile.example.yaml
-│   │   └── comms-profile.example.yaml
+│   │   ├── comms-profile.example.yaml
+│   │   └── kb-article-*.example.html
 │   └── .claude-plugin/
 │       ├── plugin.json       # Plugin metadata
 │       └── marketplace.json  # Makes this repo its own marketplace
@@ -152,14 +153,18 @@ invented term) documented in the spec and demonstrated in
 
 **Modes**:
 
-- **Manual** (default): paste-ready draft with field checklist, works with zero ServiceNow access
+- **Manual** (default): triage-first HTML draft rendered to `.docx` for ServiceNow import, plus outstanding items and a separate suggestions block; works with zero ServiceNow access
 - **Connected**: reads resolved incident, drafts, and submits with category/workflow state (blocked: DEP-1 — requires ServiceNow MCP access)
+
+**Article shape** (see ADR-0009): scope first, then the triage differential's branches in order — workstation/user, application (RIS/PACS), interface, advanced — then verification, cause with a confidence mark, escalation, related. Only the layers the worklog supports are emitted; the rest are listed as outstanding.
 
 **Rules**:
 
 - Conform to the site's article template from the profile
 - Separate observation from inference (same as everywhere else)
 - Do not invent reproduction steps that were not in the worklog
+- Suggestions and outstanding items live in the response, never in the HTML or the `.docx`
+- Never invent an image `src`; screenshots of production systems are presumed to contain patient data and are the site's call
 - No article gaps are accepted — gaps are recorded in the profile as stale-article flags
 
 ### `/downtime` - Communications

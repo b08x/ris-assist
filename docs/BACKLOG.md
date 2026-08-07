@@ -89,17 +89,21 @@ E9 (forensics) moved there. Epic numbers are not reused.
 
 ## E7 — KB Pipeline  (P2 · stories US-11…US-14 · DEP-1)
 
-- [x] E7.1 (M) — Adapt existing ServiceNow KB generator skill into the plugin;
-      conform output to KCS template shape from site profile
-- [x] E7.2 (S) — Manual-mode path: article draft as paste-ready output with
-      field checklist (works with zero ServiceNow access)
+- [x] E7.1 (M) — Adapt existing ServiceNow KB generator skill into the plugin:
+      triage-first HTML article shape, import formatting rules, and the
+      HTML → DOCX renderer. Supersedes the KCS markdown template that shipped
+      in 1.0.0 — see ADR-0009
+- [x] E7.2 (S) — Manual-mode path: article draft as an importable `.docx`
+      plus outstanding items and field checklist (works with zero ServiceNow
+      access)
 - [ ] E7.3 (M) — MCP-mode path: read resolved incident → draft → push with
       category/workflow state  *(blocked: DEP-1)*
 - [ ] E7.4 (M) — KB gap detection: recurring-symptom clusters without matching
       articles → candidate list (US-12) *(needs incident read: DEP-1 — manual-
       mode partial: skill now prompts explicitly when a pattern is described)*
 - [x] E7.5 (S) — Stale-article flagger keyed to change/upgrade events (US-13)
-- [ ] E7.6 (S) — `/kb-draft` slash command
+- [x] E7.6 (S) — `/kb-draft` slash command (`Bash` allowed for the render step
+      only)
 
 ## E8 — Ticket Clarification Skill  (P3 · stories US-03…US-06)
 

@@ -1,6 +1,6 @@
 ---
 name: knowledge
-description: Turns a resolved ticket or worklog into a knowledge base article draft in the site's template, detects recurring incidents with no matching article, and flags articles made stale by a change or upgrade. Use when an incident is resolved and worth documenting, when the same question keeps recurring, or when the user says /kb-draft, "write this up", "is there an article for this".
+description: Turns a resolved ticket or worklog into a ServiceNow-importable knowledge base article — triage-first HTML draft, rendered to .docx for upload — detects recurring incidents with no matching article, and flags articles made stale by a change or upgrade. Use when an incident is resolved and worth documenting, when the same question keeps recurring, or when the user says /kb-draft, "write this up", "turn this into a KB article", "is there an article for this".
 ---
 
 # Knowledge capture
@@ -11,15 +11,23 @@ blocked on DEP-1; manual mode is fully usable now and is the default.
 Capture at resolution time, while the context still exists. That is the whole
 argument — a quarterly documentation sprint never happens.
 
+The corollary is that the output has to be the thing that gets uploaded. A
+markdown draft that someone re-keys into ServiceNow the next morning is a
+second task, and the second task is the one that does not happen. So manual
+mode ends at a `.docx` the analyst can attach to a KB record, not at a draft
+in the chat window.
+
 Persona: `${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`. Observation/inference separation and
 cite-or-decline apply to article bodies same as everywhere else.
 
 ## Modes
 
-- **manual** — paste-ready draft with a field checklist. Works with no
+- **manual** — triage-first HTML draft plus a rendered `.docx`, with an
+  outstanding-items list and a separate suggestions block. Works with no
   ServiceNow access at all. This is the default until DEP-1 resolves.
 - **connected** — read the resolved incident, draft, and submit with category
-  and workflow state. Requires a ServiceNow MCP connection.
+  and workflow state. Requires a ServiceNow MCP connection. The article shape
+  is identical; only the transport changes.
 
 ## Manual mode procedure
 
@@ -29,16 +37,52 @@ cite-or-decline apply to article bodies same as everywhere else.
 2. **Select the template.** Site profile's article template if one is
    defined; otherwise `references/kb-template.md`, labeled generic per the
    usual convention.
-3. **Draft section by section**, marking the Cause section's confidence
+3. **Order the article the way the ticket was worked.** Scope first, then
+   the differential branches in the order `skills/triage/SKILL.md` rules
+   them out — workstation/user, application (RIS/PACS), interface, advanced.
+   Carry only the layers the worklog supports. A layer with nothing behind
+   it is omitted and listed as outstanding, never emitted as an empty
+   heading and never filled from general knowledge.
+4. **Draft section by section**, marking the Cause section's confidence
    explicitly (`confirmed` / `likely` / `possible` — same scale as
    triage/persona spec, applied to root cause rather than to a differential
-   branch).
-4. **Run the field checklist** (`references/kb-template.md`) before
+   branch). A worklog with no cause in it gets "cause not established," not
+   a mark on a guess.
+5. **Format for the importer.** `references/servicenow-format.md` governs
+   heading levels, bold and monospace use, image references, callouts, and
+   what silently degrades. Never invent an image `src`.
+6. **Run the field checklist** (`references/kb-template.md`) before
    presenting the draft as done. A checklist item that can't be filled is
    marked unknown in the draft, not silently dropped from the checklist.
-5. **Separate suggestions from the article.** Anything that would improve
+7. **Render it.** Write the HTML, then convert:
+
+   ```bash
+   python3 ${CLAUDE_PLUGIN_ROOT}/skills/knowledge/scripts/html_to_docx.py article.html article.docx
+   ```
+
+   Both files go where the user says, or the working directory if they
+   haven't said — never inside the plugin directory. Report any images the
+   converter left as placeholders; they are outstanding items, not a
+   rendering detail to discover after upload.
+8. **Separate suggestions from the article.** Anything that would improve
    the article but isn't supported by the worklog goes in a clearly
-   separate suggestions block underneath — never merged into the draft body.
+   separate suggestions block underneath — in the response, never in the
+   HTML, and therefore never in the `.docx`. Once the file leaves the
+   session, generated content merged into the body is indistinguishable
+   from recorded content.
+
+## Screenshots
+
+Screenshots make a troubleshooting article usable, and a screenshot of a
+production worklist or study list almost certainly contains patient data.
+This plugin does not ingest, redact, or de-identify it — see
+`docs/DATA-PROVENANCE.md`.
+
+So: use the exact image ID handed over, place it immediately after the step
+it illustrates, and say plainly that whether a given screenshot can be
+attached is the site's call under its own policy. If the answer is no, keep
+drafting with placeholders. Never invent a `src`, and never treat an image
+as available because the article would be better with one.
 
 ## Gap detection and stale-article flagging (E7.4/E7.5)
 
@@ -49,10 +93,38 @@ explicitly and offer to draft a candidate article rather than silently
 noting the pattern and moving on. Stale-article flagging works the same way
 in manual mode — if the user mentions a change or upgrade, ask whether any
 existing articles reference the old configuration, rather than scanning a
-KB the skill has no access to.
+KB the skill has no access to. The metadata line's version and date exist
+for exactly this; an article with no version cannot be flagged stale later.
 
 ## Rules
 
 - Conform to the site's article template from the profile, not to a generic
   KB shape.
 - Do not invent reproduction steps that were not in the worklog.
+- The ladder is ordered by the triage differential, not by a generic
+  troubleshooting script. A step that isn't tied to how this site's topology
+  behaves is guessing with confidence.
+- Rendering is code's job, interpretation is not. The script maps tags to
+  Word styles; it does not decide content. This is the same
+  symbolic-before-model commitment the rest of the project runs on.
+
+## References
+
+- `references/kb-template.md` — article shape, layer names, field checklist
+- `references/servicenow-format.md` — import mechanics: what converts, what
+  degrades, image and PHI handling
+- `scripts/html_to_docx.py` — HTML → DOCX renderer (PEP 723 header; `uv run`
+  resolves `python-docx` and `Pillow` without a manual install)
+- `${CLAUDE_PLUGIN_ROOT}/examples/kb-article-*.example.html` — worked
+  articles against the fictional site, including one that degrades to Step 1
+  alone because no incident underlies it
+
+## Not this skill
+
+Writing to ServiceNow. Rendering a `.docx` is a local file conversion, not a
+state-changing action — the article still gets uploaded by a human, and
+connected mode's submit path stays behind DEP-1 and an explicit human
+approval either way. See `docs/NON-GOALS.md`.
+
+Deciding whether an article should exist at all, or approving one for
+publication. This skill drafts and flags; the knowledge owner decides.

@@ -22,6 +22,23 @@ comms_profile.y*ml
 profiles/
 .ris-triage/
 
+# ── Real-session material — NEVER COMMIT ────────────────────────────────
+# Anything user-generated or user-provided that carries real site,
+# interface, vendor, or identifier vocabulary — transcripts, screenshots,
+# logs, exports, and findings derived from them — lives OUTSIDE this
+# repository, in ~/NotebookV3/RIS_TRIAGE/. See the README there.
+#
+# Location is the real control. These patterns are a second line of
+# defence for the case where something lands in the tree by accident.
+findings/
+**/findings/
+shared-chats/
+**/shared-chats/
+screenshots/
+**/screenshots/
+*-transcript.*
+*_transcript.*
+
 # ── Clinical and operational data — NEVER COMMIT ─────────────────────────────
 # All test data here is synthetic from birth (docs/DATA-PROVENANCE.md). These
 # patterns exist so an accidental drop of real message or ticket data cannot

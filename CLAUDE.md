@@ -5,9 +5,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this repository is
 
 RIS Triage is a **Claude plugin**, not an application. There is no build, lint,
-or test command — the repository is markdown (slash commands, skills, docs)
-plus one non-functional demo script. Verify any change by reading the
-frontmatter and prose for internal consistency, not by running anything.
+or test command — the repository is markdown (slash commands, skills, docs),
+one non-functional demo script, and one shipped script that does run:
+`plugins/ris-triage/skills/knowledge/scripts/html_to_docx.py`, the KB
+renderer (ADR-0009). Verify a markdown change by reading the frontmatter and
+prose for internal consistency; verify a change to the renderer by converting
+`plugins/ris-triage/examples/kb-article-*.example.html` and opening the result.
 
 ```bash
 claude plugin validate .                              # validate plugin structure
