@@ -1,3 +1,17 @@
+## [unreleased]
+
+### 🚀 Features
+
+- *(knowledge)* Implement ServiceNow-shaped KB article pipeline
+
+### 🐛 Bug Fixes
+
+- Package PERSONA-SPEC for installed plugins; require asking write path
+
+### 💼 Other
+
+- Merge tag 'v1.0.0' into development
+
 ## [1.0.0] - 2026-08-06
 
 ### 🚀 Features

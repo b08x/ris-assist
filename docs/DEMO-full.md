@@ -150,9 +150,9 @@ restart.
 - Cause marked `confirmed` — the worklog states it as confirmed, not inferred
 - Resolution steps trace exactly to the worklog — two steps, nothing added
 - Outstanding: incident reference, not stated
-- HTML written and rendered to `.docx` via `scripts/html_to_docx.py`, ready to
-  attach to a KB record — the point of capturing at resolution time is that
-  nothing is left to re-key later
+- One self-contained, Word-openable HTML file written — Open with → Word →
+  Save As `.docx`, then attach to a KB record — the point of capturing at
+  resolution time is that nothing is left to re-key later
 - A suggestion (post-restart verification step for the runbook) appears in a
   visibly separate suggestions block in the response, never merged into the
   article body and never inside the `.docx`

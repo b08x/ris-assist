@@ -153,7 +153,7 @@ invented term) documented in the spec and demonstrated in
 
 **Modes**:
 
-- **Manual** (default): triage-first HTML draft rendered to `.docx` for ServiceNow import, plus outstanding items and a separate suggestions block; works with zero ServiceNow access
+- **Manual** (default): triage-first, Word-openable HTML article (analyst does Open with → Word → Save As `.docx`), plus outstanding items and a separate suggestions block; works with zero ServiceNow access and zero installed tooling. The Python renderer is optional and not the Windows path — see ADR-0010
 - **Connected**: reads resolved incident, drafts, and submits with category/workflow state (blocked: DEP-1 — requires ServiceNow MCP access)
 
 **Article shape** (see ADR-0009): scope first, then the triage differential's branches in order — workstation/user, application (RIS/PACS), interface, advanced — then verification, cause with a confidence mark, escalation, related. Only the layers the worklog supports are emitted; the rest are listed as outstanding.

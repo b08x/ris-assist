@@ -121,13 +121,117 @@ depend on them:
 - Fonts other than Arial and Courier New
 - Colour beyond black text, red warnings, and grey metadata
 
-## Running the conversion
+## Producing the upload artifact
 
-```bash
-python3 scripts/html_to_docx.py article.html article.docx
+The target machine is an MSP-managed Windows workstation: no Python, no
+`pip`, and a shell that is PowerShell unless Git for Windows happens to be
+installed. Anything that assumes an interpreter is not the primary path.
+
+**Why not skip the file and paste HTML into the article body.** ServiceNow's
+knowledge editor is TinyMCE, which rewrites pasted markup — the reason the
+Word-import route exists at all. Pasting is a fallback for a short article,
+not the plan.
+
+### Path 1 — Word-readable HTML (default, zero dependencies)
+
+The article is written as a single self-contained HTML file carrying the
+Word namespace declarations and a stylesheet that maps this format's
+elements onto Word's own sizes. The analyst opens it in Word and saves as
+`.docx`:
+
+```powershell
+Start-Process winword.exe -ArgumentList '"C:\path\to\article.html"'
 ```
 
+Or, without a shell: right-click the file, **Open with** → **Word**, then
+**Save As** → **Word Document (\*.docx)**.
+
+Open it in Word, not the browser. A browser renders it fine and copies out
+of it badly — that lands back in TinyMCE's rewriting.
+
+Renaming the file to `.doc` makes a double-click open Word directly, at the
+cost of Office's "file format and extension don't match" prompt on many
+configurations. Offer it; do not do it silently.
+
+### The Word HTML header
+
+Every article file opens with this. It is what makes Word render the article
+at the sizes this format specifies rather than at browser defaults:
+
+```html
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<meta name="ProgId" content="Word.Document">
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->
+<style>
+body,p,li,td{font-family:Arial,sans-serif;font-size:11.0pt}
+h1{font-family:Arial,sans-serif;font-size:24.0pt;font-weight:bold}
+h2{font-family:Arial,sans-serif;font-size:18.0pt;font-weight:bold}
+h3{font-family:Arial,sans-serif;font-size:14.0pt;font-weight:bold}
+h4{font-family:Arial,sans-serif;font-size:12.0pt;font-weight:bold}
+p.metadata{font-size:10.0pt;color:#666666}
+code,pre{font-family:"Courier New",monospace;font-size:10.0pt;color:#C7254E}
+pre{background:#F4F4F4;border:1px solid #D0D0D0;padding:6pt}
+.warning{color:#FF0000;font-weight:bold}
+.callout{border:1px solid #D0D0D0;padding:6pt}
+table{border-collapse:collapse}
+th,td{border:1px solid #999999;padding:4pt}
+th{background:#F2F2F2;font-weight:bold}
+</style>
+</head>
+<body>
+```
+
+Closed with `</body></html>`. The sizes here and the ones
+`scripts/html_to_docx.py` sets in code are the same numbers on purpose —
+this file is the spec, both paths implement it. Change one, change both.
+
+### Path 2 — Word COM from PowerShell
+
+If a real `.docx` is wanted without a manual Save As, and scripting is not
+blocked by policy:
+
+```powershell
+$word = New-Object -ComObject Word.Application
+$doc  = $word.Documents.Open("C:\path\to\article.html")
+$doc.SaveAs2("C:\path\to\article.docx", 16)   # 16 = wdFormatDocumentDefault
+$doc.Close(); $word.Quit()
+```
+
+Uses the Word already on the workstation. Expect it to fail where COM
+automation is locked down; that failure is not a reason to fall back to
+pasting into TinyMCE — fall back to Path 1.
+
+### Path 3 — the Python renderer
+
+`scripts/html_to_docx.py` produces the `.docx` directly and is the better
+path on macOS, Linux, and WSL. It is **not** the Windows path.
+
+```bash
+python3 scripts/html_to_docx.py article.html article.docx   # bash
+```
+
+```powershell
+py -3 .\scripts\html_to_docx.py .\article.html .\article.docx   # PowerShell
+```
+
+`python3` is not a Windows command — the name resolves to a Microsoft Store
+alias stub that does nothing. Use `py -3`, or `python`, and only after
+confirming an interpreter exists.
+
 Dependencies are `python-docx` and `Pillow`; the script carries a PEP 723
-header, so `uv run scripts/html_to_docx.py …` resolves them without a
-manual install. Without `Pillow` the script still runs — images fall back to
-default sizing instead of being scaled to fit.
+header, so `uv run scripts/html_to_docx.py …` resolves them without a manual
+install. Without `Pillow` the script still runs — images fall back to default
+sizing instead of being scaled to fit.
+
+### Known limit, unverified
+
+LibreOffice's HTML import flattens `<ul>`/`<ol>` items to plain paragraphs.
+Word's HTML import was not verifiable in the environment this was built in,
+so whether bullets survive as real list formatting on the target
+workstations is **unconfirmed** (GUARDRAILS G6). Check it on first use. If
+Word flattens them too, the fix belongs here — `mso-list` style hints — not
+in a workaround inside the article.

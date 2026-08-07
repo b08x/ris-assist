@@ -93,9 +93,9 @@ E9 (forensics) moved there. Epic numbers are not reused.
       triage-first HTML article shape, import formatting rules, and the
       HTML → DOCX renderer. Supersedes the KCS markdown template that shipped
       in 1.0.0 — see ADR-0009
-- [x] E7.2 (S) — Manual-mode path: article draft as an importable `.docx`
+- [x] E7.2 (S) — Manual-mode path: article draft as a Word-openable HTML file
       plus outstanding items and field checklist (works with zero ServiceNow
-      access)
+      access and zero installed tooling — ADR-0010)
 - [ ] E7.3 (M) — MCP-mode path: read resolved incident → draft → push with
       category/workflow state  *(blocked: DEP-1)*
 - [ ] E7.4 (M) — KB gap detection: recurring-symptom clusters without matching

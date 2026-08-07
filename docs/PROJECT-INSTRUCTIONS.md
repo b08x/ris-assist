@@ -220,3 +220,9 @@ Open items:
   monitoring-dependent detection, night-only teleradiology routing, DST boundary
   cases — are asserted from general healthcare IT patterns, not confirmed
   against this environment. Unconfirmed under G3.
+- Whether Word's HTML import preserves `<ul>`/`<ol>` as real list formatting is
+  unconfirmed under G6 (ADR-0010). LibreOffice's filter flattens them to plain
+  paragraphs; Word could not be tested where this was built. First real use on
+  a target workstation answers it. If Word flattens too, the fix is `mso-list`
+  hints in the Word header in `skills/knowledge/references/servicenow-format.md`,
+  not a per-article workaround.

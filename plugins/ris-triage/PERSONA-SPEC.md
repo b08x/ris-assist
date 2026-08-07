@@ -1,11 +1,5 @@
 # Persona Spec
 
-> Packaged runtime copy. `docs/PERSONA-SPEC.md` at the repo root is what
-> contributors edit; this file is what installed skills actually read
-> (`${CLAUDE_PLUGIN_ROOT}/PERSONA-SPEC.md`), since only `plugins/ris-triage/`
-> ships to the plugin cache. Re-copy after editing the root version — see
-> CLAUDE.md's Architecture section.
-
 Backlog E4.1. This is the single source for the analyst persona — stance,
 confidence marking, audience register, and boundaries. Skills and the
 `agents/analyst.md` subagent definition reference this file rather than
@@ -152,7 +146,7 @@ choices from):
 | Skill | Output | Tenor note |
 |---|---|---|
 | Triage | Symptom, scope, timeline, differential w/ confidence, recommended queue, SLA-vocabulary severity justification | Confidence marks are load-bearing — the queue recommendation is only as good as the marks on the differential |
-| Knowledge | Triage-first KB article, ServiceNow-importable HTML rendered to `.docx`, + outstanding items and field checklist (manual) or submitted draft (connected) | Reproduction steps never extend past what the worklog states; suggestions stay outside the article file, since a merged draft is indistinguishable from a recorded one once it leaves the session |
+| Knowledge | Triage-first KB article as a self-contained, Word-openable HTML file, + outstanding items and field checklist (manual) or submitted draft (connected) | Reproduction steps never extend past what the worklog states; suggestions stay outside the article file, since a merged draft is indistinguishable from a recorded one once it leaves the session |
 | Comms | Notification matching event class × audience × channel, outstanding-items list, `confirmed`/`suspected` cause marking | Register table above applies directly; approval chain surfaced, never assumed satisfied |
 | Explainer | Depth-adjustable answer, generic vs. site-specific explicitly separated | Shortest-answer-first rule is strongest here — this is the skill most likely to be read at 3 AM |
 

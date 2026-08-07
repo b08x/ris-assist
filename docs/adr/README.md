@@ -40,7 +40,8 @@ What this makes easy, what it makes hard, what it commits us to.
 | 0006 | Confidence marking and cite-or-decline as enforced persona rules | Accepted |
 | 0007 | Elicitation stops at routability, not at question exhaustion | Accepted |
 | [0008](0008-separate-forensics-plugin.md) | Message forensics split into its own plugin | Accepted |
-| [0009](0009-servicenow-shaped-kb-output.md) | ServiceNow-shaped KB output replaces the KCS markdown template | Accepted |
+| [0009](0009-servicenow-shaped-kb-output.md) | ServiceNow-shaped KB output replaces the KCS markdown template | Accepted (rendering path amended by 0010) |
+| [0010](0010-word-readable-html-as-the-default-artifact.md) | Word-readable HTML is the default artifact; the Python renderer is optional | Accepted |
 
 *Backfill in progress (backlog E11.1) — the index lists decisions already made
 in design; individual records are being written up.*

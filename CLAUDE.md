@@ -6,11 +6,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 RIS Triage is a **Claude plugin**, not an application. There is no build, lint,
 or test command — the repository is markdown (slash commands, skills, docs),
-one non-functional demo script, and one shipped script that does run:
-`plugins/ris-triage/skills/knowledge/scripts/html_to_docx.py`, the KB
-renderer (ADR-0009). Verify a markdown change by reading the frontmatter and
-prose for internal consistency; verify a change to the renderer by converting
-`plugins/ris-triage/examples/kb-article-*.example.html` and opening the result.
+one non-functional demo script, and one shipped script that does run but is
+off the critical path: `plugins/ris-triage/skills/knowledge/scripts/html_to_docx.py`,
+an optional KB renderer for macOS/Linux/WSL (ADR-0009, demoted by ADR-0010).
+Verify a markdown change by reading the frontmatter and prose for internal
+consistency; verify a change to the renderer or to the Word header in
+`skills/knowledge/references/servicenow-format.md` by opening
+`plugins/ris-triage/examples/kb-article-*.example.html` in Word.
+
+**The target is MSP-managed Windows.** No Python, no `pip`, and PowerShell as
+the shell unless Git for Windows is installed. Anything on a default path must
+work with nothing installed; shell examples are PowerShell-first;
+`${CLAUDE_PLUGIN_ROOT}` is resolved to an absolute path before it reaches a
+shell, because PowerShell does not expand it. `python3` is not a Windows
+command.
 
 ```bash
 claude plugin validate .                              # validate plugin structure

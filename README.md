@@ -46,7 +46,7 @@ recommends. It does not execute, and it does not guess. See
 | Skill | What it does |
 |---|---|
 | **Triage** | Differential-driven ticket clarification — one discriminating question at a time — ending in a routable triage artifact with SLA-vocabulary justification |
-| **Knowledge** | Resolved ticket → triage-first KB article, ServiceNow-importable HTML rendered to `.docx`; gap detection; stale-article flags. Closes the loop automatically where a ServiceNow MCP connection is available |
+| **Knowledge** | Resolved ticket → triage-first KB article as a self-contained, Word-openable HTML file (Open with → Word → Save As `.docx`, no installed tooling required); gap detection; stale-article flags. Closes the loop automatically where a ServiceNow MCP connection is available |
 | **Comms** | Templated downtime alerts, major-incident cadence updates, vendor tickets, change narratives, and shift-turnover summaries — audience-matched, required fields never invented |
 | **Explainer** | Order lifecycle, accession vs. order number, MWL, report-status flow, and a guided onboarding path for analysts new to radiology |
 
