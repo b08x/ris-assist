@@ -15,46 +15,46 @@ chapter headings — they will be narrated.
 CHAPTER 1 — The persona, named
 ═══════════════════════════════════════════════════════════════════
 
-Every skill in this plugin — clarifying a ticket, drafting a notification, writing up a resolution — talks through the same voice. Fifteen years in radiology IT. Calm. Allergic to filler.
+Every skill in this plugin talks through the same voice. Fifteen years in radiology IT. Exhausted. Allergic to corporate filler.
 
-That voice isn't a writing style. It's a set of rules, and this is what they look like on their own, without a ticket attached to them.
+It isn't a writing style. It's a survival mechanism. This is what those rules look like when you aren't drowning in tickets.
 
 ═══════════════════════════════════════════════════════════════════
 CHAPTER 2 — Field, tenor, mode
 ═══════════════════════════════════════════════════════════════════
 
-The persona is built on three questions, asked of every response. What does it know. How does it relate to the person reading it. How is what it says organized.
+The persona asks three things before it talks. What does it actually know. Who is it talking to. And how is the answer organized.
 
-What it knows is bounded on purpose. Order lifecycle, interfaces, S L A vocabulary, incident communications, K B capture. Not clinical decision-making. Not message-level H L seven parsing — that's a separate tool. Not anything that changes a production system.
+What it knows is strictly bounded. Interfaces. Order lifecycles. It doesn't do clinical decision-making. It doesn't parse raw H L seven. It doesn't push changes to production. Because it knows better.
 
-How it relates is the part that matters most. It hands off a draft. It does not decide for you. And every conclusion it reaches carries a mark for how sure it actually is.
+How it relates is simple: it hands you a draft. It doesn't make the call for you. And it tags every conclusion with exactly how sure it is.
 
 ═══════════════════════════════════════════════════════════════════
 CHAPTER 3 — Confidence marking
 ═══════════════════════════════════════════════════════════════════
 
-Three marks. Confirmed means it's stated somewhere — a ticket, a worklog, a source you can point to. Likely means the evidence points that way, but nobody said it outright, and the persona will tell you what would confirm it. Possible means it fits the shape of the problem, and nothing more than that.
+Three tags. 'Confirmed' means it's written in a log you can actually point to. 'Likely' means all the evidence points there, but nobody wants to say it out loud. 'Possible' means it matches the shape of the fire.
 
-An unmarked claim is not a stylistic miss. It's a defect. That's a stronger word than most tools would use about their own output, and it's used on purpose.
+An unmarked claim isn't a stylistic choice. It's a defect. A hallucination. Other tools might call it an 'inference.' I call it a defect because I'm the one who gets paged when it's wrong.
 
 ═══════════════════════════════════════════════════════════════════
 CHAPTER 4 — One incident, three registers
 ═══════════════════════════════════════════════════════════════════
 
-Same underlying facts, every time. An interface went down at two fourteen in the morning. What changes is who's reading.
+The facts don't change. An interface died at two fourteen in the morning. What changes is who you're talking to.
 
-The clinical version leads with what to do right now, and stops after three sentences, because that's what this audience actually reads.
+The clinical version gives them the workaround and shuts up after three sentences, because they aren't reading the fourth.
 
-The technical version leads with what broke, names the interface, and marks the cause suspected, because it hasn't been confirmed yet.
+The technical version names the interface and marks the cause suspected, because you haven't proven it yet.
 
-The leadership version leads with scope and duration, because that's the information that decides whether this gets escalated further.
+The leadership version gives scope and duration, so they can decide who else needs to be woken up.
 
-Nothing about the incident changed across those three. Only the shape of what's told first.
+Same fire. Different buckets of water.
 
 ═══════════════════════════════════════════════════════════════════
 CHAPTER 5 — The close
 ═══════════════════════════════════════════════════════════════════
 
-This isn't a simplified version of the persona for a demo. The rules on this screen are the same rules every skill in the plugin actually runs on.
+This isn't a watered-down demo persona. These are the actual rules running underneath every skill in the plugin.
 
-The site and the incident in this walkthrough are invented, the same as everywhere else in this project. Nothing here comes from a real hospital, and no patient data touches any part of it.
+And yes, the site and the incident are entirely fictional. Nothing here came from a real hospital, because nobody's foolish enough to put live patient data in a demo.

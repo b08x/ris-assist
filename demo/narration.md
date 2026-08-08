@@ -33,12 +33,7 @@ engine reads it as "six colon fifteen," spell it out in the source line.
 **Screen: coverage grid, nothing selected yet.**
 
 SPEAK:
-Every hospital sends notifications when a system goes down. The order interface
-fails, and someone has to tell the radiologists, and the technologists, and the
-shift coming on next, and each of those groups needs to hear something
-different. The radiologists need to know where to read from. The technologists
-need to know which paper process to start. Leadership needs to know how big
-this is.
+An order interface drops at three in the morning. The ER is screaming about a stat head CT. Someone has to tell the radiologists where to read from, the techs which paper downtime process to start, and the oncoming shift what they're walking into. Nobody has a template for any of this.
 
 SPEAK:
 So it isn't one message. It's a grid. Event class down one side, audience across
@@ -50,14 +45,13 @@ the top. And most sites have never written most of these down.
 **Screen: slow pan across the grid. Hold on the next shift column.**
 
 SPEAK:
-This is one site's actual coverage. The filled cells are notifications they have
-a template for. Seven of them. The hatched cells are the ones they don't.
+Here is the coverage grid. The filled cells are the seven templates someone actually
+documented five years ago. The hatched cells are the void.
 
 SPEAK:
-Look at the next shift column. Nothing. Every unplanned outage, every planned
-maintenance window, and the incoming analyst gets whatever the outgoing one
-remembered to type in the handoff notes. That's not a criticism of the site.
-That's what normal looks like.
+Look at the next-shift column. Empty. The incoming analyst gets whatever the outgoing one
+managed to type into a handoff note before passing out. That isn't a broken process.
+That's just Tuesday.
 
 ---
 
@@ -70,15 +64,12 @@ we know: the order interface went down at six fifteen in the morning, we have an
 incident number, and we do not have a cause or an estimated time to repair.
 
 SPEAK:
-The draft leads with what the radiologist has to do, not with what broke. It
-tells them to read direct from the PACS worklist. It gives them the phone
-dictation extension. Three sentences, because this site's profile says
-radiologists read the first two lines and stop.
+Radiologists don't care that your broker is dropping ACKs. They care that they can't dictate.
+The draft gives them the PACS worklist workaround and the downtime phone
+extension. Three sentences. Because by sentence four, they're already calling the helpdesk to yell at you.
 
 SPEAK:
-And notice what is missing. There is no estimated time to repair, because nobody
-gave it one. It's listed underneath as an unfilled field instead of being
-invented. That distinction is the whole product.
+Notice the ETA is blank. It doesn't invent one, because guessing an ETA is how you lose your job.
 
 ---
 
@@ -92,16 +83,12 @@ Now the interesting one. Same outage, next shift, and there is no template for
 this cell.
 
 SPEAK:
-A tool that wanted to look impressive would just write something. This one tells
-you first. It says which template it borrowed from, it says the structure is
-provisional, and then it gives you the draft anyway so you are not stuck.
+Here's a gap. No template. An AI that wants to please you will hallucinate a
+distribution list and invent a downtime procedure. This one doesn't. It flags
+what it borrowed and tells you it's provisional.
 
 SPEAK:
-That's the behavior worth arguing about in a support organization. Not whether
-the writing is good. Whether you can tell, at a glance, which parts of the output
-the tool actually knew and which parts it borrowed. A confident wrong answer
-costs you more than no answer at all, and it costs you it later, when someone
-has already acted on it.
+A confident hallucination at 4 AM doesn't just look bad. It creates a patient safety event.
 
 ---
 
@@ -109,15 +96,13 @@ has already acted on it.
 **Screen: edit the facts box, add a suspected cause, redraft.**
 
 SPEAK:
-Change the facts and it changes with them. Add a suspected cause, and the draft
-marks it suspected, because that's how you phrased it. Say it's confirmed, and it
-says confirmed. It tracks your certainty rather than flattening it.
+Add a suspected cause, it marks it suspected. Confirm it, it marks it confirmed.
+It tracks your certainty instead of flattening it.
 
 SPEAK:
-And none of the site language here comes from the model. The downtime packet form
-number, the yellow requisition slips, the dictation extension — all of that comes
-out of a configuration file for this site. Swap the file, and the voice changes
-with it. The tool is generic. The output is not.
+The form numbers, the paper colors, the extensions — those come from your site
+profile, not a training corpus. You don't want a generic apology. You want the exact
+sequence of numbers that makes the paging system stop beeping.
 
 ---
 
