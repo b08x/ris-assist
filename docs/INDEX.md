@@ -25,16 +25,18 @@ Sorted by category, then by purpose. Each entry links to the file and states wha
 
 | File | Purpose | Governs |
 |------|---------|---------|
+| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Detailed architectural overview | System boundary, data flows, dependencies, extension points |
 | [`adr/README.md`](adr/README.md) | ADR index and format spec | How decisions are recorded |
 | [`adr/0008-separate-forensics-plugin.md`](adr/0008-separate-forensics-plugin.md) | Message forensics split into own plugin | Scope boundary, dependency structure |
 | [`adr/0009-servicenow-shaped-kb-output.md`](adr/0009-servicenow-shaped-kb-output.md) | ServiceNow-shaped KB output replaces KCS template | Article shape, triage-first ordering |
 | [`adr/0010-word-readable-html-as-the-default-artifact.md`](adr/0010-word-readable-html-as-the-default-artifact.md) | Word-readable HTML is default; Python renderer optional | Zero-dependency path, PowerShell-first |
 
-## Connector Documentation
+## Connector & Forensics Documentation
 
 | File | Purpose | Governs |
 |------|---------|---------|
 | [`kb-serviceNow-ms365-connectors.md`](kb-serviceNow-ms365-connectors.md) | ServiceNow & MS 365 integration overview | Current capabilities, blocked dependencies, upload paths |
+| [`FORENSICS-BACKLOG.md`](FORENSICS-BACKLOG.md) | Message forensics long-term backlog (parked) | FE1–FE5, blocking dependencies (F-DEP-1/2/3) |
 
 ## Demos & Walkthroughs
 
@@ -72,6 +74,7 @@ Sorted by category, then by purpose. Each entry links to the file and states wha
 
 ### Maintainer / Developer
 1. `PROJECT-INSTRUCTIONS.md` — collaboration rules
-2. `BACKLOG.md` — current state and next sprint
-3. `adr/README.md` — decision index
-4. `CONTRIBUTING.md` (root) — PR policy
+2. `ARCHITECTURE.md` — detailed architecture and data flows
+3. `BACKLOG.md` — current state and next sprint
+4. `adr/README.md` — decision index
+5. `CONTRIBUTING.md` (root) — PR policy
