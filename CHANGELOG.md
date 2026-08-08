@@ -24,6 +24,8 @@
 - Add ServiceNow/MS 365 connector integration guide and improve demo narratives
 - Update changelog with connector documentation
 - Add architecture overview and documentation index
+- Update changelog with architecture and index documentation
+- Update INDEX.md to include architecture and forensics documentation
 ## [1.0.0] - 2026-08-06
 
 ### 🚀 Features
