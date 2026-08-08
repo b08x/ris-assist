@@ -20,6 +20,8 @@
 
 - Reconcile Word-openable HTML default with ADR-0010; update changelog
 - Update overnight analyst persona from novice to senior framing
+- Update changelog with refactor commit
+- Add ServiceNow/MS 365 connector integration guide and improve demo narratives
 ## [1.0.0] - 2026-08-06
 
 ### 🚀 Features
