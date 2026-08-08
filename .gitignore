@@ -211,3 +211,6 @@ temp/
 #  A force-push after rewriting is required, and any existing clone still has
 #  the old objects.
 # ─────────────────────────────────────────────────────────────────────────────
+
+.omm/
+.codebase-memory/
