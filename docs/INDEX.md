@@ -56,7 +56,6 @@ Sorted by category, then by purpose. Each entry links to the file and states wha
 | Directory | Contents |
 |-----------|----------|
 | [`assets/`](assets/) | Icons and logos |
-| [`imgs/`](imgs/) | Persona spec analysis and prompt images |
 
 ---
 
