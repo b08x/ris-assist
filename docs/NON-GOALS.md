@@ -46,7 +46,7 @@ Message forensics is a separate plugin, not a missing feature. It waits on data
 access and on a symbolic parse layer, and shipping a model-interpreted version
 in the meantime would be the exact behavior this project argues against. See
 [ADR-0008](adr/0008-separate-forensics-plugin.md) and
-[FORENSICS-BACKLOG.md](FORENSICS-BACKLOG.md).
+Part 2 of [ROADMAP.md](ROADMAP.md).
 
 ## It is not a clinical tool
 

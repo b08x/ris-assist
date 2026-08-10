@@ -26,6 +26,9 @@
 - Add architecture overview and documentation index
 - Update changelog with architecture and index documentation
 - Update INDEX.md to include architecture and forensics documentation
+- Add comprehensive SIFT protocol system design review report (sift-report-latest.md, 17 issues, health score 2/5)
+- Add comprehensive codebase map for ris-assist repository (docs/CODEBASE-MAP.md, mermaid diagrams, complexity metrics, SIFT issue cross-refs)
+- Add RIS integration standards and software catalog references (explainer skill: integration-standards.md, ris-software-catalog.md)
 ## [1.0.0] - 2026-08-06
 
 ### 🚀 Features

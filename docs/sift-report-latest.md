@@ -18,10 +18,10 @@ STUB — implements comprehensive system analysis per sift-protocol skill. Conso
 
 | # | Query | Bias Critique |
 |---|-------|----------------|
-| 1 | `"Claude plugin marketplace dependency isolation patterns"` | **Platform bias**: Assumes Claude's plugin sandbox provides isolation. Doesn't account for shared state via user prompts or filesystem access. Misses the repo's explicit rejection of shared state (see [AGENTS.md §1](#)). |
+| 1 | `"Claude plugin marketplace dependency isolation patterns"` | **Platform bias**: Assumes Claude's plugin sandbox provides isolation. Doesn't account for shared state via user prompts or filesystem access. Misses the repo's explicit rejection of shared state (see [AGENTS.md §1](../AGENTS.md#separate-profile-from-plugin-code)). |
 | 2 | `"YAML frontmatter schema validation for skill files"` | **Syntactic bias**: Focuses on schema compliance, not semantic correctness. A valid YAML can still violate persona rules (G4). |
-| 3 | `"how to enforce synthetic data constraints in markdown templates"` | **Medium bias**: Overweights markdown parsing. The real constraint is at *ingress* (see [NON-GOALS.md](#): "deterministic script gate at ingress"). Templates are downstream of the gate. |
-| 4 | `"plugin skill dependency graph visualization tools"` | **Tool bias**: Assumes visualization is the goal. The actual need is *dependency elimination*—the architecture explicitly avoids cross-skill dependencies (see [AGENTS.md §4](#): "Every skill degrades honestly"). |
+| 3 | `"how to enforce synthetic data constraints in markdown templates"` | **Medium bias**: Overweights markdown parsing. The real constraint is at *ingress* (see [NON-GOALS.md §"It does not handle identified PHI"](NON-GOALS.md#it-does-not-handle-identified-phi): "deterministic script gate at ingress"). Templates are downstream of the gate. |
+| 4 | `"plugin skill dependency graph visualization tools"` | **Tool bias**: Assumes visualization is the goal. The actual need is *dependency elimination*—the architecture explicitly avoids cross-skill dependencies (see [AGENTS.md §4](../AGENTS.md#graceful-degradation): "Every skill degrades honestly"). |
 
 **Revised approach**: Focus on *enforcement mechanisms* for existing architectural commitments, not discovery of new patterns.
 

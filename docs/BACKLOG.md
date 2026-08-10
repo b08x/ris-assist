@@ -14,7 +14,7 @@ L (multi-day / needs design). Epics list the user stories they serve
 
 **Message forensics is not in this backlog.** Split into a separate plugin per
 [ADR-0008](adr/0008-separate-forensics-plugin.md); parked work lives in
-[FORENSICS-BACKLOG.md](FORENSICS-BACKLOG.md). Former epics E3 (data hygiene) and
+Part 2 of [ROADMAP.md](ROADMAP.md). Former epics E3 (data hygiene) and
 E9 (forensics) moved there. Epic numbers are not reused.
 
 **External dependencies (tracked, not owned):**

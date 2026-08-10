@@ -43,7 +43,7 @@ ris-assist/
 │   │   ├── comms/SKILL.md               # Service notification drafting
 │   │   │   └── references/              # comms-profile.schema.md, generic-templates.md, register-guide.md
 │   │   ├── explainer/SKILL.md          # Domain concept explanation
-│   │   │   └── references/              # 5 domain reference docs
+│   │   │   └── references/              # 7 domain reference docs
 │   │   └── setup/SKILL.md               # Site profile building
 │   │       └── references/              # site-profile.schema.md
 │   │
@@ -74,12 +74,12 @@ ris-assist/
 │   ├── DATA-PROVENANCE.md
 │   ├── DEMO-comms.md
 │   ├── DEMO-full.md
-│   ├── FORENSICS-BACKLOG.md
 │   ├── GUARDRAILS.md (G1-G10)
 │   ├── INDEX.md
 │   ├── NON-GOALS.md
 │   ├── PERSONA-SPEC.md (Single source of truth)
-│   └── PROJECT-INSTRUCTIONS.md
+│   ├── PROJECT-INSTRUCTIONS.md
+│   └── ROADMAP.md             # ServiceNow/MS 365 + parked forensics backlog
 │
 ├── .claude-plugin/                     # Root plugin config
 │   └── marketplace.json
@@ -128,7 +128,7 @@ ris-assist/
 | **triage** | Asks discriminating questions to route vague tickets | SKILL.md | None (logic embedded) |
 | **knowledge** | Turns resolved tickets into KB article drafts | SKILL.md | kb-template.md, servicenow-format.md, html_to_docx.py |
 | **comms** | Drafts service notifications (downtime, incidents, updates) | SKILL.md | comms-profile.schema.md, generic-templates.md, register-guide.md |
-| **explainer** | Explains radiology IT concepts at adjustable depth | SKILL.md | 5 domain reference docs |
+| **explainer** | Explains radiology IT concepts at adjustable depth | SKILL.md | 7 domain reference docs |
 | **setup** | Builds site profile via interview or edits | SKILL.md | site-profile.schema.md |
 
 **Common Pattern**:
@@ -146,7 +146,7 @@ Each skill maintains its own `references/` directory for domain-specific knowled
 
 - **knowledge**: Article templates, ServiceNow format guides
 - **comms**: Profile schemas, template examples, registration guides
-- **explainer**: 5 domain concepts (order lifecycle, accession vs order, MWL, report status, topology)
+- **explainer**: 7 domain concepts (order lifecycle, accession vs order, MWL, report status, topology, vendor platforms, integration standards)
 - **setup**: Site profile schema
 - **triage**: None (logic is self-contained)
 
@@ -222,7 +222,7 @@ Profile Field Missing?
 | Total Files | 40+ | Mostly markdown |
 | Commands | 6 | Slash commands |
 | Skills | 5 | Core capabilities |
-| Reference Docs | 11 | Domain knowledge |
+| Reference Docs | 13 | Domain knowledge |
 | ADRs | 3+ | Architectural decisions |
 | Guardrails | 10 | G1-G10 in GUARDRAILS.md |
 | Non-Goals | 8 | Explicit boundaries |
@@ -259,7 +259,7 @@ flowchart TD
     subgraph Plugin["ris-assist Plugin"]
         C["Commands\n(6)"] -->|STUB| S["Skills\n(5)"]
         S -->|reads| P["Profiles\n(external)"]
-        S -->|uses| R["References\n(11)"]
+        S -->|uses| R["References\n(13)"]
         R -->|validated by| V["Schemas\n(3)"]
     end
     
@@ -584,7 +584,7 @@ grep -E "^## Decision" docs/adr/*.md
 
 For questions about this codebase map:
 - See [AGENTS.md](../AGENTS.md) for architectural principles
-- See [sift-report-latest.md](../sift-report-latest.md) for detailed SIFT analysis
+- See [sift-report-latest.md](sift-report-latest.md) for detailed SIFT analysis
 - See GitHub Issues for tracked work
 
 ---

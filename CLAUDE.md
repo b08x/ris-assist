@@ -66,7 +66,7 @@ repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
   themselves live in each skill's `references/`), keyed to the fictional site
   "Riverside Regional Imaging."
 - **Message forensics is a separate, not-yet-built plugin** (parked in
-  `docs/FORENSICS-BACKLOG.md`). It waits on a symbolic (code, not model) HL7
+  Part 2 of `docs/ROADMAP.md`). It waits on a symbolic (code, not model) HL7
   parse layer — see the "Symbolic parse before model interpretation"
   commitment below. Do not add HL7 parsing to this plugin.
 

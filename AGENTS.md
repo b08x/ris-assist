@@ -45,11 +45,11 @@ RIS_Assist/
 │   ├── DATA-PROVENANCE.md    # Synthetic data policy
 │   ├── DEMO-comms.md         # Scripted walkthrough — comms skill alone
 │   ├── DEMO-full.md          # Scripted walkthrough — all five skills, one incident thread
-│   ├── FORENSICS-BACKLOG.md  # Message forensics work (parked)
 │   ├── GUARDRAILS.md         # Guardrails/G1-G10 patterns
 │   ├── NON-GOALS.md          # Explicit non-goals and boundaries
 │   ├── PERSONA-SPEC.md       # Single source of truth for the analyst persona (Field/Tenor/Mode)
 │   ├── PROJECT-INSTRUCTIONS.md # Project rules for collaborative work
+│   ├── ROADMAP.md             # ServiceNow/MS 365 connectors + parked forensics backlog (DEP-1/2, F-DEP-1/2/3)
 │   ├── USER_STORIES.md       # Feature requirements
 │   └── assets/               # Icons and logos
 ├── .claude-plugin/           # Root plugin config
