@@ -25,6 +25,8 @@ the depth asked, offer deeper:
 - `references/modality-worklist.md`
 - `references/report-status-flow.md`
 - `references/topology-patterns.md` — RIS ↔ PACS ↔ EHR, generic pattern only
+- `references/ris-software-catalog.md` — major RIS/PACS/EHR vendor platforms
+- `references/integration-standards.md` — HL7, DICOM, IHE, FHIR standards
 
 ## Rules
 
@@ -60,7 +62,12 @@ Suggested sequence, one topic per turn, checking in before advancing:
    overnight ticket shape (order not reaching the modality) lives.
 5. **Report status flow.** `report-status-flow.md` — the other half of
    "where's my study/report" tickets.
-6. **Site-specific close-out.** Walk the site profile's `escalation_matrix`
+6. **Vendor platforms.** `ris-software-catalog.md` — if the new analyst
+   asks "what system are we on," this is the generic reference before
+   checking the site profile's `systems` section.
+7. **Integration standards.** `integration-standards.md` — HL7, DICOM,
+   IHE basics for analysts who need to understand interface tickets.
+8. **Site-specific close-out.** Walk the site profile's `escalation_matrix`
    and `sla_tiers` — generic domain knowledge is done; this is "how *this*
    account works."
 
