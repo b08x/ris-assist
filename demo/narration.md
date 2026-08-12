@@ -1,11 +1,15 @@
-# Narration script — coverage demo
+# Narration script — dataset-driven demo
 
 Written to be spoken, not read. Lines under `SPEAK:` contain no markdown, no
 symbols, no bracketed asides — feed them straight to a TTS engine. Everything
 else is direction and never gets voiced.
 
-Total spoken length: roughly four minutes at a measured pace. Six segments,
+Total spoken length: roughly five minutes at a measured pace. Seven segments,
 each independently usable if you want shorter cuts.
+
+Source data: every turn uses an actual record from the 100-record synthetic
+RIS incident dataset. The incident numbers, workstations, descriptions, and
+work notes are real shapes — names and identifiers have been replaced.
 
 ---
 
@@ -19,119 +23,193 @@ Set these before generating, or the output will mangle them.
 | PACS | "packs" — one syllable |
 | HL7 | "H L seven" |
 | EHR | "E H R" |
-| INC0084219 | "incident zero zero eight four two one nine" |
+| INC0059264 | "incident zero zero five nine two six four" |
+| INC0059600 | "incident zero zero five nine six zero zero" |
+| SYN0100030 | "incident S Y N zero one zero zero zero three zero" |
+| SYN0100055 | "incident S Y N zero one zero zero zero five five" |
 | IMG-14 | "I M G fourteen" |
 | ETA | "E T A" |
-| MSP | "M S P" |
+| AD | "A D" |
+| ADFS | "A D F S" |
 
-Numbers like 6:15 AM should be spoken "six fifteen in the morning." If your
-engine reads it as "six colon fifteen," spell it out in the source line.
-
----
-
-## Segment 1 — the problem
-**Screen: coverage grid, nothing selected yet.**
-
-SPEAK:
-An order interface drops at three in the morning. The ER is screaming about a stat head CT. Someone has to tell the radiologists where to read from, the techs which paper downtime process to start, and the oncoming shift what they're walking into. Nobody has a template for any of this.
-
-SPEAK:
-So it isn't one message. It's a grid. Event class down one side, audience across
-the top. And most sites have never written most of these down.
+Numbers like 387RRS should be spoken "three eight seven R R S." If your
+engine reads it as a number, spell it in the source line.
 
 ---
 
-## Segment 2 — reading the grid
-**Screen: slow pan across the grid. Hold on the next shift column.**
+## Segment 1 — the dataset
+
+**Screen: dataset overview — 100 records, slice view.**
 
 SPEAK:
-Here is the coverage grid. The filled cells are the seven templates someone actually
-documented five years ago. The hatched cells are the void.
+Here's a hundred incidents from a synthetic radiology support operation.
+A hundred tickets with real shapes — vague descriptions, empty worklogs,
+recurring issues, shift-change failures. Names, identifiers, and clinical
+details have been replaced through a deterministic scrub map.
 
 SPEAK:
-Look at the next-shift column. Empty. The incoming analyst gets whatever the outgoing one
-managed to type into a handoff note before passing out. That isn't a broken process.
-That's just Tuesday.
+We're going to run five skills against this data. Triage, downtime
+communications, knowledge capture, domain explanation, and overnight
+framing. Each one uses an actual dataset record as input.
 
 ---
 
-## Segment 3 — the happy path
-**Screen: click Unplanned / Radiologists / Techs. Draft appears.**
+## Segment 2 — triage, the vague ticket
+
+**Screen: dataset record INC0059264 appears. "RA unable to launch Synapse (again)."**
 
 SPEAK:
-Start with one they do have. Unplanned outage, radiologists. Here are the facts
-we know: the order interface went down at six fifteen in the morning, we have an
-incident number, and we do not have a cause or an estimated time to repair.
+Incident zero zero five nine two six four. Short description: "R A unable
+to launch Synapse, again." Sev two. Single workstation. No scope stated in
+the description.
 
 SPEAK:
-Radiologists don't care that your broker is dropping ACKs. They care that they can't dictate.
-The draft gives them the PACS worklist workaround and the downtime phone
-extension. Three sentences. Because by sentence four, they're already calling the helpdesk to yell at you.
+The triage skill's first move is scope. One user or many? The answer
+collapses four of five branches. Single user — it's workstation or user,
+not interface, not R A S, not PACS.
 
 SPEAK:
-Notice the ETA is blank. It doesn't invent one, because guessing an ETA is how you lose your job.
+But notice the parenthetical. "Again." That's a recurrence signal. The
+skill should surface it: prior occurrence suggests a local state problem
+rather than a systemic failure.
 
 ---
 
-## Segment 4 — the gap
-**Screen: click Unplanned / Next shift. Hold on the substitution banner.**
+## Segment 3 — downtime, empty worklog
 
-**Direction: this is the segment to keep if you only keep one.**
-
-SPEAK:
-Now the interesting one. Same outage, next shift, and there is no template for
-this cell.
+**Screen: dataset record INC0059600. "Blanchard Valley Medical Center is facing issues
+with orders not crossing and Powersribe is not allowing there order to
+complete or reports to cross to over."**
 
 SPEAK:
-Here's a gap. No template. An AI that wants to please you will hallucinate a
-distribution list and invent a downtime procedure. This one doesn't. It flags
-what it borrowed and tells you it's provisional.
+Incident zero zero five nine six zero zero. The description is a sentence
+fragment with two typos and no incident number. The worklog is empty. The
+severity is medium. Patient care impact: direct.
 
 SPEAK:
-A confident hallucination at 4 AM doesn't just look bad. It creates a patient safety event.
+The comms skill resolves the variant key, picks the template, and fills
+required slots from stated facts only. Stated facts: orders are not
+crossing at Blanchard Valley. That's it.
+
+SPEAK:
+Everything the template requires that the user didn't provide gets a
+bracket TBD. No invented ETA. No guessed cause. No inferred scope. This
+is the core contract.
 
 ---
 
-## Segment 5 — your own facts
-**Screen: edit the facts box, add a suspected cause, redraft.**
+## Segment 4 — the interval update
+
+**Screen: continuation of INC0059600. New input: "Update — Blanchard Valley orders
+are flowing again. Reports still queued."**
 
 SPEAK:
-Add a suspected cause, it marks it suspected. Confirm it, it marks it confirmed.
-It tracks your certainty instead of flattening it.
+Same incident, twenty minutes later. Orders restored. Reports still
+queued. The vendor says the outbound interface was stuck.
 
 SPEAK:
-The form numbers, the paper colors, the extensions — those come from your site
-profile, not a training corpus. You don't want a generic apology. You want the exact
-sequence of numbers that makes the paging system stop beeping.
+The skill carries forward the incident number, the original start time,
+and the scope. It leads with the delta: orders back, reports still
+queued. And it marks the cause suspected — the vendor says it was stuck,
+but no root cause is confirmed.
+
+SPEAK:
+And notice the correction. The initial assumption was R A S-side. The
+actual fix was in the PowerScribe outbound interface. The skill makes that
+correction visible, not buried. That's not a nice to have. That's how you
+prevent the next analyst from repeating the wrong diagnosis.
 
 ---
 
-## Segment 6 — the close
-**Screen: pull back to the full grid.**
+## Segment 5 — knowledge capture
+
+**Screen: dataset record SYN0100030. Work notes show a three-day resolution
+ending with "Identified orphaned Synapse process. Killed via Task Manager."**
 
 SPEAK:
-So the deliverable isn't the drafts. It's the grid. It shows a support lead
-exactly which of their notifications are standardized and which are still living
-in somebody's head, and it turns that into a list of things to fix.
+Incident S Y N zero one zero zero zero three zero. PowerScribe not
+sending transcribed reports to Synapse. The worklog spans three days.
+Remoted in. Awaited callback. Closed after user verification. Time
+worked: forty-four minutes.
 
 SPEAK:
-The site in this demo is invented. The templates, the form numbers, the phone
-extension, the incident number — all fictional. Nothing here came from a real
-hospital, and no patient data touches any part of this.
+The knowledge capture skill reads the worklog and builds the article
+around what it actually supports. The worklog documents a workstation
+layer fix — orphaned process, cache cleared, relaunched. That's one
+ladder rung.
+
+SPEAK:
+The application layer, the interface layer, the advanced layer — nothing
+in the worklog supports those. The skill lists them as outstanding, not
+filled. It doesn't invent reproduction steps from general knowledge. That
+separation is the whole product.
+
+---
+
+## Segment 6 — the domain question
+
+**Screen: mid-incident, analyst asks "what's the difference between accession
+number and order number?"**
+
+SPEAK:
+The analyst is mid-incident and asks a domain question. The explain skill
+answers in one or two sentences and offers to go deeper. Shortest answer
+first, always.
+
+SPEAK:
+"The order number identifies the request. The accession number identifies
+the imaging exam R A S and PACS actually performs. They're usually
+assigned by different systems, at different lifecycle stages, and are not
+interchangeable." That's it. The practical consequence follows in one
+more sentence.
+
+SPEAK:
+Even mid-incident, the skill doesn't dump the full reference. It answers
+the question asked and offers to go deeper. That restraint is the
+contract.
+
+---
+
+## Segment 7 — overnight framing, the close
+
+**Screen: dataset record SYN0100055. "EPIC logon slow at shift change — AD token
+validation failing." Critical severity.**
+
+SPEAK:
+Incident S Y N zero one zero zero zero five five. EPIC logon slow at
+shift change. A D token validation failing. Multiple users. Single site.
+Critical severity.
+
+SPEAK:
+The analyst is on alone overnight. The skill's first move isn't the
+differential — it's the change window question. Shift-change timing is
+when scheduled restarts and patching typically land. Knowing whether there
+was a window helps narrow this fast.
+
+SPEAK:
+The severity justification cites the site profile's S L A tiers
+definition verbatim. Not invented language. The real definition, applied
+to the real facts. That's the contract all five skills share.
+
+SPEAK:
+All data in this demo is synthetic. Incident numbers, workstations,
+and work notes have been replaced. No production data is used.
 
 ---
 
 ## Direction notes
 
-Pace it slower than feels natural. This is a demo for people evaluating whether
-to trust a tool, and confidence in the delivery reads as sales pressure.
+Pace it slower than feels natural. This is a demo for people evaluating
+whether to trust a tool, and confidence in the delivery reads as sales
+pressure.
 
-Do not add music under segment four. Let the substitution banner sit in silence
-for a beat before the next line.
+Do not add music under segments four or five. Let the correction and the
+ladder-layer omission sit in silence for a beat before the next line.
 
-If you cut for time, drop segments one and five. The argument survives on two,
-three, four, and six.
+If you cut for time, drop segments one and six. The argument survives on
+two, three, four, five, and seven.
 
-The last two sentences of segment six are not optional. In a managed-services
-environment the first question anyone asks is where the data came from, and
-answering it before it's asked is worth more than anything else in the script.
+The last two sentences of segment seven are not optional. In a
+managed-services environment the first question anyone asks is where the
+data came from, and answering it before it's asked is worth more than
+anything else in the script.

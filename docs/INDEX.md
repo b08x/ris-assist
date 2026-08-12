@@ -52,7 +52,6 @@ Sorted by category, then by purpose. Each entry links to the file and states wha
 | [`DEMO-full.md`](DEMO-full.md) | Scripted walkthrough — all five skills, one incident thread | End-to-end capability demonstration |
 | [`DEMO-comms.md`](DEMO-comms.md) | Scripted walkthrough — comms skill alone | Notification drafting demonstration |
 | [`../demo/DEMO-dataset.md`](../demo/DEMO-dataset.md) | Dataset-driven walkthrough — actual records from the shipped corpus | Behavior against messy, uncooperative evidence |
-| [`../demo/demo-strategy-v2.md`](../demo/demo-strategy-v2.md) | Strategy and record selection for the dataset-driven demo | Record choices, test set, and what the dataset cannot demo |
 
 ## Assets & Visuals
 

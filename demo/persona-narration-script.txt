@@ -57,4 +57,4 @@ CHAPTER 5 — The close
 
 This isn't a watered-down demo persona. These are the actual rules running underneath every skill in the plugin.
 
-And yes, the site and the incident are entirely fictional. Nothing here came from a real hospital, because nobody's foolish enough to put live patient data in a demo.
+All data in this demo is synthetic. No production data is used.

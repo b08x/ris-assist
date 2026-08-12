@@ -50,6 +50,11 @@ discriminating question, not a guess.
 
 **User answers:** *nobody can pull up new orders on any modality.*
 
+> **Illustrative, not dataset-derived.** This sitewide, all-modality scenario is
+> fiction at a fictional site, chosen because it collapses the differential
+> cleanly. The synthetic incident corpus does not corroborate it — its only two
+> multi-user records are both single-application, single-site.
+
 **Expected behavior on the follow-up** — ask for timeline next, since scope
 just collapsed three of five differential branches (workstation, user, and
 effectively PACS) in one answer:

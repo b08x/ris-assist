@@ -1,69 +1,79 @@
-RIS ASSIST — COVERAGE DEMO NARRATION
+RIS ASSIST — DATASET-DRIVEN DEMO NARRATION
 Import copy for ElevenCreative Studio. See narration-studio.md for setup.
 
 Each block below is ONE Studio paragraph — the atomic unit for generation,
 regeneration, and locking. Blank lines separate paragraphs. Do not merge them;
 paragraph boundaries are your only cheap undo.
 
-Six chapters. Create them in the Chapters sidebar and paste one section into
+Seven chapters. Create them in the Chapters sidebar and paste one section into
 each. Do not paste the chapter headings — they will be narrated.
 
 ═══════════════════════════════════════════════════════════════════
-CHAPTER 1 — The problem
+CHAPTER 1 — The dataset
 ═══════════════════════════════════════════════════════════════════
 
-An order interface drops at three in the morning. The ER is screaming about a stat head CT. Someone has to tell the radiologists where to read from, the techs which paper downtime process to start, and the oncoming shift what they're walking into.
+Here's a hundred incidents from a synthetic radiology support operation. A hundred tickets with real shapes — vague descriptions, empty worklogs, recurring issues, shift-change failures. Names, identifiers, and clinical details have been replaced through a deterministic scrub map.
 
-Nobody has a template for any of this.
-
-So it isn't one message. It's a grid. Event class down one side, audience across the top. And most sites have never written most of these down.
+We're going to run five skills against this data. Triage, downtime communications, knowledge capture, domain explanation, and overnight framing. Each one uses an actual dataset record as input.
 
 ═══════════════════════════════════════════════════════════════════
-CHAPTER 2 — Reading the grid
+CHAPTER 2 — Triage, the vague ticket
 ═══════════════════════════════════════════════════════════════════
 
-Here is the coverage grid. The filled cells are the seven templates someone actually documented five years ago. The hatched cells are the void.
+Incident zero zero five nine two six four. Short description: "R A unable to launch Synapse, again." Sev two. Single workstation. No scope stated in the description.
 
-Look at the next-shift column. Empty. The incoming analyst gets whatever the outgoing one managed to type into a handoff note before passing out.
+The triage skill's first move is scope. One user or many? The answer collapses four of five branches. Single user — it's workstation or user, not interface, not R A S, not PACS.
 
-That isn't a broken process. That's just Tuesday.
-
-═══════════════════════════════════════════════════════════════════
-CHAPTER 3 — The happy path
-═══════════════════════════════════════════════════════════════════
-
-Start with one they do have. Unplanned outage, radiologists. Here are the facts we know: the order interface went down at six fifteen in the morning, we have an incident number, and we do not have a cause or an estimated time to repair.
-
-Radiologists don't care that your broker is dropping ACKs. They care that they can't dictate. The draft gives them the PACS worklist workaround and the downtime phone extension. Three sentences. Because by sentence four, they're already calling the helpdesk to yell at you.
-
-Notice the ETA is blank. It doesn't invent one, because guessing an ETA is how you lose your job.
+But notice the parenthetical. "Again." That's a recurrence signal. The skill should surface it: prior occurrence suggests a local state problem rather than a systemic failure.
 
 ═══════════════════════════════════════════════════════════════════
-CHAPTER 4 — The gap
+CHAPTER 3 — Downtime, empty worklog
 ═══════════════════════════════════════════════════════════════════
 
-Now the interesting one. Same outage, next shift, and there is no template for this cell.
+Incident zero zero five nine six zero zero. The description is a sentence fragment with two typos and no incident number. The worklog is empty. The severity is medium. Patient care impact: direct.
 
-Here's a gap. No template. An AI that wants to please you will hallucinate a distribution list and invent a downtime procedure. This one doesn't.
+The comms skill resolves the variant key, picks the template, and fills required slots from stated facts only. Stated facts: orders are not crossing at Blanchard Valley. That's it.
 
-It flags what it borrowed and tells you it's provisional. A confident hallucination at 4 AM doesn't just look bad. It creates a patient safety event.
-
-═══════════════════════════════════════════════════════════════════
-CHAPTER 5 — Your own facts
-═══════════════════════════════════════════════════════════════════
-
-Add a suspected cause, it marks it suspected. Confirm it, it marks it confirmed. It tracks your certainty instead of flattening it.
-
-The form numbers, the paper colors, the extensions — those come from your site profile, not a training corpus.
-
-You don't want a generic apology. You want the exact sequence of numbers that makes the paging system stop beeping.
+Everything the template requires that the user didn't provide gets a bracket TBD. No invented ETA. No guessed cause. No inferred scope. This is the core contract.
 
 ═══════════════════════════════════════════════════════════════════
-CHAPTER 6 — The close
+CHAPTER 4 — The interval update
 ═══════════════════════════════════════════════════════════════════
 
-So the deliverable isn't the drafts. It's the grid. It shows a support lead exactly which of their notifications are standardized, and which are still living in somebody's head. And it turns that into a list of things to fix.
+Same incident, twenty minutes later. Orders restored. Reports still queued. The vendor says the outbound interface was stuck.
 
-The site in this demo is invented. The templates, the form numbers, the phone extension, the incident number — all fictional.
+The skill carries forward the incident number, the original start time, and the scope. It leads with the delta: orders back, reports still queued. And it marks the cause suspected — the vendor says it was stuck, but no root cause is confirmed.
 
-Nothing here came from a real hospital, and no patient data touches any part of this.
+And notice the correction. The initial assumption was R A S-side. The actual fix was in the PowerScribe outbound interface. The skill makes that correction visible, not buried. That's not a nice to have. That's how you prevent the next analyst from repeating the wrong diagnosis.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 5 — Knowledge capture
+═══════════════════════════════════════════════════════════════════
+
+Incident S Y N zero one zero zero zero three zero. PowerScribe not sending transcribed reports to Synapse. The worklog spans three days. Remoted in. Awaited callback. Closed after user verification. Time worked: forty-four minutes.
+
+The knowledge capture skill reads the worklog and builds the article around what it actually supports. The worklog documents a workstation layer fix — orphaned process, cache cleared, relaunched. That's one ladder rung.
+
+The application layer, the interface layer, the advanced layer — nothing in the worklog supports those. The skill lists them as outstanding, not filled. It doesn't invent reproduction steps from general knowledge. That separation is the whole product.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 6 — The domain question
+═══════════════════════════════════════════════════════════════════
+
+The analyst is mid-incident and asks a domain question. The explain skill answers in one or two sentences and offers to go deeper. Shortest answer first, always.
+
+"The order number identifies the request. The accession number identifies the imaging exam R A S and PACS actually performs. They're usually assigned by different systems, at different lifecycle stages, and are not interchangeable." That's it. The practical consequence follows in one more sentence.
+
+Even mid-incident, the skill doesn't dump the full reference. It answers the question asked and offers to go deeper. That restraint is the contract.
+
+═══════════════════════════════════════════════════════════════════
+CHAPTER 7 — Overnight framing, the close
+═══════════════════════════════════════════════════════════════════
+
+Incident S Y N zero one zero zero zero five five. EPIC logon slow at shift change. A D token validation failing. Multiple users. Single site. Critical severity.
+
+The analyst is on alone overnight. The skill's first move isn't the differential — it's the change window question. Shift-change timing is when scheduled restarts and patching typically land. Knowing whether there was a window helps narrow this fast.
+
+The severity justification cites the site profile's S L A tiers definition verbatim. Not invented language. The real definition, applied to the real facts. That's the contract all five skills share.
+
+All data in this demo is synthetic. Incident numbers, workstations, and work notes have been replaced. No production data is used.

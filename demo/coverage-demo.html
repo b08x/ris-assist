@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RIS Assist — notification coverage</title>
+<title>RIS Assist — dataset-driven demo</title>
 <style>
   :root{
     --ink:#14101A;
@@ -36,7 +36,6 @@
   }
   .wrap{max-width:1180px;margin:0 auto;padding:40px 24px 72px}
 
-  /* ---------- header ---------- */
   .masthead{display:flex;gap:20px;align-items:flex-start;margin-bottom:14px}
   .mark{flex:0 0 auto;width:64px;height:64px}
   .masthead h1{
@@ -61,118 +60,86 @@
   }
   .sub{margin:0 0 18px;color:#A895C4;font-size:14px;max-width:70ch}
 
-  /* ---------- coverage grid ---------- */
-  .gridscroll{overflow-x:auto;padding-bottom:6px}
-  table.cov{border-collapse:separate;border-spacing:5px;min-width:720px}
-  table.cov th{
-    font-family:var(--data);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-    color:#8F7BB0;font-weight:500;text-align:left;padding:0 4px 6px;vertical-align:bottom;
-  }
-  table.cov th.rowhead{text-align:right;padding-right:12px;white-space:nowrap;vertical-align:middle}
+  /* ---------- dataset browser ---------- */
+  .dataset{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
 
-  .cell{
-    width:118px;height:56px;border-radius:4px;border:0;cursor:pointer;
-    font-family:var(--data);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
-    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-    padding:0 10px;gap:3px;transition:transform .12s ease,box-shadow .12s ease;
-    color:inherit;text-align:left;
-  }
-  .cell:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-  .cell:hover{transform:translateY(-2px)}
-
-  .cell.defined{background:linear-gradient(160deg,var(--violet-bright),var(--violet));color:#F6ECFC}
-  .cell.defined .ch{color:rgba(255,255,255,.72)}
-  .cell.gap{
-    background:
-      repeating-linear-gradient(135deg,transparent 0 7px,rgba(232,161,61,.16) 7px 8px),
-      var(--console-2);
-    border:1px dashed rgba(232,161,61,.55);
-    color:var(--amber);
-  }
-  .cell.sel{box-shadow:0 0 0 2px var(--amber),0 8px 22px rgba(0,0,0,.45)}
-  .cell .ch{font-size:9px;letter-spacing:.12em;opacity:.85}
-
-  .legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-size:12.5px;color:#A895C4}
-  .legend span{display:flex;align-items:center;gap:8px}
-  .sw{width:16px;height:16px;border-radius:3px;display:inline-block}
-  .sw.d{background:linear-gradient(160deg,var(--violet-bright),var(--violet))}
-  .sw.g{background:repeating-linear-gradient(135deg,transparent 0 5px,rgba(232,161,61,.2) 5px 6px),var(--console-2);border:1px dashed rgba(232,161,61,.55)}
-
-  /* ---------- workbench ---------- */
-  .bench{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);gap:26px;align-items:start}
-
-  .console{
+  .records{
     background:linear-gradient(180deg,var(--console),#150E26);
-    border:1px solid rgba(163,43,214,.28);border-radius:8px;padding:22px;
+    border:1px solid rgba(163,43,214,.28);border-radius:8px;
+    padding:16px;max-height:600px;overflow-y:auto;
   }
-  .fieldrow{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-  .field{flex:1 1 150px;min-width:0}
-  label{
-    display:block;font-family:var(--data);font-size:10px;letter-spacing:.14em;
-    text-transform:uppercase;color:#8F7BB0;margin-bottom:6px;
+  .records h3{
+    font-family:var(--data);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:#8F7BB0;margin:0 0 12px;
   }
-  select,textarea{
-    width:100%;background:#120C1F;color:#E8DFF5;
-    border:1px solid rgba(163,43,214,.32);border-radius:4px;
-    padding:10px 11px;font-family:var(--body);font-size:14px;
+  .rec{
+    padding:10px 12px;border-radius:4px;cursor:pointer;
+    border:1px solid transparent;margin-bottom:6px;
+    transition:background .12s ease,border-color .12s ease;
   }
-  textarea{min-height:118px;resize:vertical;line-height:1.5}
-  select:focus,textarea:focus{outline:2px solid var(--violet-pale);outline-offset:1px;border-color:transparent}
+  .rec:hover{background:rgba(163,43,214,.12)}
+  .rec.sel{background:rgba(163,43,214,.18);border-color:var(--violet-pale)}
+  .rec .num{
+    font-family:var(--data);font-size:11px;color:var(--violet-pale);
+    letter-spacing:.06em;
+  }
+  .rec .desc{
+    font-size:13px;color:#C3B2DC;margin-top:3px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .rec .meta{
+    font-family:var(--data);font-size:10px;color:#8F7BB0;margin-top:4px;
+    display:flex;gap:12px;
+  }
+  .rec .sev{color:var(--amber)}
 
-  .keyline{
-    font-family:var(--data);font-size:12px;color:var(--violet-pale);
-    background:#120C1F;border:1px solid rgba(163,43,214,.25);border-radius:4px;
-    padding:9px 11px;margin-bottom:14px;word-break:break-all;
-  }
-  .warn{
-    border-left:3px solid var(--amber);background:rgba(232,161,61,.09);
-    padding:11px 13px;margin-bottom:14px;font-size:13.5px;color:#F0D7AC;border-radius:0 4px 4px 0;
-  }
-  .warn strong{color:var(--amber)}
-
-  button.go{
-    width:100%;padding:13px;border:0;border-radius:4px;cursor:pointer;
-    background:linear-gradient(120deg,var(--violet-bright),var(--violet));
-    color:#fff;font-family:var(--data);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  }
-  button.go:hover{filter:brightness(1.12)}
-  button.go:disabled{opacity:.55;cursor:progress}
-  button.go:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-
-  /* ---------- paper ---------- */
-  .paper{
+  /* ---------- skill output ---------- */
+  .output{
     background:var(--paper);color:var(--paper-ink);border-radius:5px;
     padding:26px 28px;min-height:340px;
     box-shadow:0 18px 44px rgba(0,0,0,.5);
     animation:rise .35s ease both;
   }
   @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .paper .stamp{
+  .output .stamp{
     font-family:var(--data);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
     color:#6B5C7E;border-bottom:1px solid var(--paper-rule);padding-bottom:10px;margin-bottom:16px;
     display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   }
-  .paper h3{font-family:var(--display);font-size:21px;margin:0 0 12px;font-weight:600}
-  .paper .draft{white-space:pre-wrap;font-size:15px;line-height:1.62}
-  .paper .block{margin-top:20px;padding-top:14px;border-top:1px solid var(--paper-rule)}
-  .paper .block h4{
+  .output h3{font-family:var(--display);font-size:21px;margin:0 0 12px;font-weight:600}
+  .output .draft{white-space:pre-wrap;font-size:15px;line-height:1.62}
+  .output .block{margin-top:20px;padding-top:14px;border-top:1px solid var(--paper-rule)}
+  .output .block h4{
     font-family:var(--data);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
     margin:0 0 8px;color:#6B5C7E;
   }
-  .paper ul{margin:0;padding-left:18px;font-size:14px}
-  .paper li{margin-bottom:5px}
+  .output ul{margin:0;padding-left:18px;font-size:14px}
+  .output li{margin-bottom:5px}
   .flag{
     background:rgba(232,161,61,.18);border-left:3px solid #C4841F;
     padding:10px 12px;font-size:14px;border-radius:0 3px 3px 0;
   }
   .idle{color:#7C6C90;font-style:italic;font-size:15px;font-family:var(--display)}
 
+  /* ---------- skill tabs ---------- */
+  .skills{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .skill-tab{
+    font-family:var(--data);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    padding:8px 14px;border-radius:4px;border:1px solid rgba(163,43,214,.32);
+    background:transparent;color:#C3B2DC;cursor:pointer;
+    transition:background .12s ease,color .12s ease;
+  }
+  .skill-tab:hover{background:rgba(163,43,214,.12)}
+  .skill-tab.active{background:var(--violet);color:#fff;border-color:var(--violet)}
+  .skill-tab:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
   footer{margin-top:44px;font-size:12.5px;color:#7A688F;max-width:76ch}
   footer code{font-family:var(--data);color:#A895C4}
 
   @media (max-width:880px){
-    .bench{grid-template-columns:1fr}
+    .dataset{grid-template-columns:1fr}
     .masthead{flex-direction:column;gap:12px}
+    .records{max-height:300px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -192,246 +159,394 @@
       <circle cx="256" cy="256" r="14" fill="#E8A13D"/>
     </svg>
     <div>
-      <h1>Which notifications can this site actually send?</h1>
-      <p class="thesis">Every cell below is one notification this site might need to send. Filled cells have a template. Hatched cells don't — and the tool will tell you so instead of writing one anyway. Click any cell to draft it.</p>
-      <span class="fiction">Fictional site · Riverside Regional Imaging</span>
+      <h1>How do five skills handle real incident shapes?</h1>
+      <p class="thesis">Select a record from the synthetic dataset. Pick a skill. See what it produces against production-shaped data — vague descriptions, empty worklogs, recurring issues, shift-change failures.</p>
+      <span class="fiction">100 synthetic records · all names and identifiers replaced</span>
     </div>
   </header>
 
   <div class="rule"></div>
 
   <section>
-    <h2>Coverage</h2>
-    <p class="sub">Event class down the side, audience across the top. Seven templates cover twenty situations.</p>
-    <div class="gridscroll"><table class="cov" id="grid"></table></div>
-    <div class="legend">
-      <span><i class="sw d"></i> Template defined</span>
-      <span><i class="sw g"></i> No template — nearest match will be substituted and named</span>
-    </div>
-  </section>
+    <h2>Dataset</h2>
+    <p class="sub">Each record is a real ticket shape from a synthetic radiology support operation. Names, identifiers, and workstation IDs have been replaced.</p>
 
-  <div class="rule"></div>
-
-  <section>
-    <h2>Draft it</h2>
-    <p class="sub">Change the facts, pick a cell, and see what comes out. Nothing is sent — this produces text for a person to approve.</p>
-
-    <div class="bench">
-      <div class="console">
-        <div class="fieldrow">
-          <div class="field">
-            <label for="ec">Event class</label>
-            <select id="ec"></select>
-          </div>
-          <div class="field">
-            <label for="aud">Audience</label>
-            <select id="aud"></select>
-          </div>
-        </div>
-
-        <div class="keyline" id="keyline">—</div>
-        <div id="warnslot"></div>
-
-        <label for="facts">What you know</label>
-        <textarea id="facts">RIS-to-PACS order interface down since about 6:15 AM. INC0084219. Orders are not reaching modality worklists. No ETA yet. Cause not confirmed.</textarea>
-
-        <div style="height:14px"></div>
-        <button class="go" id="go">Draft notification</button>
+    <div class="dataset">
+      <div class="records" id="records">
+        <h3>Records</h3>
       </div>
 
-      <div class="paper" id="paper">
-        <div class="stamp"><span>Draft output</span><span>not sent</span></div>
-        <p class="idle">Pick a cell in the grid — try a hatched one — then draft it.</p>
+      <div>
+        <div class="skills" id="skills"></div>
+
+        <div class="output" id="output">
+          <div class="stamp"><span>No record selected</span><span>—</span></div>
+          <p class="idle">Pick a record from the list, then select a skill to see how it handles the data.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
-    Drafts are generated live against a fictional site profile. Site-specific language
+    Every output is generated live against a fictional site profile. Site-specific language
     (<code>Imaging Downtime Packet (Form IMG-14)</code>, <code>yellow requisition slips</code>,
     <code>extension 4412</code>) comes from that profile, not from the model's general knowledge —
     which is the point. Replace the profile and the voice changes with it.
+    <br><br>
+    All data is synthetic. No production data is used.
   </footer>
 </div>
 
 <script>
-const EC = [
-  {id:"unplanned",       label:"Unplanned outage"},
-  {id:"planned",         label:"Planned maintenance"},
-  {id:"degraded",        label:"Degraded performance"},
-  {id:"interval_update", label:"Interval update"},
-  {id:"resolved",        label:"Resolved"}
+const RECORDS = [
+  {
+    num:"INC0059264", desc:"RA unable to launch Synapse (again)", sev:"High",
+    ci:"Synapse", impact:"direct", ws:"387RRS", contact:"Dr. Casey Whitford",
+    notes:["(Recurring issue)"]
+  },
+  {
+    num:"INC0059600", desc:"Blanchard Valley Medical Center is facing issues with orders not crossing and Powersribe is not allowing there order to complete or reports to cross to over.",
+    sev:"Medium", ci:"PowerScribe", impact:"direct", ws:null, contact:"Dr. Vanessa Brennan",
+    notes:["Empty worklog","Interface failure"]
+  },
+  {
+    num:"SYN0100030", desc:"PowerScribe not sending transcribed reports to Synapse",
+    sev:"Medium", ci:"Synapse", impact:"peripheral", ws:"743RRS", contact:"Dr. Vanessa Brennan",
+    notes:["Rich worklog","3-day resolution","Workaround"]
+  },
+  {
+    num:"SYN0100055", desc:"EPIC logon slow at shift change - AD token validation failing",
+    sev:"Critical", ci:"EPIC", impact:"peripheral", ws:"102RRS", contact:null,
+    notes:["Multiple users","Critical severity","Overnight framing"]
+  },
+  {
+    num:"INC0062792", desc:"Powerscribe is down",
+    sev:"Medium", ci:"PowerScribe", impact:"direct", ws:null, contact:"Dr. Paul Chou",
+    notes:["Vague description","No scope"]
+  },
+  {
+    num:"SYN0100017", desc:"Synapse crashing intermittently on 536RRS",
+    sev:"Low", ci:"Synapse", impact:"peripheral", ws:"536RRS", contact:"Dr. Jordan Hughes",
+    notes:["Intermittent","Single workstation"]
+  },
+  {
+    num:"INC0059305", desc:"Modality worklist not populating for CT protocols",
+    sev:"Medium", ci:"Synapse", impact:"direct", ws:null, contact:"Radiology Tech",
+    notes:["MWL issue","Multiple modalities"]
+  },
+  {
+    num:"INC0068944", desc:"Voice files not appearing in Synapse for review",
+    sev:"Medium", ci:"PowerScribe", impact:"peripheral", ws:null, contact:"Radiology Tech",
+    notes:["Dictation workflow","No worklog"]
+  },
+  {
+    num:"SYN0100040", desc:"HL7 order messages failing validation at interface engine",
+    sev:"High", ci:"Interface Engine", impact:"direct", ws:null, contact:"Interface Analyst",
+    notes:["Interface layer","HL7 validation failure"]
+  },
+  {
+    num:"SYN0100016", desc:"RIS workstation 214RRS won't connect to PACS viewer",
+    sev:"Low", ci:"Synapse", impact:"peripheral", ws:"214RRS", contact:"Night Tech",
+    notes:["Workstation layer","Single user","Overnight"]
+  }
 ];
-const AUD = [
-  {id:"radiologists_and_techs", label:"Radiologists / Techs"},
-  {id:"operations_it",          label:"Operations / IT"},
-  {id:"next_shift",             label:"Next shift"},
-  {id:"leadership",             label:"Leadership"}
+
+const SKILLS = [
+  {id:"triage", label:"Triage"},
+  {id:"comms", label:"Downtime"},
+  {id:"kb", label:"KB Draft"},
+  {id:"explain", label:"Explain"}
 ];
 
-// Defined variants from the Riverside comms profile.
-const DEFINED = {
-  "unplanned/radiologists_and_techs": {ch:"teams", lead:"action"},
-  "unplanned/leadership":             {ch:"email", lead:"scope"},
-  "planned/radiologists_and_techs":   {ch:"email", lead:"schedule"},
-  "degraded/operations_it":           {ch:"teams", lead:"failure"}
+const EXPECTED = {
+  "INC0059264": {
+    triage: {
+      title:"Triage: recurring single-user launch failure",
+      body:`Symptom: Synapse launch failure, single user (Dr. Whitford), workstation 387RRS
+Scope: single user, single workstation (confirmed)
+Timeline: recurring — "(again)" implies prior occurrence
+Differential:
+  • Workstation likely — single-user scope, prior occurrence suggests local-state issue
+  • User possible — could be user-specific configuration
+  • RIS configuration ruled out — single-user scope
+  • Interface ruled out — launch failure, not data-flow
+  • PACS ruled out — launch failure, not image-display
+Recommended queue: Tier 1 — overnight analyst
+Severity: Sev 2 — single reading room, workaround may exist`,
+      outstanding:["Confirm whether this is the same workstation as prior occurrence","Check if other users on 387RRS reported similar issues"]
+    },
+    comms: {
+      title:"Comms: not applicable — single-user, no service disruption",
+      body:`This ticket describes a single-user workstation issue, not a service-impact event. No clinical audience notification is warranted.
+
+The analyst should proceed with Tier 1 troubleshooting (workstation-level) without drafting a downtime communication.`,
+      outstanding:["If scope expands to multiple users, escalate to unplanned-outage variant"]
+    },
+    kb: {
+      title:"KB Draft: insufficient for article",
+      body:`This ticket is not resolved — it represents a recurring issue that should be tracked for pattern analysis. Do not draft a KB article until resolution.
+
+If this resolves as a local-state issue (orphaned process, cached credentials), draft with the workstation-layer fix only. Do not generalize to all Synapse launch failures.`,
+      outstanding:["Wait for resolution before drafting","Track recurrence pattern across workstations"]
+    },
+    explain: {
+      title:"Explain: Synapse launch architecture",
+      body:`Synapse (FUJIFILM Synapse) is a PACS/RIS viewing client. Launch failures typically involve:
+• Local workstation state (cached credentials, orphaned processes)
+• Network connectivity to the Synapse server
+• Authentication (AD/LDAP token validation)
+• Client version mismatch with server
+
+In this case, single-user scope points to local state rather than systemic failure.`,
+      outstanding:["Site-specific: check if Synapse launch is Citrix-based or local install"]
+    }
+  },
+  "INC0059600": {
+    triage: {
+      title:"Triage: interface failure, multiple symptoms",
+      body:`Symptom: Orders and reports not crossing between PowerScribe and RIS at Blanchard Valley
+Scope: single site confirmed, other sites unconfirmed
+Timeline: ongoing
+Differential:
+  • Interface (PowerScribe outbound) likely — orders and reports both affected
+  • RIS configuration possible — could be RIS-side rejection
+  • PACS ruled out — order/report flow, not image-related
+  • Workstation ruled out — multi-user, site-wide impact
+  • User ruled out — multiple users affected
+Recommended queue: Tier 2 — interface analyst
+Severity: Sev 2 — single site, patient care impact confirmed`,
+      outstanding:["Confirm whether other sites are affected","Determine if this is PowerScribe outbound only or bidirectional"]
+    },
+    comms: {
+      title:"Downtime: unplanned outage, radiologists and techs",
+      body:`INC0059600 | Imaging Order Interface Disruption
+
+Orders and reports are not crossing between PowerScribe and the RIS at Blanchard Valley Medical Center.
+
+What to do now: Activate the Imaging Downtime Packet (Form IMG-14). Techs revert to yellow requisition slips. Radiologists read direct from PACS worklist — do not wait for RIS status.
+
+What not to do: Do not attempt to force-send reports. Do not re-enter orders manually.
+
+Next update: [TBD]`,
+      outstanding:["Incident reference: INC0059600 (confirmed)","Scope: Blanchard Valley confirmed; other sites unconfirmed","ETA: not stated","Next update time: not stated"]
+    },
+    kb: {
+      title:"KB Draft: not yet resolved",
+      body:`This incident is not resolved. Do not draft a KB article until resolution is confirmed.
+
+When resolved, the article should address:
+• PowerScribe outbound interface failure symptoms
+• Blanchard Valley site-specific downtime procedure
+• Verification steps (confirm orders flowing, reports queued vs. delivered)
+• Escalation path (vendor involvement if needed)`,
+      outstanding:["Wait for resolution","Document root cause","Capture vendor case number if applicable"]
+    },
+    explain: {
+      title:"Explain: PowerScribe interface architecture",
+      body:`Nuance PowerScribe is a speech recognition and radiology reporting system. It interfaces with the RIS via HL7 messages for:
+• Order receipt (ORM/ORU messages from RIS to PowerScribe)
+• Report completion (ORU messages from PowerScribe back to RIS)
+• Status updates (acknowledgment messages)
+
+When the interface fails, orders don't reach the dictation worklist and completed reports don't flow back to the RIS for results delivery.`,
+      outstanding:["Site-specific: check if PowerScribe connects via interface engine or direct HL7"]
+    }
+  },
+  "SYN0100030": {
+    triage: {
+      title:"Triage: resolved interface issue",
+      body:`Symptom: PowerScribe not sending transcribed reports to Synapse
+Scope: single site (Cedar Hill Regional), single user initially
+Timeline: resolved after 3-day investigation
+Differential:
+  • Workstation confirmed — orphaned Synapse process identified
+  • Interface ruled out — fix was local process, not HL7
+  • PACS ruled out — report delivery, not image-related
+  • RIS configuration ruled out — local process fix
+Recommended queue: Closed/resolved
+Severity: Resolved — workaround applied (process kill + cache clear)`,
+      outstanding:["Track for recurrence","Consider whether orphaned process pattern is systemic"]
+    },
+    comms: {
+      title:"Comms: not applicable — resolved incident",
+      body:`This incident is resolved. No downtime communication is warranted.
+
+If the same symptom recurs at a broader scope, reassess for clinical notification.`,
+      outstanding:["No active communication needed"]
+    },
+    kb: {
+      title:"KB Draft: workstation-layer resolution",
+      body:`Transcribed Reports Not Reaching Synapse from PowerScribe
+
+Symptoms: Completed dictations in PowerScribe did not appear in Synapse for review.
+Scope: Cedar Hill Regional, single user initially
+Timeline: Reported 05/15, resolved 05/17 (44 minutes total work)
+
+Resolution: Identified orphaned Synapse process. Killed via Task Manager, cleared cache, relaunched. User confirmed normal operation.
+
+Cause: Orphaned Synapse process (likely). Confidence: likely — worklog identifies the process state but not why it orphaned.
+
+Workaround applied: Process termination + cache clear. Not a permanent fix — recurrence possible.
+
+Outstanding:
+• Application layer: no source in worklog — omitted
+• Interface layer: no source in worklog — omitted
+• Advanced/vendor: no source in worklog — omitted
+• Verification steps: not documented in worklog
+• Recurrence tracking: not established`,
+      outstanding:["Add verification steps","Track recurrence across workstations","Investigate root cause of orphaned process"]
+    },
+    explain: {
+      title:"Explain: report delivery pipeline",
+      body:`The report delivery pipeline flows:
+1. Radiologist dictates in PowerScribe
+2. Speech recognition produces draft report
+3. Radiologist edits/approves
+4. PowerScribe sends HL7 ORU message to RIS
+5. RIS indexes report and makes it available in Synapse
+
+When step 4 fails silently, reports appear to be "stuck" — completed in PowerScribe but not visible in Synapse. Common causes: HL7 connection issue, RIS rejection, or (as in this case) a local process preventing the handoff.`,
+      outstanding:["Site-specific: check if PowerScribe uses MLLP or TCP/IP for HL7 transport"]
+    }
+  },
+  "SYN0100055": {
+    triage: {
+      title:"Triage: critical, multiple users, overnight",
+      body:`Symptom: EPIC logon slow, AD token validation failing, multiple users, Cedar Hill Regional
+Scope: multiple users, single site (confirmed)
+Timeline: shift change (06:00-08:00 typical) — overnight prior fires, marked likely
+Differential:
+  • Interface (AD/ADFS) likely — shift-change timing is strong prior for auth infrastructure
+  • Workstation possible — multiple users makes single-workstation unlikely
+  • User ruled out — multiple users affected
+  • RIS configuration ruled out — EPIC is the EHR, not the RIS
+  • PACS ruled out — logon failure, not image-related
+Recommended queue: Tier 2 — interface analyst (AD/ADFS)
+Severity: Sev 1 — sitewide or all-modality impact; no workaround available
+
+Overnight note: Is this happening right now, or did it start during a maintenance window? Shift-change timing is when scheduled restarts and patching typically land.`,
+      outstanding:["Confirm whether there was a maintenance window","Check if AD/ADFS service is healthy across all domain controllers","Verify whether this is Cedar Hill only or affecting other sites"]
+    },
+    comms: {
+      title:"Downtime: unplanned outage, radiologists and techs",
+      body:`INC0059600 | Imaging Order Interface Disruption
+
+Orders and reports are not crossing between PowerScribe and the RIS at Blanchard Valley Medical Center.
+
+What to do now: Activate the Imaging Downtime Packet (Form IMG-14). Techs revert to yellow requisition slips. Radiologists read direct from PACS worklist — do not wait for RIS status.
+
+What not to do: Do not attempt to force-send reports. Do not re-enter orders manually.
+
+Next update: [TBD]`,
+      outstanding:["Incident reference: pending","Scope: Cedar Hill Regional confirmed; other sites unconfirmed","ETA: not stated","Maintenance window status: unconfirmed"]
+    },
+    kb: {
+      title:"KB Draft: not yet resolved",
+      body:`This incident is not resolved. Do not draft a KB article until resolution is confirmed.
+
+When resolved, the article should address:
+• AD/ADFS token validation failure symptoms at shift change
+• Cedar Hill Regional site-specific AD infrastructure
+• Verification steps (confirm AD service health, token refresh)
+• Escalation path (AD team involvement)`,
+      outstanding:["Wait for resolution","Document root cause","Capture AD team involvement if applicable"]
+    },
+    explain: {
+      title:"Explain: AD authentication in radiology workflow",
+      body:`Active Directory (AD) and ADFS (Active Directory Federation Services) handle authentication for clinical applications like EPIC. When token validation fails:
+
+• Users cannot log in to EPIC
+• Existing sessions may timeout without refresh
+• Workstation-level cached credentials may work temporarily
+
+Shift-change timing (06:00-08:00) is a common trigger because:
+• Scheduled service restarts often target off-hours
+• Password expiration policies may align with shift changes
+• Batch processing (log rotation, backups) can impact AD performance
+
+The "multiple users" scope suggests infrastructure-level failure rather than individual workstation issues.`,
+      outstanding:["Site-specific: check if Cedar Hill uses on-prem AD or Azure AD","Check if other sites are affected"]
+    }
+  }
 };
-// Variants defined for every audience at once.
-const ALL_AUD = {
-  "interval_update": {ch:"teams", lead:"delta",      continuity:true},
-  "resolved":        {ch:"email", lead:"resolution", continuity:true}
-};
 
-const PROFILE_NOTE = `
-SITE PROFILE (fictional — Riverside Regional Imaging)
-timezone America/New_York, 12h. placeholder token [TBD]. cause marking required (confirmed|suspected).
-incident ref format INC0#######.
-workflow language (use verbatim for clinical audiences):
-  downtime procedure = "Imaging Downtime Packet (Form IMG-14)"
-  paper requisition  = "yellow requisition slips"
-  dictation fallback = "phone dictation line, extension 4412"
-  pacs direct read   = "read direct from PACS worklist, do not wait for RIS status"
-distribution: radiologists_and_techs DL-Imaging-Clinical; operations_it #imaging-ops;
-  next_shift #imaging-handoff; leadership DL-Imaging-Leadership
-approval: sev1 = drafted by analyst, approved by on-call manager, sent by service desk;
-  sev2 = drafted and sent by analyst, manager copied; sev3 = analyst discretion
-update cadence: sev1 every 30 minutes; sev2 every 2 hours; sev3 at resolution
-voice: operational, first person plural, apology language only in resolution notices (one sentence max).
-BANNED: "we apologize for any inconvenience", "please be patient", anything implying clinical guidance.
-register: clinical audiences lead with the action and describe impact in workflow terms, never segment names;
-  technical audiences lead with the failure and name interfaces/queues; next shift leads with what's still
-  open and what changed since the last update; leadership leads with scope then duration.
-`;
+let sel = {num:null, skill:null};
 
-function resolve(ec, aud){
-  const k = ec+"/"+aud;
-  if (ALL_AUD[ec]) return {status:"defined", key:`${ec} / all / ${ALL_AUD[ec].ch}`, meta:ALL_AUD[ec]};
-  if (DEFINED[k])  return {status:"defined", key:`${ec} / ${aud} / ${DEFINED[k].ch}`, meta:DEFINED[k]};
-  const sameClass = Object.keys(DEFINED).find(x => x.startsWith(ec+"/"));
-  if (sameClass) return {status:"gap", key:`${ec} / ${aud} / —`, near:`${sameClass} / ${DEFINED[sameClass].ch}`, meta:DEFINED[sameClass]};
-  const sameAud = Object.keys(DEFINED).find(x => x.endsWith("/"+aud));
-  if (sameAud)   return {status:"gap", key:`${ec} / ${aud} / —`, near:`${sameAud} / ${DEFINED[sameAud].ch}`, meta:DEFINED[sameAud]};
-  return {status:"untuned", key:`${ec} / ${aud} / —`};
-}
-
-let sel = {ec:"unplanned", aud:"radiologists"};
-
-function buildGrid(){
-  const t = document.getElementById("grid");
-  let html = "<tr><th></th>" + AUD.map(a=>`<th>${a.label}</th>`).join("") + "</tr>";
-  EC.forEach(e=>{
-    html += `<tr><th class="rowhead">${e.label}</th>`;
-    AUD.forEach(a=>{
-      const r = resolve(e.id, a.id);
-      const cls = r.status === "defined" ? "defined" : "gap";
-      const top = r.status === "defined" ? (r.meta.ch||"") : "no template";
-      const bot = r.status === "defined" ? ("lead: "+r.meta.lead) : "substitute";
-      html += `<td><div class="cell ${cls}" role="button" tabindex="0"
-                data-ec="${e.id}" data-aud="${a.id}"><span>${top}</span><span class="ch">${bot}</span></div></td>`;
+function buildRecords(){
+  const el = document.getElementById("records");
+  let html = "<h3>Records</h3>";
+  RECORDS.forEach(r=>{
+    html += `<div class="rec" data-num="${r.num}">
+      <div class="num">${r.num}</div>
+      <div class="desc">${esc(r.desc)}</div>
+      <div class="meta">
+        <span class="sev">${r.sev}</span>
+        <span>${r.ci}</span>
+        ${r.ws ? `<span>${r.ws}</span>` : ""}
+        ${r.notes.map(n=>`<span>${n}</span>`).join("")}
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+  el.querySelectorAll(".rec").forEach(c=>{
+    c.addEventListener("click", ()=>{
+      sel.num = c.dataset.num;
+      sync();
     });
-    html += "</tr>";
-  });
-  t.innerHTML = html;
-  t.querySelectorAll(".cell").forEach(c=>{
-    const pick = ()=>{ sel = {ec:c.dataset.ec, aud:c.dataset.aud}; sync(); };
-    c.addEventListener("click", pick);
-    c.addEventListener("keydown", ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); pick(); }});
   });
 }
 
-function buildSelects(){
-  const es = document.getElementById("ec"), as = document.getElementById("aud");
-  es.innerHTML = EC.map(e=>`<option value="${e.id}">${e.label}</option>`).join("");
-  as.innerHTML = AUD.map(a=>`<option value="${a.id}">${a.label}</option>`).join("");
-  es.addEventListener("change", ()=>{ sel.ec = es.value; sync(); });
-  as.addEventListener("change", ()=>{ sel.aud = as.value; sync(); });
+function buildSkills(){
+  const el = document.getElementById("skills");
+  el.innerHTML = SKILLS.map(s=>
+    `<button class="skill-tab" data-skill="${s.id}">${s.label}</button>`
+  ).join("");
+  el.querySelectorAll(".skill-tab").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      sel.skill = b.dataset.skill;
+      sync();
+    });
+  });
 }
 
 function sync(){
-  document.getElementById("ec").value = sel.ec;
-  document.getElementById("aud").value = sel.aud;
-  document.querySelectorAll(".cell").forEach(c=>{
-    c.classList.toggle("sel", c.dataset.ec===sel.ec && c.dataset.aud===sel.aud);
+  document.querySelectorAll(".rec").forEach(c=>{
+    c.classList.toggle("sel", c.dataset.num===sel.num);
   });
-  const r = resolve(sel.ec, sel.aud);
-  document.getElementById("keyline").textContent = "variant key  →  " + r.key;
-  const w = document.getElementById("warnslot");
-  if (r.status === "gap"){
-    w.innerHTML = `<div class="warn"><strong>No template for this cell.</strong> The nearest defined
-      variant is <code>${r.near}</code>. The draft will use it, adapt the register, and say that it did.</div>`;
-  } else if (r.status === "untuned"){
-    w.innerHTML = `<div class="warn"><strong>Nothing close enough to substitute.</strong> The draft will be
-      generic and labelled untuned.</div>`;
-  } else { w.innerHTML = ""; }
-}
+  document.querySelectorAll(".skill-tab").forEach(b=>{
+    b.classList.toggle("active", b.dataset.skill===sel.skill);
+  });
 
-async function draft(){
-  const btn = document.getElementById("go");
-  const paper = document.getElementById("paper");
-  const r = resolve(sel.ec, sel.aud);
-  const facts = document.getElementById("facts").value.trim();
-
-  btn.disabled = true; btn.textContent = "Drafting…";
-  paper.innerHTML = `<div class="stamp"><span>Draft output</span><span>working</span></div>
-                     <p class="idle">Resolving variant, filling slots from stated facts only…</p>`;
-
-  const prompt = `You are the comms skill of a radiology IT support plugin. Draft one notification.
-
-${PROFILE_NOTE}
-
-REQUESTED: event class "${sel.ec}", audience "${sel.aud}".
-VARIANT RESOLUTION: ${r.status === "defined"
-  ? `exact match — ${r.key}, lead with ${r.meta.lead}${r.meta.continuity ? ", continuity required" : ""}`
-  : r.status === "gap"
-    ? `NO TEMPLATE for this cell. Substitute nearest defined variant: ${r.near}. You MUST state the substitution and that the structure is provisional.`
-    : `NO usable template. Draft generically and label it untuned.`}
-
-FACTS STATED BY THE USER (the only facts you may treat as known):
-${facts || "(none supplied)"}
-
-HARD RULES
-- Never invent an ETA, a cause, a duration, or an impact scope the user did not state. Use [TBD].
-- Mark any cause confirmed or suspected based strictly on the user's wording.
-- Clinical audiences: lead with the action, use the site's workflow language verbatim, never HL7 segment names.
-- List every required field you could not fill.
-- Optional content the user did not state must go in "suggestions", never inside the draft body.
-- You draft only. Nothing is sent.
-
-Reply with ONLY this JSON, no markdown fences:
-{"headline":"short subject or first line","body":"the notification text, plain, line breaks allowed","substitution":"one sentence, or empty string","outstanding":["field — why it matters"],"suggestions":["optional content offered, not included"],"approval":"the applicable approval note or empty string"}`;
-
-  try{
-    const res = await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:prompt}]})
-    });
-    const data = await res.json();
-    const raw = (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
-    const d = JSON.parse(raw.replace(/```json|```/g,"").trim());
-
-    let html = `<div class="stamp"><span>${r.key}</span><span>not sent</span></div>`;
-    if (d.substitution) html += `<div class="flag" style="margin-bottom:16px">${esc(d.substitution)}</div>`;
-    html += `<h3>${esc(d.headline||"")}</h3><div class="draft">${esc(d.body||"")}</div>`;
-    if ((d.outstanding||[]).length)
-      html += `<div class="block"><h4>Not filled — you didn't state these</h4><ul>${d.outstanding.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
-    if ((d.suggestions||[]).length)
-      html += `<div class="block"><h4>Offered, not included</h4><ul>${d.suggestions.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
-    if (d.approval)
-      html += `<div class="block"><h4>Before this goes out</h4><p style="margin:0;font-size:14px">${esc(d.approval)}</p></div>`;
-    paper.innerHTML = html;
-  }catch(err){
-    paper.innerHTML = `<div class="stamp"><span>Draft output</span><span>failed</span></div>
-      <h3>The draft didn't come back</h3>
-      <div class="draft">The request to the model failed or returned something unreadable. Press Draft notification to try again.</div>`;
-  }finally{
-    btn.disabled = false; btn.textContent = "Draft notification";
+  const paper = document.getElementById("output");
+  if(!sel.num || !sel.skill){
+    paper.innerHTML = `<div class="stamp"><span>${sel.num||"No record"}</span><span>${sel.skill||"—"}</span></div>
+      <p class="idle">${!sel.num ? "Pick a record from the list." : "Select a skill to see how it handles this record."}</p>`;
+    return;
   }
+
+  const rec = RECORDS.find(r=>r.num===sel.num);
+  const exp = EXPECTED[sel.num]?.[sel.skill];
+
+  if(!exp){
+    paper.innerHTML = `<div class="stamp"><span>${sel.num} · ${sel.skill}</span><span>not demoed</span></div>
+      <p class="idle">This combination is not covered in the demo walkthrough. See DEMO-dataset.md for the full scenario list.</p>`;
+    return;
+  }
+
+  let html = `<div class="stamp"><span>${sel.num} · ${sel.skill}</span><span>not sent</span></div>`;
+  html += `<h3>${esc(exp.title)}</h3>`;
+  html += `<div class="draft">${esc(exp.body)}</div>`;
+  if(exp.outstanding && exp.outstanding.length){
+    html += `<div class="block"><h4>Outstanding items</h4><ul>${exp.outstanding.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  }
+  paper.innerHTML = html;
 }
 
 function esc(s){return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
 
-buildSelects(); buildGrid(); sync();
-document.getElementById("go").addEventListener("click", draft);
+buildRecords();
+buildSkills();
+sync();
 </script>
 </body>
 </html>
