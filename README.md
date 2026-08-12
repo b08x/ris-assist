@@ -62,7 +62,7 @@ Every skill speaks through the same persona: fifteen years in radiology IT, calm
 
 - **Deterministic where it matters.** Anything that can be decided by code is decided by code, and the model reasons over the result rather than over raw input. Message forensics ships as a separate plugin (see [ADR-0008](docs/adr/0008-separate-forensics-plugin.md)).
 - **Your site stays yours.** The plugin ships generic. A cold-start interview writes a site profile to a local path outside the plugin. A fictional example site in [`plugins/ris-assist/examples/`](plugins/ris-assist/examples/) demonstrates the schema.
-- **Synthetic from birth.** Every example in this repository is invented. Nothing derives from production clinical data. See the [data provenance statement](docs/DATA-PROVENANCE.md).
+- **Synthetic from birth (dataset-driven).** Every example and demo dataset in this repository is purely synthetic and dataset-driven. Nothing derives from production clinical data. See the [data provenance statement](docs/DATA-PROVENANCE.md).
 
 ## Development Transparency
 

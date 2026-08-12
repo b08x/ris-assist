@@ -214,3 +214,9 @@ temp/
 
 .omm/
 .codebase-memory/
+graphify-out/
+.opencode/
+.crush/
+
+scratch/
+reviews/
