@@ -22,16 +22,17 @@ That single fact drives the whole format:
 - **Short paragraphs beat long ones.** The hard cap is 5,000 characters, which
   you'll never approach — but a 4-sentence paragraph costs 4 sentences to fix,
   and a 1-sentence paragraph costs 1.
-- **The punchlines are isolated.** "That distinction is the whole product" and
-  the closing data-provenance line each sit alone. Those are the two you'll
-  re-roll most, and they're the two that matter most.
-- **Six chapters, not one.** Chapters export individually, so you can re-cut
+- **The punchlines are isolated.** "That separation is the whole product" and
+  "That's how you prevent the next analyst from repeating the wrong diagnosis"
+  each sit alone. Those are the two you'll re-roll most, and they're the two
+  that matter most.
+- **Seven chapters, not one.** Chapters export individually, so you can re-cut
   Chapter 4 without re-rendering the deck.
 
-Create the six chapters manually in the Chapters sidebar and paste each section
-in. Studio auto-detects chapters on import only from structured documents
-(EPUB with Heading 1 is the reliable path) — for a script this short, manual is
-faster than fighting the importer.
+Create the seven chapters manually in the Chapters sidebar and paste each
+section in. Studio auto-detects chapters on import only from structured
+documents (EPUB with Heading 1 is the reliable path) — for a script this
+short, manual is faster than fighting the importer.
 
 ---
 
@@ -60,7 +61,7 @@ content doesn't want. Resist it — restraint is the point.
 **Do not use `<break>` tags for the silences.** Studio's own guidance is that
 newer models may reduce or ignore them, and that precise timing belongs on the
 timeline. Drag the gap between clips instead. That's where the beat of silence
-after the Chapter 4 substitution line should live.
+after the correction line should live.
 
 ---
 
@@ -80,15 +81,18 @@ readable by anyone who inherits the project.
 | PACS | packs |
 | HL7 | H. L. seven |
 | EHR | E. H. R. |
-| MSP | M. S. P. |
+| SLA | S. L. A. |
+| KB | K. B. |
+| AD | A. D. |
+| ADFS | A. D. F. S. |
 
 Entries are case-sensitive, so add lowercase variants if the script ever uses
 them. Preview each with the Play button in the editor before committing.
 
 Two things are already handled in the script text rather than the dictionary,
-because substitution is unreliable for them: **"six fifteen in the morning"**
-(written out, not `6:15 AM`) and the incident number, which is spoken rather
-than shown. If you change any facts in the demo, keep that convention.
+because substitution is unreliable for them: **incident numbers** (spoken as
+words, not shown) and **times** (left as digits since Supertonic normalizes
+them well). If you change any facts in the demo, keep that convention.
 
 ---
 
@@ -130,22 +134,22 @@ In order of what to try:
    reliably than any tag.
 4. **Actor Mode** — record yourself delivering the line and let it guide the
    performance. This is the tool for the Chapter 4 lines, where the pause
-   placement and the flatness of "a confident wrong answer costs you more than
-   no answer at all" carry the argument. Note that it replicates your accent
-   along with everything else.
+   placement and the flatness of the correction carry the argument. Note that
+   it replicates your accent along with everything else.
 
 ---
 
 ## 6. Assembly and export
 
-- **Timeline for silence.** Add the beat after the substitution line in
+- **Timeline for silence.** Add the beat after the correction line in
   Chapter 4 by dragging clip spacing, not by adding a break tag.
-- **No music under Chapter 4.** If you score the piece at all, duck out
-  entirely for that chapter. Silence is doing work there.
+- **No music under Chapters 4 or 5.** If you score the piece at all, duck out
+  entirely for those chapters. The correction and the ladder-layer omission
+  need silence.
 - **Music track** is separate from narration and doesn't affect regeneration
   cost — safe to experiment with late.
 - **Video track** if you're screen-recording the demo artifact: import the
-  capture, align narration to the moment each grid cell is clicked. Sentence-
+  capture, align narration to the moment each dataset record appears. Sentence-
   level timing control is the reason to assemble here rather than in an editor.
 - **Export** per chapter while iterating, whole project at the end. If every
   paragraph is already generated, export costs no additional credits.
@@ -160,10 +164,10 @@ In order of what to try:
 
 ## 7. Cuts
 
-If you need a shorter version, drop Chapters 1 and 5. The argument survives on
-2, 3, 4, and 6 — roughly two and a half minutes.
+If you need a shorter version, drop Chapters 1 and 6. The argument survives on
+2, 3, 4, 5, and 7 — roughly three minutes.
 
-Chapter 6's final paragraph is not optional in any cut. In a managed-services
+Chapter 7's final paragraph is not optional in any cut. In a managed-services
 environment, "where did the data come from" is the first question anyone asks,
 and answering it before it's asked is worth more than any capability claim in
 the script.
