@@ -1,4 +1,4 @@
-# RIS Support Triage Plugin — User Stories
+# RIS Support Plugin — User Stories
 
 Personas reflect a client-site radiology support environment operated by an MSP,
 plus external adopters of the published plugin. Stories are numbered for

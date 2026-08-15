@@ -1,4 +1,4 @@
-# RIS Support Triage Plugin — Backlog
+# RIS Support Plugin — Backlog
 
 Task format: `[ ] ID (Size) — description`. Sizes: S (≤half day), M (1–3 days),
 L (multi-day / needs design). Epics list the user stories they serve
