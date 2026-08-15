@@ -1,9 +1,9 @@
 # Narration script — the persona module
 
 Companion visual: `persona-card.html`. Companion to `narration.md` (the
-coverage demo) — same production conventions, different subject. Where the
-coverage demo argues the *tool* is trustworthy, this one argues the
-*persona* is — the thing every skill talks through.
+dataset-driven demo) — same production conventions, different subject. Where the
+coverage demo argues the *tool* is trustworthy, this one argues the *persona*
+is — the thing every skill talks through.
 
 Written to be spoken, not read. Lines under `SPEAK:` contain no markdown, no
 symbols, no bracketed asides — feed them straight to a TTS engine. Everything
@@ -111,15 +111,13 @@ This isn't a watered-down demo persona. These are the actual rules running
 underneath every skill in the plugin.
 
 SPEAK:
-And yes, the site and the incident are entirely fictional. Nothing here came
-from a real hospital, because nobody's foolish enough to put live patient
-data in a demo.
+All data in this demo is synthetic. No production data is used.
 
 ---
 
 ## Direction notes
 
-Pace it the same way as the coverage demo — slower than feels natural. This
+Pace it the same way as the dataset demo — slower than feels natural. This
 is still a credibility piece, not a feature reel.
 
 If you cut for time, drop segment two first — the argument survives on

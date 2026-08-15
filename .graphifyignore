@@ -1,0 +1,16 @@
+cliff.toml
+.omm
+sift-report-latest.md
+CLAUDE.md
+CHANGELOG.md
+AGENTS.md
+.gitignore
+.git/
+.crush/
+.codemap/
+.codebase-memory/
+.claude/
+scratch/
+docs/
+demo/
+.opencode/

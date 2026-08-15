@@ -62,9 +62,10 @@ problem with alias entries.
 
 **Pauses are directives, not markup.** `@pause 0.9` inserts real silence during
 assembly. Supertonic has no break tag; trying to punctuate your way to a
-1.2-second beat is how you get an unnatural read. The long pause after "it costs
-you later, when someone has already acted on it" is the most important timing in
-the piece — it's silence, precisely measured, and it costs nothing to adjust.
+1.2-second beat is how you get an unnatural read. The long pause after "that's
+how you prevent the next analyst from repeating the wrong diagnosis" is the most
+important timing in the piece — it's silence, precisely measured, and it costs
+nothing to adjust.
 
 ---
 
@@ -78,7 +79,7 @@ the piece — it's silence, precisely measured, and it costs nothing to adjust.
 
 Expression tags exist — ten of them, inline, angle-bracketed, including
 `<breath>` and `<sigh>`. For this material use none, or at most a `<breath>`
-before the closing line of the gap section. Check the model card for the full
+before the closing data-provenance line. Check the model card for the full
 tag list rather than guessing at names; an unrecognized tag reads as literal
 text, which is a memorable way to ruin a take.
 

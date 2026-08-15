@@ -37,6 +37,7 @@ Sorted by category, then by purpose. Each entry links to the file and states wha
 | File | Purpose | Governs |
 |------|---------|---------|
 | [`sift-report-latest.md`](sift-report-latest.md) | SIFT protocol system design review — 17 issues, health score, transformation proposals | Architectural risk surface, P0/P1 issue inventory |
+| 
 
 ## Connector & Forensics Documentation
 
@@ -50,6 +51,7 @@ Sorted by category, then by purpose. Each entry links to the file and states wha
 |------|---------|---------|
 | [`DEMO-full.md`](DEMO-full.md) | Scripted walkthrough — all five skills, one incident thread | End-to-end capability demonstration |
 | [`DEMO-comms.md`](DEMO-comms.md) | Scripted walkthrough — comms skill alone | Notification drafting demonstration |
+| [`../demo/DEMO-dataset.md`](../demo/DEMO-dataset.md) | Dataset-driven walkthrough — actual records from the shipped corpus | Behavior against messy, uncooperative evidence |
 
 ## Assets & Visuals
 

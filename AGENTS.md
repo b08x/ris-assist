@@ -8,6 +8,18 @@ The repository **doubles as a plugin marketplace** (see `.claude-plugin/marketpl
 
 ---
 
+## Diagram Skin (Clinical Parchment)
+
+Diagrams generated for this project use the **Clinical Parchment** skin, not the diagram-design skill's shipped default.
+
+- **Source of truth:** `docs/assets/diagrams/style-guide.md` — light (Parchment) and dark (Night) columns, typography, and node treatments.
+- **Templates:** `docs/assets/diagrams/template.html` (light) and `template-dark.html` (dark).
+- **Rule:** when generating a diagram, load `docs/assets/diagrams/style-guide.md` first and use its tokens. Do not use the skill's shipped `references/style-guide.md` (that default is white-smoke/tangerine).
+- **Accent:** light ochre `#C09241` is reserved for borders/fills/warnings; purple `#7161A1` carries light interaction states; dark lavender `#A78BFA` carries dark interaction states. Keep one focal accent treatment per diagram.
+- Place generated diagrams in `docs/assets/diagrams/`.
+
+---
+
 ## Repository Layout
 
 ```
@@ -51,7 +63,12 @@ RIS_Assist/
 │   ├── PROJECT-INSTRUCTIONS.md # Project rules for collaborative work
 │   ├── ROADMAP.md             # ServiceNow/MS 365 connectors + parked forensics backlog (DEP-1/2, F-DEP-1/2/3)
 │   ├── USER_STORIES.md       # Feature requirements
-│   └── assets/               # Icons and logos
+│   └── assets/               # Icons, logos, and the diagram skin
+│       ├── style-guide-colors-typography-tokens.md   # Brand tokens (Clinical Parchment)
+│       └── diagrams/         # Project-local diagram skin + templates
+│           ├── style-guide.md       # Light (Clinical Parchment) + dark (Night)
+│           ├── template.html        # Light template
+│           └── template-dark.html   # Dark template
 ├── .claude-plugin/           # Root plugin config
 │   └── marketplace.json
 ├── .gitignore

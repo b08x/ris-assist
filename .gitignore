@@ -214,3 +214,12 @@ temp/
 
 .omm/
 .codebase-memory/
+graphify-out/
+.opencode/
+.crush/
+
+scratch/
+reviews/
+
+**/zreadV2/*
+.zread/
