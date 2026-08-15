@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comms skill · Data flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5; --paper-2: #ececec; --ink: #2d3142; --muted: #4f5d75;
+      --soft: #7a8399; --rule: rgba(45,49,66,0.12); --accent: #eb6c36;
+      --accent-tint: rgba(235,108,54,0.08); --link: #2e5aa8;
+      --sans: 'Geist', system-ui, sans-serif; --serif: 'Instrument Serif', serif;
+      --mono: 'Geist Mono', ui-monospace, monospace;
+    }
+    body { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    .frame { width: 100%; max-width: 1200px; }
+    .eyebrow { margin-bottom: 0.5rem; color: var(--muted); font: 500 0.66rem var(--mono); letter-spacing: 0.18em; text-transform: uppercase; }
+    h1 { margin-bottom: 1.5rem; color: var(--ink); font: 400 clamp(1.5rem, 2.4vw + 0.75rem, 2rem)/1.15 var(--serif); letter-spacing: -0.02em; }
+    svg { display: block; width: 100%; min-width: 728px; }
+    .step-number, .step-label, .lane-label, .role-text, .chip-text, .legend-label { font-family: var(--mono); text-anchor: middle; }
+    .step-number { fill: var(--ink); font-size: 7px; font-weight: 600; }
+    .step-label { fill: var(--muted); font-size: 7px; font-weight: 500; letter-spacing: 0.12em; }
+    .lane-label { fill: var(--muted); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; }
+    .role-text { fill: var(--ink); font-size: 6px; font-weight: 600; }
+    .node-title { fill: var(--ink); font: 600 9px var(--sans); text-anchor: middle; }
+    .node-sub { fill: var(--muted); font: 400 6.5px var(--mono); text-anchor: middle; }
+    .node-tool { fill: var(--soft); font: 400 6.5px var(--mono); text-anchor: middle; }
+    .chip-text { fill: #fff; font-size: 5px; font-weight: 700; }
+    .focal-text { fill: var(--accent); }
+    .legend-label { fill: var(--muted); font-size: 7px; font-weight: 500; letter-spacing: 0.12em; text-anchor: end; }
+    .legend-text { fill: var(--muted); font: 400 7px var(--sans); }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <p class="eyebrow">Data flow · Diagram Design</p>
+    <h1>Comms skill — notification drafting pipeline</h1>
+
+    <svg viewBox="0 0 728 356" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="comms-dataflow-title comms-dataflow-desc">
+      <title id="comms-dataflow-title">Comms skill notification drafting data flow</title>
+      <desc id="comms-dataflow-desc">Event triggers enter the system, a template variant is resolved and filled from stated facts, audience register and causal claims are applied, and the notification is delivered.</desc>
+      <defs>
+        <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="0.8" fill="rgba(45,49,66,0.10)"/></pattern>
+        <marker id="arr-muted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#4f5d75"/></marker>
+        <marker id="arr-accent" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#eb6c36"/></marker>
+        <marker id="arr-link" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#2e5aa8"/></marker>
+      </defs>
+
+      <!-- Background -->
+      <rect width="728" height="356" fill="#f5f5f5"/>
+      <rect width="728" height="356" fill="url(#dots)"/>
+      <rect x="0" y="36" width="728" height="80" fill="rgba(45,49,66,0.018)"/>
+      <rect x="0" y="196" width="728" height="80" fill="rgba(45,49,66,0.018)"/>
+
+      <!-- Structure lines -->
+      <line x1="0" y1="36" x2="728" y2="36" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+      <line x1="0" y1="116" x2="728" y2="116" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+      <line x1="0" y1="196" x2="728" y2="196" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+      <line x1="0" y1="276" x2="728" y2="276" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+      <line x1="140" y1="36" x2="140" y2="276" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+
+      <!-- Header step chips -->
+      <g aria-label="Pipeline steps">
+        <rect x="180" y="6" width="32" height="16" rx="8" fill="rgba(45,49,66,0.12)"/><text x="196" y="14" class="step-number">01</text><text x="196" y="29" class="step-label">TRIGGER</text>
+        <rect x="292" y="6" width="32" height="16" rx="8" fill="rgba(45,49,66,0.12)"/><text x="308" y="14" class="step-number">02</text><text x="308" y="29" class="step-label">RESOLVE</text>
+        <rect x="404" y="6" width="32" height="16" rx="8" fill="rgba(45,49,66,0.12)"/><text x="420" y="14" class="step-number">03</text><text x="420" y="29" class="step-label">FILL</text>
+        <rect x="516" y="6" width="32" height="16" rx="8" fill="rgba(235,108,54,0.20)"/><text x="532" y="14" class="step-number focal-text">04</text><text x="532" y="29" class="step-label focal-text">APPLY</text>
+        <rect x="628" y="6" width="32" height="16" rx="8" fill="rgba(45,49,66,0.12)"/><text x="644" y="14" class="step-number">05</text><text x="644" y="29" class="step-label">PUBLISH</text>
+      </g>
+
+      <!-- Lane labels -->
+      <g aria-label="Role lanes">
+        <text x="70" y="72" class="lane-label">EVENT</text><text x="70" y="84" class="lane-label">INPUT</text>
+        <text x="70" y="152" class="lane-label">DRAFT</text><text x="70" y="164" class="lane-label">TEMPLATE</text>
+        <text x="70" y="232" class="lane-label">DELIVER</text><text x="70" y="244" class="lane-label">OUTPUT</text>
+      </g>
+
+      <!-- ============ ARROWS (drawn before nodes) ============ -->
+
+      <!-- EVT/01 → EVT/02: muted same-lane -->
+      <path d="M246 76 H258" fill="none" stroke="#4f5d75" marker-end="url(#arr-muted)"/>
+
+      <!-- DFT/02 → DFT/03: muted same-lane -->
+      <path d="M358 156 H370" fill="none" stroke="#4f5d75" marker-end="url(#arr-muted)"/>
+
+      <!-- DFT/03 → DLV/04: focal cross-lane cross-step -->
+      <path d="M470 156 H524 Q532 156 532 164 V204" fill="none" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#arr-accent)"/>
+      <rect x="376" y="140" width="68" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="410" y="149" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">FILLED DRAFT</text>
+
+      <!-- DLV/04 → DLV/05: muted same-lane -->
+      <path d="M582 236 H594" fill="none" stroke="#4f5d75" marker-end="url(#arr-muted)"/>
+
+      <!-- ============ NODES ============ -->
+
+      <!-- EVENT / 01-TRIGGER: Event Fires -->
+      <rect x="146" y="44" width="100" height="64" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+      <rect x="150" y="48" width="18" height="10" rx="3" fill="rgba(45,49,66,0.12)"/><text x="159" y="53" class="role-text">EVT</text>
+      <text x="196" y="67" class="node-title">Event Fires</text><text x="196" y="79" class="node-sub">downtime · incident · vendor</text><text x="196" y="91" class="node-tool">Event trigger</text>
+      <rect x="226" y="98" width="16" height="8" rx="3" fill="#6e6479"/><text x="234" y="104" class="chip-text">WB</text>
+
+      <!-- EVENT / 02-RESOLVE: Classify Event -->
+      <rect x="258" y="44" width="100" height="64" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+      <rect x="262" y="48" width="18" height="10" rx="3" fill="rgba(45,49,66,0.12)"/><text x="271" y="53" class="role-text">EVT</text>
+      <text x="308" y="67" class="node-title">Classify Event</text><text x="308" y="79" class="node-sub">class × audience × channel</text><text x="308" y="91" class="node-tool">Variant key</text>
+      <rect x="262" y="98" width="16" height="8" rx="3" fill="#6e6479"/><text x="270" y="104" class="chip-text">WB</text>
+      <rect x="338" y="98" width="16" height="8" rx="3" fill="#b8915a"/><text x="346" y="104" class="chip-text">TB</text>
+
+      <!-- DRAFT / 02-RESOLVE: Resolve Variant -->
+      <rect x="258" y="124" width="100" height="64" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+      <rect x="262" y="128" width="18" height="10" rx="3" fill="rgba(45,49,66,0.12)"/><text x="271" y="133" class="role-text">DFT</text>
+      <text x="308" y="147" class="node-title">Resolve Variant</text><text x="308" y="159" class="node-sub">exact match or nearest</text><text x="308" y="171" class="node-tool">Comms profile</text>
+      <rect x="262" y="178" width="16" height="8" rx="3" fill="#b8915a"/><text x="270" y="184" class="chip-text">TB</text>
+      <rect x="338" y="178" width="16" height="8" rx="3" fill="#9c6b50"/><text x="346" y="184" class="chip-text">FL</text>
+
+      <!-- DRAFT / 03-FILL: Fill Slots -->
+      <rect x="370" y="124" width="100" height="64" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+      <rect x="374" y="128" width="18" height="10" rx="3" fill="rgba(45,49,66,0.12)"/><text x="383" y="133" class="role-text">DFT</text>
+      <text x="420" y="147" class="node-title">Fill Slots</text><text x="420" y="159" class="node-sub">stated facts only</text><text x="420" y="171" class="node-tool">Site profile</text>
+      <rect x="374" y="178" width="16" height="8" rx="3" fill="#9c6b50"/><text x="382" y="184" class="chip-text">FL</text>
+      <rect x="450" y="178" width="16" height="8" rx="3" fill="#b8915a"/><text x="458" y="184" class="chip-text">TB</text>
+
+      <!-- DELIVER / 04-APPLY: Apply Register (focal) -->
+      <rect x="482" y="204" width="100" height="64" rx="6" fill="rgba(235,108,54,0.07)" stroke="#eb6c36" stroke-width="1.2"/>
+      <rect x="486" y="208" width="18" height="10" rx="3" fill="rgba(235,108,54,0.20)"/><text x="495" y="213" class="role-text focal-text">DLV</text>
+      <text x="532" y="227" class="node-title">Apply Register</text><text x="532" y="239" class="node-sub">clinical · tech · leadership</text><text x="532" y="251" class="node-tool">PERSONA-SPEC.md</text>
+      <rect x="486" y="258" width="16" height="8" rx="3" fill="#b8915a"/><text x="494" y="264" class="chip-text">TB</text>
+      <rect x="562" y="258" width="16" height="8" rx="3" fill="#b8915a"/><text x="570" y="264" class="chip-text">TB</text>
+
+      <!-- DELIVER / 05-PUBLISH: Deliver -->
+      <rect x="594" y="204" width="100" height="64" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+      <rect x="598" y="208" width="18" height="10" rx="3" fill="rgba(45,49,66,0.12)"/><text x="607" y="213" class="role-text">DLV</text>
+      <text x="644" y="227" class="node-title">Deliver</text><text x="644" y="239" class="node-sub">email · SMS · portal · Slack</text><text x="644" y="251" class="node-tool">Distribution lists</text>
+      <rect x="598" y="258" width="16" height="8" rx="3" fill="#b8915a"/><text x="606" y="264" class="chip-text">TB</text>
+      <rect x="674" y="258" width="16" height="8" rx="3" fill="#9c6b50"/><text x="682" y="264" class="chip-text">FL</text>
+
+      <!-- ============ LEGEND ============ -->
+
+      <!-- Row 1: STEPS -->
+      <text x="164" y="293" class="legend-label">STEPS</text>
+      <rect x="180" y="284" width="24" height="12" rx="6" fill="rgba(45,49,66,0.12)"/><text x="192" y="292" class="step-number">01</text><text x="212" y="293" class="legend-text">Trigger</text>
+      <rect x="272" y="284" width="24" height="12" rx="6" fill="rgba(45,49,66,0.12)"/><text x="284" y="292" class="step-number">02</text><text x="304" y="293" class="legend-text">Resolve</text>
+      <rect x="360" y="284" width="24" height="12" rx="6" fill="rgba(45,49,66,0.12)"/><text x="372" y="292" class="step-number">03</text><text x="392" y="293" class="legend-text">Fill</text>
+      <rect x="468" y="284" width="24" height="12" rx="6" fill="rgba(235,108,54,0.20)"/><text x="480" y="292" class="step-number focal-text">04</text><text x="500" y="293" class="legend-text">Apply</text>
+      <rect x="568" y="284" width="24" height="12" rx="6" fill="rgba(45,49,66,0.12)"/><text x="580" y="292" class="step-number">05</text><text x="600" y="293" class="legend-text">Publish</text>
+
+      <!-- Row 2: DATA TYPE -->
+      <text x="164" y="314" class="legend-label">DATA TYPE</text>
+      <rect x="180" y="306" width="16" height="8" rx="3" fill="#6e6479"/><text x="188" y="312" class="chip-text">WB</text><text x="202" y="314" class="legend-text">Web / Event</text>
+      <rect x="280" y="306" width="16" height="8" rx="3" fill="#b8915a"/><text x="288" y="312" class="chip-text">TB</text><text x="302" y="314" class="legend-text">Table / Draft</text>
+      <rect x="376" y="306" width="16" height="8" rx="3" fill="#9c6b50"/><text x="384" y="312" class="chip-text">FL</text><text x="398" y="314" class="legend-text">File / Notification</text>
+      <text x="504" y="314" class="legend-text">left chip = input · right chip = output</text>
+
+      <!-- Row 3: FLOW -->
+      <text x="164" y="336" class="legend-label">FLOW</text>
+      <line x1="180" y1="333" x2="204" y2="333" stroke="#4f5d75" marker-end="url(#arr-muted)"/><text x="212" y="336" class="legend-text">Standard handoff</text>
+      <line x1="324" y1="333" x2="348" y2="333" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#arr-accent)"/><text x="356" y="336" class="legend-text">Focal handoff</text>
+    </svg>
+  </main>
+</body>
+</html>

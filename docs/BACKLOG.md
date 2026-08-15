@@ -143,6 +143,13 @@ E9 (forensics) moved there. Epic numbers are not reused.
 - [ ] E11.4 (S) — `docs/NON-GOALS.md` published (from E4.4)
 - [ ] E11.5 (M) — Reader-test pass: fresh-context review of README + docs;
       fix what a cold reader gets wrong
+- [ ] E11.6 (S) — Demo the setup skill's `interview` mode: the write-path
+      question, "we don't distinguish that" recorded as absence, the overnight
+      audience second pass, and the pasted-inventory branch (currently the only
+      demonstrable instance of symbolic-parse-before-interpretation, since the
+      HL7 parser is gated behind ADR-0008). Proves question sequence and
+      refusal behavior only — elicitation is not scriptable; label it as such.
+      Blocked on nothing; `review` mode is all any demo covers today.
 
 ## E12 — Copilot Parallel Track  (PX · deferred until DEP-2 resolves)
 

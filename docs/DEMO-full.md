@@ -210,6 +210,11 @@ over-answer when one just wrapped.
   full pattern) — worth flagging as a real gap rather than treating an
   approximate answer as equivalent to a precise one
 
+**Scope note.** The setup skill has three modes — `interview`, `edit`,
+`review`. This turn exercises `review` only. `interview` is built (E2.2) and
+is demoed nowhere in this repo; `edit` is not built (E2.3). Neither absence
+should be read off this turn as a capability claim in either direction.
+
 ---
 
 ## What this demo does and does not prove
@@ -222,10 +227,20 @@ without re-derivation; that a generic fallback (KB template, in Turn 4) is
 labeled as such rather than presented as site-tuned.
 
 **Does not:** exercise the symbolic HL7 parse layer, the de-identification
-gate, ServiceNow connected mode, or a live cold-start interview (Turn 6 uses
-a pre-populated example rather than running the interview live) — none of
-which exist yet or apply here. Forensics is deliberately excluded — see
+gate, ServiceNow connected mode, or profile `edit` mode (E2.3) — none of
+which are built yet. Forensics is deliberately excluded — see
 [ADR-0008](adr/0008-separate-forensics-plugin.md).
+
+**Also does not run the cold-start interview — but that is a different kind
+of gap, and lumping it in with the list above overstated it.** The interview
+is built (E2.2); Turn 6 just doesn't exercise it. A scripted run *could*
+prove the question sequence and the refusal behaviors — asking where to write
+the profile rather than assuming a path, recording "we don't distinguish
+that" as absence rather than an empty placeholder, asking the overnight
+audience roster as a deliberate second pass. What no script can prove is
+**elicitation**: that these questions get the right answers out of a real
+analyst at a real site. That needs an analyst, not a fixture, and it is the
+one capability here whose evidence cannot be manufactured.
 
 ---
 
