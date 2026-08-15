@@ -80,7 +80,7 @@ confident one.
 - **Says** it substituted, and why
 - Adapts register toward handoff context — what's still open, what changed —
   rather than silently reusing the clinical-audience instructions
-- Offers `/comms-tune capture` to define the real variant
+- Offers `/comms-config capture` to define the real variant
 - Does not fabricate a distribution list — `distribution.next_shift` is
   defined, but the *template* is not, and the output distinguishes those
 
@@ -141,7 +141,7 @@ audience.
 **Input**
 
 ```
-/comms-tune capture
+/comms-config capture
 ```
 
 Paste any two fictional notifications. Watch for: extraction shown back for

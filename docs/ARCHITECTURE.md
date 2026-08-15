@@ -12,7 +12,7 @@ Detailed architecture of RIS Assist — a Claude plugin for Radiology Informatio
 │  ┌───────────────────────────────────────────────────────────────┐  │
 │  │                    RIS Assist Plugin                          │  │
 │  │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐        │  │
-│  │  │ Triage  │  │Knowledge│  │ Comms   │  │Explainer│  ...    │  │
+│  │  │Troublesh│  │Knowledge│  │ Comms   │  │Explainer│  ...    │  │
 │  │  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘        │  │
 │  │       │            │            │            │               │  │
 │  │       └────────────┴─────┬──────┴────────────┘               │  │
@@ -32,7 +32,7 @@ Detailed architecture of RIS Assist — a Claude plugin for Radiology Informatio
                     └────────────────────┘
 ```
 
-**Boundary principle:** The plugin ships generic. Site-specific configuration lives outside the plugin directory, written by `/setup`, read at runtime by skills. Nothing site-specific ever enters the repository.
+**Boundary principle:** The plugin ships generic. Site-specific configuration lives outside the plugin directory, written by `/onboarding`, read at runtime by skills. Nothing site-specific ever enters the repository.
 
 ---
 
@@ -42,11 +42,11 @@ Detailed architecture of RIS Assist — a Claude plugin for Radiology Informatio
 
 | Skill | Backlog | Purpose | Input | Output |
 |-------|---------|---------|-------|--------|
-| **triage** | E8 | Differential-driven ticket clarification | Vague ticket text | Symptom, scope, timeline, differential w/ confidence, recommended queue |
+| **troubleshoot** | E8 | Differential-driven ticket clarification | Vague ticket text | Symptom, scope, timeline, differential w/ confidence, recommended queue |
 | **knowledge** | E7 | Resolved ticket → KB article | Worklog text | Self-contained HTML article + `.docx` |
 | **comms** | E6 | Service-impact notifications | Event details | Drafted notification (event × audience × channel) |
 | **explainer** | E5 | Domain concept explanation | Question | Depth-adjustable answer |
-| **setup** | E2 | Cold-start site profile | Interview responses | YAML profile file |
+| **onboarding** | E2 | Cold-start site profile | Interview responses | YAML profile file |
 
 ### Skill Internal Structure
 
@@ -115,7 +115,7 @@ User: "PACS won't open a study"
             │
             ▼
 ┌───────────────────────────────────────────────────────┐
-│                    TRIAGE SKILL                        │
+│                  TROUBLESHOOT SKILL                     │
 │                                                       │
 │  Differential:                                        │
 │  ┌─────────────────┐  ┌─────────────────┐            │
@@ -196,11 +196,11 @@ User: "Draft a downtime notice for radiology"
 ```
 PERSONA-SPEC.md ◄────────────────────────────────────┐
        │                                              │
-       ├── triage/SKILL.md                           │
+       ├── troubleshoot/SKILL.md                     │
        ├── knowledge/SKILL.md                        │
        ├── comms/SKILL.md                            │
        ├── explainer/SKILL.md                        │
-       └── setup/SKILL.md                            │
+       └── onboarding/SKILL.md                       │
                                                     │
 agents/analyst.md ─── references ───────────────────┘
 ```
@@ -264,8 +264,8 @@ agents/analyst.md ─── references ─────────────�
 ### Profile Extension
 
 Site and comms profiles are extensible by user:
-- `/setup` writes site profile (interview mode)
-- `/comms-tune` writes comms profile (capture/build/edit/review modes)
+- `/onboarding` writes site profile (interview mode)
+- `/comms-config` writes comms profile (capture/build/edit/review modes)
 - Profiles live outside the plugin directory
 
 ---
@@ -308,5 +308,5 @@ Site and comms profiles are extensible by user:
 | Overnight technical distinctions | Asserted from general patterns, not confirmed | PERSONA-SPEC.md |
 | Connected-mode ServiceNow | Blocked on DEP-1 | BACKLOG.md E7.3 |
 | MS 365 Copilot track | Deferred on DEP-2 | BACKLOG.md E12 |
-| /triage, /explain, /setup wiring | Commands exist, may not be fully connected | BACKLOG.md E8.6 |
-| /comms-tune interview modes | Partially implemented | BACKLOG.md E6.6–E6.9 |
+| /troubleshoot, /explain, /onboarding wiring | Commands exist, may not be fully connected | BACKLOG.md E8.6 |
+| /comms-config interview modes | Partially implemented | BACKLOG.md E6.6–E6.9 |

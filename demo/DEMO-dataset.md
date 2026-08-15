@@ -68,7 +68,7 @@ holding.
 
 ---
 
-## Turn 1 — `/triage`, three signals in one line
+## Turn 1 — `/troubleshoot`, three signals in one line
 
 **Record: `INC0059264`** `[scrubbed real]` · Closed · `2 - High` ·
 urgency `1 - High` / impact `2 - Medium` (matrix-consistent) · CI `Synapse` ·
@@ -87,7 +87,7 @@ opened **06/19/2024 02:40:34 AM** · `contact_name` `Dr. Casey Whitford`
 **Input**
 
 ```
-/triage RA unable to launch Synapse (again) — INC0059264
+/troubleshoot RA unable to launch Synapse (again) — INC0059264
 ```
 
 **Expected behavior — one discriminating question, not three**
@@ -147,7 +147,7 @@ marking table; *Field* → "experience is not a citable source"; GUARDRAILS **G2
 
 ---
 
-## Turn 2 — `/triage`, the four-word ticket that is somebody else's incident
+## Turn 2 — `/troubleshoot`, the four-word ticket that is somebody else's incident
 
 **Record: `INC0062744`** `[scrubbed real]` · Closed · `3 - Moderate` ·
 CI `PowerScribe` · category `Network & Telecom` · channel `Walk-in` ·
@@ -169,7 +169,7 @@ CI `PowerScribe` · category `Network & Telecom` · channel `Walk-in` ·
 **Input**
 
 ```
-/triage PS not working. Ticket says "-038 down". That's all I've got.
+/troubleshoot PS not working. Ticket says "-038 down". That's all I've got.
 ```
 
 **Expected behavior**
@@ -349,7 +349,7 @@ cite-or-decline; *Mode* → "a previously stated fact that changes gets flagged.
 
 ---
 
-## Turn 5 — `/kb-draft`, the rich worklog and the article that already exists
+## Turn 5 — `/draft-kb`, the rich worklog and the article that already exists
 
 **Record: `INC0077265`** `[scrubbed real]` · Closed · `3 - Moderate` ·
 CI `EPIC` · `Solved (First Call Resolution)` · `contact_name` `Dr. Nathan Cole`
@@ -375,7 +375,7 @@ chars**
 **Input**
 
 ```
-/kb-draft INC0077265 — resolved, first call. [paste worklog]
+/draft-kb INC0077265 — resolved, first call. [paste worklog]
 ```
 
 **Expected behavior**
@@ -457,7 +457,7 @@ audiences who need the domain-fluency signal more than the thread-closure one.
 
 ---
 
-## Optional Turn 7 — `/setup review`
+## Optional Turn 7 — `/onboarding review`
 
 Unchanged from [`docs/DEMO-full.md`](../docs/DEMO-full.md). No record, no corpus
 dependency. Include only if the audience asks "how does it learn the site."
@@ -640,7 +640,7 @@ pull up new orders on any modality" scenario that `docs/DEMO-full.md` Turn 1
 uses; that turn is labeled there as illustrative fiction.
 
 **6.6 The overnight operating rhythm — and this is the significant one.**
-PERSONA-SPEC names the overnight rhythm as core *Field*, and the triage skill's
+PERSONA-SPEC names the overnight rhythm as core *Field*, and the troubleshoot skill's
 change-window prior depends on it. With `opened_at` populated 70/70 it is finally
 measurable:
 
@@ -706,7 +706,7 @@ walkthrough against records chosen by reading them. See G8 above.
 | 4 | (continuation) | scrubbed real | All-clear, cause not established |
 | 5 | `INC0077265` | scrubbed real | 1166-char worklog; pre-existing `KB0010703` |
 | 6 | (no record) | — | `RA` resolved from evidence, refused for "your site" |
-| 7 | (no record) | — | Optional `/setup review` |
+| 7 | (no record) | — | Optional `/onboarding review` |
 | T-1 | `INC0069375` | **synthetic** | Priority contradicts urgency/impact |
 | T-2 | `INC0063805` | scrubbed real | 142-char worklog, `Undocumented CI` |
 | T-3 | `INC0063796` | scrubbed real | Ladder omission, no `resolution_code` |

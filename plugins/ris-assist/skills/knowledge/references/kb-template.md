@@ -17,7 +17,7 @@ Two things this shape is doing at once, and both are load-bearing:
   markdown draft someone has to re-key at the end of a shift.
 - **Triage-first.** The procedure is ordered the way the ticket would have
   been worked — scope first, then the differential branches in the order
-  `skills/triage/SKILL.md` rules them out. An article that reads in a
+  `skills/troubleshoot/SKILL.md` rules them out. An article that reads in a
   different order than the work was done is an article nobody follows.
 
 The KCS fields did not go away. Symptom, cause with a confidence mark,
@@ -105,7 +105,7 @@ filled from general knowledge of how this class of problem is usually fixed.
 ## Layer names for steps 2…n
 
 The ladder mirrors the triage differential, in the order that skill rules
-branches out (`skills/triage/SKILL.md`). Use only the layers the worklog
+branches out (`skills/troubleshoot/SKILL.md`). Use only the layers the worklog
 supports, in this order:
 
 | Icon | Layer | Covers |
@@ -116,7 +116,7 @@ supports, in this order:
 | 🚀 | Advanced and vendor | Anything requiring a component admin, a vendor, or a change window |
 
 Scope (Step 1) comes before all of them because it is the split that
-eliminates the most branches at once — the same reason `/triage` asks it
+eliminates the most branches at once — the same reason `/troubleshoot` asks it
 first.
 
 ## Confidence marks

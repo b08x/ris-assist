@@ -36,15 +36,15 @@ repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
 
 - **Commands** (`plugins/ris-assist/commands/*.md`) are thin stubs with YAML
   frontmatter (`description`, `argument-hint`, `allowed-tools`) that invoke a
-  skill: `/triage`, `/kb-draft`, `/downtime`, `/explain`, `/setup`, `/comms-tune`.
+  skill: `/troubleshoot`, `/draft-kb`, `/downtime`, `/uptime`, `/explain`, `/onboarding`, `/comms-config`.
 - **Skills** (`plugins/ris-assist/skills/<name>/SKILL.md`) hold the actual
   behavior, each with `name`/`description` frontmatter and a **"Not this
-  skill"** section defining its boundary. All five (triage, knowledge, comms,
-  explainer, setup) are implemented; four of the five (all but `triage`) have
+  skill"** section defining its boundary. All five (troubleshoot, knowledge, comms,
+  explainer, onboarding) are implemented; four of the five (all but `troubleshoot`) have
   a `references/` subdirectory of supporting docs (schemas, templates, generic
-  fallbacks) — triage's differential logic lives directly in its `SKILL.md`.
+  fallbacks) — troubleshoot's differential logic lives directly in its `SKILL.md`.
   What's still
-  missing is the `/comms-tune` build/capture/edit/review interview modes
+  missing is the `/comms-config` build/capture/edit/review interview modes
   themselves and some slash-command wiring — check `docs/BACKLOG.md` for
   exact per-item status rather than assuming from a skill's presence alone.
 - **`docs/PERSONA-SPEC.md` is the single source of truth for the analyst
@@ -59,8 +59,8 @@ repo later (see `docs/adr/0008-separate-forensics-plugin.md`).
   the root file. Edit `docs/PERSONA-SPEC.md`, then re-copy it to
   `plugins/ris-assist/PERSONA-SPEC.md` before shipping; the two must not
   drift.
-- **Site profile / comms profile** are user data written by `/setup` and
-  `/comms-tune` to a **local path outside this repository**. Never write
+- **Site profile / comms profile** are user data written by `/onboarding` and
+  `/comms-config` to a **local path outside this repository**. Never write
   site-specific config into this repo. `plugins/ris-assist/examples/site-profile.example.yaml`
   and `.../comms-profile.example.yaml` are the schema references (schemas
   themselves live in each skill's `references/`), keyed to the fictional site

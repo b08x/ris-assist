@@ -2,8 +2,8 @@
 #
 # Riverside Regional Imaging. Every name here is invented, and consistent
 # with examples/comms-profile.example.yaml (same fictional site). This file
-# demonstrates the schema in skills/setup/references/site-profile.schema.md;
-# a real profile is written by /setup to a local path outside the plugin
+# demonstrates the schema in skills/onboarding/references/site-profile.schema.md;
+# a real profile is written by /onboarding to a local path outside the plugin
 # directory and never enters this repository.
 
 version: 1

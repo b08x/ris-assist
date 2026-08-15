@@ -202,9 +202,9 @@ They become evidence when a night analyst uses the tool at 3 AM.
 ## Current state
 
 Pre-alpha, phase 0 (foundation). Persona spec, site profile schema, comms
-profile schema, and all five skills (triage, knowledge, comms, explainer,
-setup) are implemented against `docs/PERSONA-SPEC.md` as the single source
-of truth; `/comms-tune`'s interview modes and some slash-command wiring are
+profile schema, and all five skills (troubleshoot, knowledge, comms, explainer,
+onboarding) are implemented against `docs/PERSONA-SPEC.md` as the single source
+of truth; `/comms-config`'s interview modes and some slash-command wiring are
 still open. See `docs/BACKLOG.md` for exact per-item status.
 
 Resolved:

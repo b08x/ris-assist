@@ -3,6 +3,7 @@
 ### 🚀 Features
 
 - *(knowledge)* Implement ServiceNow-shaped KB article pipeline
+- *(comms)* Add `/uptime` recovery/all-clear command as the resolution-side counterpart to `/downtime` (same skill, same profile, same continuity rules)
 
 ### 🐛 Bug Fixes
 
@@ -15,6 +16,7 @@
 ### 🚜 Refactor
 
 - Rename plugin from ris-triage to ris-assist and update all references
+- **BREAKING:** Rename commands `/setup`, `/triage`, `/kb-draft`, `/comms-tune` to `/onboarding`, `/troubleshoot`, `/draft-kb`, `/comms-config`, with matching `skills/setup` → `skills/onboarding` and `skills/triage` → `skills/troubleshoot` directory renames; no deprecation aliases (clean break)
 
 ### 📚 Documentation
 

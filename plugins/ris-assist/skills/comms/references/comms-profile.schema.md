@@ -1,7 +1,7 @@
 # Comms profile schema
 
 Backlog E6.5. The comms profile is narrower than the general site profile
-(`skills/setup/references/site-profile.schema.md`) — it holds notification
+(`skills/onboarding/references/site-profile.schema.md`) — it holds notification
 *voice and variants*, not systems/interfaces/SLA facts. `/downtime` reads
 both: site profile for facts (system names, procedure names), comms profile
 for how to say them to whom.
@@ -119,7 +119,7 @@ branches on.
 
 ## `gaps`
 
-Recorded by `/comms-tune review`, and read by `/downtime` when no variant
+Recorded by `/comms-config review`, and read by `/downtime` when no variant
 matches. A gap entry is not a TODO for the plugin to fill silently — it's
 what makes a missing variant visible in output instead of invented.
 

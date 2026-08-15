@@ -1,10 +1,10 @@
 # Demo — the full plugin, one incident thread
 
-A scripted walkthrough of all five capabilities — `setup`, `triage`, `comms`,
+A scripted walkthrough of all five capabilities — `onboarding`, `troubleshoot`, `comms`,
 `knowledge`, `explainer` — as one connected incident rather than five
 disconnected feature checks. Companion to [DEMO-comms.md](DEMO-comms.md),
 which goes deeper on comms alone; this demo's point is that the capabilities
-compose: triage's finding becomes comms' incident, becomes knowledge's
+compose: troubleshoot's finding becomes comms' incident, becomes knowledge's
 article, against one consistent site.
 
 **Everything here is fictional.** Riverside Regional Imaging does not exist.
@@ -16,7 +16,7 @@ article, against one consistent site.
 Two paths:
 
 **Installed plugin** (the real path — `README.md` install instructions),
-then run `/setup review` once to confirm a profile is loaded, or point the
+then run `/onboarding review` once to confirm a profile is loaded, or point the
 session at the example files directly for a scripted run without a live
 interview:
 
@@ -33,12 +33,12 @@ ServiceNow access — manual mode throughout."*
 
 ---
 
-## Turn 1 — `/triage`, the vague ticket
+## Turn 1 — `/troubleshoot`, the vague ticket
 
 **Input**
 
 ```
-/triage PACS won't open a study.
+/troubleshoot PACS won't open a study.
 ```
 
 **What to watch for.** No scope stated. Correct behavior is one
@@ -131,12 +131,12 @@ matters" — an incident is a thread, not a series of restatements.
 
 ---
 
-## Turn 4 — `/kb-draft`, capture at resolution
+## Turn 4 — `/draft-kb`, capture at resolution
 
 **Input**
 
 ```
-/kb-draft — resolved now, restarting the interface engine service manually
+/draft-kb — resolved now, restarting the interface engine service manually
 cleared it. Worklog: engine restart after maintenance left the RIS-to-PACS
 queue stalled; ops restarted the engine service at 03:10, queue drained,
 orders resumed flowing within 2 minutes. Confirmed root cause: engine
@@ -192,12 +192,12 @@ over-answer when one just wrapped.
 
 ---
 
-## Optional turn 6 — `/setup review`
+## Optional turn 6 — `/onboarding review`
 
 **Input**
 
 ```
-/setup review
+/onboarding review
 ```
 
 **Expected behavior**
@@ -210,7 +210,7 @@ over-answer when one just wrapped.
   full pattern) — worth flagging as a real gap rather than treating an
   approximate answer as equivalent to a precise one
 
-**Scope note.** The setup skill has three modes — `interview`, `edit`,
+**Scope note.** The onboarding skill has three modes — `interview`, `edit`,
 `review`. This turn exercises `review` only. `interview` is built (E2.2) and
 is demoed nowhere in this repo; `edit` is not built (E2.3). Neither absence
 should be read off this turn as a capability claim in either direction.

@@ -1,9 +1,9 @@
 ---
-name: setup
-description: Cold-start interview that builds this site's profile — systems, interface names, escalation matrix, SLA tiers, audiences, downtime procedure names — and writes it to a local path outside the plugin. Also handles single-field edits later. Use when the plugin is first installed, when a skill reports a missing profile field, or when the user says "set up", "configure my site", "change my escalation contact", or /setup.
+name: onboarding
+description: Cold-start interview that builds this site's profile — systems, interface names, escalation matrix, SLA tiers, audiences, downtime procedure names — and writes it to a local path outside the plugin. Also handles single-field edits later. Use when the plugin is first installed, when a skill reports a missing profile field, or when the user says "set up", "configure my site", "change my escalation contact", or /onboarding.
 ---
 
-# Site profile setup
+# Site profile onboarding
 
 Implements backlog E2.2 (interview) and E2.3 (edit). Review mode is
 lighter-weight and covered inline below rather than broken out further.

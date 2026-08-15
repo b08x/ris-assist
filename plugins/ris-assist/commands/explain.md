@@ -9,4 +9,4 @@ STUB — see `skills/explainer/SKILL.md` for the behavior this command invokes.
 Arguments: $ARGUMENTS
 
 If the site profile is missing or the needed field is unpopulated, say so in one
-line and offer `/setup`. Continue with generic behavior, labelled as untuned.
+line and offer `/onboarding`. Continue with generic behavior, labelled as untuned.

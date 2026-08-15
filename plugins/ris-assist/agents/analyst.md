@@ -83,7 +83,7 @@ rather than interpreting it.
 
 ## Output shape
 
-Defer to the invoking skill's own schema (`triage`, `knowledge`, `comms`,
+Defer to the invoking skill's own schema (`troubleshoot`, `knowledge`, `comms`,
 `explainer` — see their `SKILL.md` files) for the literal output format.
 Across all of them: draft first, outstanding items and suggestions clearly
 separated from it, confidence marks on every conclusion, source cited or

@@ -19,7 +19,7 @@ RIS Assist packages that senior analyst's working method as a Claude plugin. It 
 
 ## Features
 
-- **Triage**: Differential-driven ticket clarification — one discriminating question at a time — ending in a routable triage artifact with SLA-vocabulary justification.
+- **Troubleshoot**: Differential-driven ticket clarification — one discriminating question at a time — ending in a routable triage artifact with SLA-vocabulary justification.
 - **Knowledge**: Resolved ticket to triage-first KB article as a self-contained HTML file. Closes the loop automatically where a ServiceNow connection is available.
 - **Comms**: Templated downtime alerts, major-incident cadence updates, vendor tickets, change narratives, and shift-turnover summaries — audience-matched, required fields never invented.
 - **Explainer**: Order lifecycle, accession vs. order number, MWL, report-status flow, and a guided onboarding path for analysts new to radiology.
@@ -39,12 +39,13 @@ Then run the cold-start interview when prompted, and keep the resulting site pro
 
 Interact with RIS Assist using the provided slash commands within Claude Desktop:
 
-- `/triage`: Clarify and route a ticket.
-- `/kb-draft`: Turn a resolved ticket into a knowledge base article.
+- `/troubleshoot`: Clarify and route a ticket.
+- `/draft-kb`: Turn a resolved ticket into a knowledge base article.
 - `/downtime`: Generate a downtime communication draft.
+- `/uptime`: Generate an all-clear or service-restored recovery draft.
 - `/explain`: Clarify radiology concepts and workflows.
-- `/setup`: Run the cold-start interview to configure your site profile.
-- `/comms-tune`: Tune communication preferences and templates.
+- `/onboarding`: Run the cold-start interview to configure your site profile.
+- `/comms-config`: Tune communication preferences and templates.
 
 > **Note:** RIS Assist drafts, decodes, and recommends. It does not execute state-changing operations, parse raw HL7, or process identified PHI. See [NON-GOALS.md](docs/NON-GOALS.md) for the complete list.
 

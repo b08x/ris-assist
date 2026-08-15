@@ -10,7 +10,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── Site profiles — NEVER COMMIT ─────────────────────────────────────────────
-# Written by /setup to a local path outside the plugin. A profile holds real
+# Written by /onboarding to a local path outside the plugin. A profile holds real
 # interface names, distribution lists, escalation contacts, and procedure
 # names. Example files are re-included below.
 site-profile.y*ml

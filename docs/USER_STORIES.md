@@ -1,4 +1,4 @@
-# RIS Support Triage Plugin — User Stories
+# RIS Support Plugin — User Stories
 
 Personas reflect a client-site radiology support environment operated by an MSP,
 plus external adopters of the published plugin. Stories are numbered for
@@ -24,7 +24,7 @@ The primary user, and the overnight shift is the design target: an experienced
 analyst (years on this account), working remotely, with senior analysts
 reachable on-call but not always quickly, and vendor support behind a callback
 queue. Not a novice working in isolation — this changes the triage
-differential's starting prior (see the triage skill's "Overnight behavior":
+differential's starting prior (see the troubleshoot skill's "Overnight behavior":
 the change-window explanation gets checked first, not worked toward from a
 blank differential).
 
@@ -37,7 +37,7 @@ a single hierarchy.
 
 Audience labels used in stories below are placeholders. The real audience set
 comes from the cold-start interview (US-22) and varies by site and by shift —
-see `docs/PERSONA-SPEC.md`'s Tenor section and `skills/setup/references/site-profile.schema.md`.
+see `docs/PERSONA-SPEC.md`'s Tenor section and `skills/onboarding/references/site-profile.schema.md`.
 
 **US-01 — Decode a message** [FORENSICS]
 As a support analyst, I want to paste a de-identified HL7 v2 message and receive

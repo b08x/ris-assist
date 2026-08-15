@@ -2,7 +2,7 @@
 
 Backlog E2.1. The site profile is what every skill except comms reads for
 site-specific facts (comms has its own, narrower profile — see
-`skills/comms/references/comms-profile.schema.md`). Written by the `setup`
+`skills/comms/references/comms-profile.schema.md`). Written by the `onboarding`
 skill's interview mode, edited by its edit mode, inspected by its review
 mode. Lives at the configured local path, outside the plugin directory.
 
@@ -51,7 +51,7 @@ it is in `notes`.
 ## `interfaces`
 
 Named integration points between systems. This is what `/explain` and
-`/triage` mean by "interface" — a logical link, not a message-level parse
+`/troubleshoot` mean by "interface" — a logical link, not a message-level parse
 target (that's the separate forensics plugin).
 
 ```yaml
@@ -95,7 +95,7 @@ escalation_matrix:
     escalates_to: <next tier name, or "none">
 ```
 
-This is what `/triage`'s "recommended queue" and escalation-package
+This is what `/troubleshoot`'s "recommended queue" and escalation-package
 assembly cite by name (US-04, US-05). A queue recommendation with no
 matching entry here says so instead of guessing.
 
@@ -111,7 +111,7 @@ sla_tiers:
     resolution_target: <time, if defined>
 ```
 
-Triage's severity justification (US-04) quotes `definition` directly rather
+Troubleshoot's severity justification (US-04) quotes `definition` directly rather
 than paraphrasing — a routing dispute gets resolved by pointing at the
 site's own words, not the plugin's interpretation of them.
 

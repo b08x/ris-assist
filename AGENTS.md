@@ -25,19 +25,20 @@ Diagrams generated for this project use the **Clinical Parchment** skin, not the
 ```
 RIS_Assist/
 ├── plugins/ris-assist/        # The main plugin content
-│   ├── commands/             # 5 slash commands
-│   │   ├── triage.md
-│   │   ├── kb-draft.md
+│   ├── commands/             # 6 slash commands
+│   │   ├── troubleshoot.md
+│   │   ├── draft-kb.md
 │   │   ├── downtime.md
+│   │   ├── uptime.md
 │   │   ├── explain.md
-│   │   ├── setup.md
-│   │   └── comms-tune.md
+│   │   ├── onboarding.md
+│   │   └── comms-config.md
 │   ├── skills/               # 5 skills (SKILL.md files); 4 have a references/ dir
-│   │   ├── triage/           #   no references/ — differential logic lives in SKILL.md itself
+│   │   ├── troubleshoot/     #   no references/ — differential logic lives in SKILL.md itself
 │   │   ├── knowledge/        #   references/{kb-template,servicenow-format}.md + scripts/html_to_docx.py
 │   │   ├── comms/            #   references/{comms-profile.schema,generic-templates,register-guide}.md
 │   │   ├── explainer/        #   references/{order-lifecycle,accession-vs-order-number,modality-worklist,report-status-flow,topology-patterns}.md
-│   │   └── setup/            #   references/site-profile.schema.md
+│   │   └── onboarding/       #   references/site-profile.schema.md
 │   ├── agents/
 │   │   └── analyst.md        # Persona as an invocable subagent (operational summary of PERSONA-SPEC.md)
 │   ├── examples/             # Fictional site examples ("Riverside Regional Imaging")
@@ -84,7 +85,7 @@ RIS_Assist/
 
 ### 1. Separate Profile from Plugin Code
 
-**Site profiles live OUTSIDE the plugin directory**. They are written by `/setup` during the cold-start interview. The plugin ships generic; nothing site-specific ever enters this repository.
+**Site profiles live OUTSIDE the plugin directory**. They are written by `/onboarding` during the cold-start interview. The plugin ships generic; nothing site-specific ever enters this repository.
 
 **Why?**
 
@@ -144,11 +145,11 @@ invented term) documented in the spec and demonstrated in
 
 ## The Five Skills
 
-### `/triage` - Ticket Clarification
+### `/troubleshoot` - Ticket Clarification
 
 **Purpose**: Differential-driven clarification of vague tickets. Asks one discriminating question at a time until the ticket is routable.
 
-**File**: `plugins/ris-assist/commands/triage.md` → invokes `skills/triage/SKILL.md`
+**File**: `plugins/ris-assist/commands/troubleshoot.md` → invokes `skills/troubleshoot/SKILL.md`
 
 **Behavior**:
 
@@ -159,13 +160,13 @@ invented term) documented in the spec and demonstrated in
 
 **Not this skill**: Message-level analysis (that's the forensics plugin).
 
-### `/kb-draft` - Knowledge Capture
+### `/draft-kb` - Knowledge Capture
 
 **Purpose**: Turns resolved tickets into knowledge base article drafts.
 
 **Files**:
 
-- Command: `plugins/ris-assist/commands/kb-draft.md`
+- Command: `plugins/ris-assist/commands/draft-kb.md`
 - Skill: `plugins/ris-assist/skills/knowledge/SKILL.md`
 
 **Modes**:
@@ -207,7 +208,7 @@ invented term) documented in the spec and demonstrated in
 5. Mark causal claims as `confirmed` or `suspected` (per comms profile convention)
 6. For interval updates: carry forward incident reference, original start time, and previously stated impact
 
-**If comms profile missing**: say so in one line and offer `/comms-tune`. Then continue with built-in generic templates, labelling output clearly.
+**If comms profile missing**: say so in one line and offer `/comms-config`. Then continue with built-in generic templates, labelling output clearly.
 
 **Comms profile structure** (example in `plugins/ris-assist/examples/comms-profile.example.yaml`):
 
@@ -252,14 +253,14 @@ invented term) documented in the spec and demonstrated in
 - If profile lacks the detail, say so and answer generically with that caveat stated
 - Default to the shortest answer that actually answers, then offer to go deeper
 
-### `/setup` - Cold-Start Interview
+### `/onboarding` - Cold-Start Interview
 
 **Purpose**: Builds the site profile during first run, then handles single-field edits later.
 
 **Files**:
 
-- Command: `plugins/ris-assist/commands/setup.md`
-- Skill: `plugins/ris-assist/skills/setup/SKILL.md`
+- Command: `plugins/ris-assist/commands/onboarding.md`
+- Skill: `plugins/ris-assist/skills/onboarding/SKILL.md`
 
 **Modes**:
 
@@ -272,13 +273,13 @@ invented term) documented in the spec and demonstrated in
 - Never invent a system name, interface name, distribution list, procedure name, or approval chain. Unknown is recorded as unknown.
 - Accept "we don't distinguish that" as a complete answer and record it.
 - The audience set is site- and shift-specific. Ask separately about who is reachable overnight (usually different from daytime).
-- Site profile schema: `skills/setup/references/site-profile.schema.md` (E2.1)
+- Site profile schema: `skills/onboarding/references/site-profile.schema.md` (E2.1)
 
-### `/comms-tune` - Customize Profiles
+### `/comms-config` - Customize Profiles
 
 **Purpose**: Customizes the comms profile (build variants, edit templates, review gaps).
 
-**File**: `plugins/ris-assist/commands/comms-tune.md`
+**File**: `plugins/ris-assist/commands/comms-config.md`
 
 Four modes:
 
@@ -324,13 +325,13 @@ STUB — see `skills/<skill_name>/SKILL.md` for the behavior this command invoke
 Arguments: $ARGUMENTS
 
 If the site profile is missing or the needed field is unpopulated, say so in one
-line and offer `/setup`. Continue with generic behavior, labelled as untuned.
+line and offer `/onboarding`. Continue with generic behavior, labelled as untuned.
 ```
 
 ### File Naming
 
-- Commands: `<action>.md` (e.g., `triage.md`, `kb-draft.md`)
-- Skills: `<action>/SKILL.md` (e.g., `triage/SKILL.md`)
+- Commands: `<action>.md` (e.g., `troubleshoot.md`, `draft-kb.md`)
+- Skills: `<action>/SKILL.md` (e.g., `troubleshoot/SKILL.md`)
 - Example configs: `*.example.yaml`
 
 ---
@@ -364,7 +365,7 @@ Content...
 
 - `name` and `description` in YAML frontmatter
 - STUB marker referencing the backlog item
-- **"Not this skill"** section at the end explaining boundaries (especially for skills that are "don't cross" like triage not doing message forensics)
+- **"Not this skill"** section at the end explaining boundaries (especially for skills that are "don't cross" like troubleshoot not doing message forensics)
 
 ### Decision Records (ADR)
 
@@ -458,12 +459,13 @@ PRs containing real clinical data are closed without merge. Add test cases by ex
 
 | Command | Purpose | Triggers | Main Skill |
 | --------- | --------- | ---------- | ------------ |
-| `/triage` | Clarify tickets, route them | "where should this go", "is this worth paging someone" | triage |
-| `/kb-draft` | Draft KB article from resolved ticket | "write this up", "is there an article for this" | knowledge |
+| `/troubleshoot` | Clarify tickets, route them | "where should this go", "is this worth paging someone" | troubleshoot |
+| `/draft-kb` | Draft KB article from resolved ticket | "write this up", "is there an article for this" | knowledge |
 | `/downtime` | Draft service notifications | "draft a downtime notice", "we need to tell clinical", "all clear" | comms |
+| `/uptime` | Draft recovery / all-clear notifications | "service is back", "send the all-clear", "close out the downtime notice" | comms |
 | `/explain` | Explain domain concepts, onboarding | "what is an accession number", "walk me through the order lifecycle", "I'm new to this account" | explainer |
-| `/setup` | Build site profile, edit fields | "set up", "configure my site", "change my escalation contact" | setup |
-| `/comms-tune` | Customize comms profiles | (implicit, invoked by commands) | comms |
+| `/onboarding` | Build site profile, edit fields | "set up", "configure my site", "change my escalation contact" | onboarding |
+| `/comms-config` | Customize comms profiles | (implicit, invoked by commands) | comms |
 
 ---
 

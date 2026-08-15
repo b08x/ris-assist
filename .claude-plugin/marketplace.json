@@ -5,7 +5,7 @@
     "url": "https://github.com/b08x/ris_assist"
   },
   "metadata": {
-    "description": "Triage tooling for radiology IT support, built for the overnight shift.",
+    "description": "Ticket clarification, knowledge capture, and incident communications tooling for radiology IT support, built for the overnight shift.",
     "version": "1.0.0"
   },
   "plugins": [
@@ -13,7 +13,7 @@
       "name": "ris-assist",
       "source": "./plugins/ris-assist",
       "description": "Ticket clarification, knowledge capture, incident communications, and analyst onboarding for radiology information system support.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "author": {
         "name": "Robert Pannick"
       },
