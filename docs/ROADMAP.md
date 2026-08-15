@@ -38,7 +38,7 @@ This section explains what works today, what's blocked, and how to configure eac
 
 #### Current capability: Manual-mode KB pipeline
 
-The knowledge skill (`/kb-draft`) produces ServiceNow-importable `.docx` files through a deterministic pipeline:
+The knowledge skill (`/draft-kb`) produces ServiceNow-importable `.docx` files through a deterministic pipeline:
 
 ```
 Worklog (pasted text) → Model drafts HTML → Code renders .docx → Human uploads to ServiceNow
@@ -219,9 +219,9 @@ When E12.1 ships, the same reference docs that power the Claude plugin skills wi
 
 #### Copilot Studio agent (E12.2)
 
-A Copilot Studio agent for live-ticket clarification. This is the Copilot-track equivalent of the `/triage` skill — same differential logic, same question-selection algorithm, but running on a BAA-approved platform against live ticket data.
+A Copilot Studio agent for live-ticket clarification. This is the Copilot-track equivalent of the `/troubleshoot` skill — same differential logic, same question-selection algorithm, but running on a BAA-approved platform against live ticket data.
 
-**What it does not replace:** The Claude Desktop plugin's triage skill continues to work for de-identified or pasted ticket data. The Copilot agent is not "the better version" — it's "the version that can touch PHI."
+**What it does not replace:** The Claude Desktop plugin's troubleshoot skill continues to work for de-identified or pasted ticket data. The Copilot agent is not "the better version" — it's "the version that can touch PHI."
 
 #### Power Automate flow (E12.3)
 

@@ -1,6 +1,6 @@
 ---
-name: triage
-description: Differential-driven ticket clarification for radiology IT support — asks the one most discriminating question at a time until the ticket is routable, then produces a triage artifact with scope, timeline, differential, confidence, and a recommended queue. Use when a vague or incomplete ticket arrives, when deciding where something should be routed, when justifying a severity, or when assembling an escalation package. Triggers include /triage, "where should this go", "is this worth paging someone", "the study won't open".
+name: troubleshoot
+description: Differential-driven ticket clarification for radiology IT support — asks the one most discriminating question at a time until the ticket is routable, then produces a triage artifact with scope, timeline, differential, confidence, and a recommended queue. Use when a vague or incomplete ticket arrives, when deciding where something should be routed, when justifying a severity, or when assembling an escalation package. Triggers include /troubleshoot, "where should this go", "is this worth paging someone", "the study won't open".
 ---
 
 # Ticket clarification
@@ -111,7 +111,7 @@ actually provided to search.
 Backlog E8.5. When a ticket escalates, assemble: the triage artifact above,
 what's been ruled out and why (the differential's dead branches, not just
 the live one), and any environment details the user has stated. This is the
-same artifact as `/triage`'s normal output plus the ruled-out reasoning made
+same artifact as `/troubleshoot`'s normal output plus the ruled-out reasoning made
 explicit — not a separate format to construct from scratch.
 
 ## Not this skill

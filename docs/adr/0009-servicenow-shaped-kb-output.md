@@ -35,12 +35,12 @@ cause with a confidence mark, verification, related. What changed is their
 order and their container, not whether they are mandatory.
 
 The step ladder is ordered by this plugin's own triage differential
-(`skills/triage/SKILL.md`: scope, then workstation/user, application, interface,
+(`skills/troubleshoot/SKILL.md`: scope, then workstation/user, application, interface,
 advanced) rather than by the source skill's hardware-oriented layers
 (physical → OS → driver). A KB article and a triage session on the same
 incident now read in the same order.
 
-`/kb-draft` gains `Bash` in `allowed-tools`, for the render step only.
+`/draft-kb` gains `Bash` in `allowed-tools`, for the render step only.
 
 ## Alternatives considered
 
@@ -71,7 +71,7 @@ against its own domain; the article should use it.
 
 **Easier:** the analyst's output is the artifact that gets uploaded. Article
 order matches triage order, so an article can be drafted directly from a
-`/triage` artifact without re-sequencing. The metadata line carries a version,
+`/troubleshoot` artifact without re-sequencing. The metadata line carries a version,
 which is what E7.5's stale-article flagging keys on. Rendering is deterministic
 code, consistent with ADR-0001 — the model drafts, the script renders, and the
 script does not interpret content.
@@ -80,7 +80,7 @@ script does not interpret content.
 not (`CLAUDE.md` said markdown plus one non-functional demo script). That means
 a Python dependency surface — `python-docx`, `Pillow` — pinned in a PEP 723
 header, and a class of bug that cannot be found by reading prose for internal
-consistency. `/kb-draft` now requires `Bash`, a real permission expansion for a
+consistency. `/draft-kb` now requires `Bash`, a real permission expansion for a
 plugin whose pitch is that it does not execute; the boundary is stated in the
 command file and in the skill's "Not this skill" section, and it is a line
 worth watching rather than assuming holds.

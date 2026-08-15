@@ -1,6 +1,6 @@
 ---
 name: knowledge
-description: Turns a resolved ticket or worklog into a ServiceNow-importable knowledge base article — triage-first HTML draft, rendered to .docx for upload — detects recurring incidents with no matching article, and flags articles made stale by a change or upgrade. Use when an incident is resolved and worth documenting, when the same question keeps recurring, or when the user says /kb-draft, "write this up", "turn this into a KB article", "is there an article for this".
+description: Turns a resolved ticket or worklog into a ServiceNow-importable knowledge base article — triage-first HTML draft, rendered to .docx for upload — detects recurring incidents with no matching article, and flags articles made stale by a change or upgrade. Use when an incident is resolved and worth documenting, when the same question keeps recurring, or when the user says /draft-kb, "write this up", "turn this into a KB article", "is there an article for this".
 ---
 
 # Knowledge capture
@@ -38,14 +38,14 @@ cite-or-decline apply to article bodies same as everywhere else.
    defined; otherwise `references/kb-template.md`, labeled generic per the
    usual convention.
 3. **Order the article the way the ticket was worked.** Scope first, then
-   the differential branches in the order `skills/triage/SKILL.md` rules
+   the differential branches in the order `skills/troubleshoot/SKILL.md` rules
    them out — workstation/user, application (RIS/PACS), interface, advanced.
    Carry only the layers the worklog supports. A layer with nothing behind
    it is omitted and listed as outstanding, never emitted as an empty
    heading and never filled from general knowledge.
 4. **Draft section by section**, marking the Cause section's confidence
    explicitly (`confirmed` / `likely` / `possible` — same scale as
-   triage/persona spec, applied to root cause rather than to a differential
+   troubleshoot/persona spec, applied to root cause rather than to a differential
    branch). A worklog with no cause in it gets "cause not established," not
    a mark on a guess.
 5. **Format for the importer.** `references/servicenow-format.md` governs
@@ -121,8 +121,8 @@ consequences, and none of them are optional:
   article is Word-openable HTML rather than a script's output.
 
 **Do not search the filesystem for the site profile.** It lives at a path
-the user confirmed during `/setup`, outside the plugin directory. If the
-path isn't known in this session, ask for it — the `setup` skill's own rule,
+the user confirmed during `/onboarding`, outside the plugin directory. If the
+path isn't known in this session, ask for it — the `onboarding` skill's own rule,
 and asking costs one line where a filesystem sweep is slow, noisy, reaches
 into places it has no business in, and is POSIX-only besides. No profile and
 no answer means draft generically and say so.

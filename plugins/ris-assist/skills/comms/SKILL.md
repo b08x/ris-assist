@@ -1,6 +1,6 @@
 ---
 name: comms
-description: Draft and maintain radiology IT support notifications — downtime alerts, major-incident cadence updates, vendor tickets, change narratives, shift turnover. Use when the user needs to notify anyone about a service impact, or wants to tune this site's notification templates. Triggers include /downtime, /comms-tune, "draft a downtime notice", "we need to tell clinical", "send an update on the outage", "all clear".
+description: Draft and maintain radiology IT support notifications — downtime alerts, major-incident cadence updates, vendor tickets, change narratives, shift turnover. Use when the user needs to notify anyone about a service impact, or wants to tune this site's notification templates. Triggers include /downtime, /comms-config, "draft a downtime notice", "we need to tell clinical", "send an update on the outage", "all clear".
 ---
 
 # Communications
@@ -18,8 +18,8 @@ second copy.
 
 | File | Contents | If absent |
 |---|---|---|
-| Site profile | systems, interface names, downtime procedure names, escalation matrix, SLA tiers | Draft generically and say so; offer `/setup` |
-| Comms profile | template variants keyed by event class × audience × channel, required fields, voice rules, approval chain | Use the generic templates in `references/`; offer `/comms-tune` |
+| Site profile | systems, interface names, downtime procedure names, escalation matrix, SLA tiers | Draft generically and say so; offer `/onboarding` |
+| Comms profile | template variants keyed by event class × audience × channel, required fields, voice rules, approval chain | Use the generic templates in `references/`; offer `/comms-config` |
 
 Both live at the local configured path, outside the plugin directory, and
 survive plugin updates.
@@ -51,7 +51,7 @@ survive plugin updates.
 
 ## Customizing the profile
 
-Four modes, invoked by `/comms-tune`: **capture** (infer variants from pasted
+Four modes, invoked by `/comms-config`: **capture** (infer variants from pasted
 examples), **build** (guided construction, deltas from the site's most common
 notification), **edit** (one variant, no re-interview), **review** (coverage
 against the axes, gaps ranked).

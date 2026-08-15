@@ -25,7 +25,7 @@ model, not by PowerShell: pasted into a PowerShell command it stays literal.
 
 **Observed, not theorised.** A live session was seen running
 `find / -iname "*.json" -path "*site*"` to locate the site profile — a
-POSIX-only command, sweeping the whole filesystem, for a path the `setup`
+POSIX-only command, sweeping the whole filesystem, for a path the `onboarding`
 skill already requires be confirmed with the user. The portability problem and
 a behavioural defect surfaced in the same trace.
 
@@ -106,7 +106,7 @@ spec, not worked around inside individual articles. Tracked in
 `docs/PROJECT-INSTRUCTIONS.md` open items.
 
 **Behavioural fix carried with it:** the knowledge skill now states that the
-site profile is asked for, never searched for. The `setup` skill already
+site profile is asked for, never searched for. The `onboarding` skill already
 required the path be confirmed with the user; knowledge simply never said what
 to do when it wasn't known, and filled the gap with a filesystem sweep. A rule
 that exists in one skill and is assumed in another is not enforced.

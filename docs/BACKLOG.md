@@ -102,7 +102,7 @@ E9 (forensics) moved there. Epic numbers are not reused.
       articles → candidate list (US-12) *(needs incident read: DEP-1 — manual-
       mode partial: skill now prompts explicitly when a pattern is described)*
 - [x] E7.5 (S) — Stale-article flagger keyed to change/upgrade events (US-13)
-- [x] E7.6 (S) — `/kb-draft` slash command (`Bash` allowed for the render step
+- [x] E7.6 (S) — `/draft-kb` slash command (`Bash` allowed for the render step
       only)
 
 ## E8 — Ticket Clarification Skill  (P3 · stories US-03…US-06)
@@ -116,7 +116,7 @@ E9 (forensics) moved there. Epic numbers are not reused.
 - [x] E8.4 (S) — Routing + severity justification against site SLA vocabulary
       (US-04)
 - [x] E8.5 (M) — Escalation package assembler (US-05)
-- [ ] E8.6 (S) — `/triage` slash command
+- [ ] E8.6 (S) — `/troubleshoot` slash command
 - [x] E8.7 (M) — Known-error matching against KB *(blocked: DEP-1 for live;
       manual paste-mode works without)*
 
@@ -143,7 +143,7 @@ E9 (forensics) moved there. Epic numbers are not reused.
 - [ ] E11.4 (S) — `docs/NON-GOALS.md` published (from E4.4)
 - [ ] E11.5 (M) — Reader-test pass: fresh-context review of README + docs;
       fix what a cold reader gets wrong
-- [ ] E11.6 (S) — Demo the setup skill's `interview` mode: the write-path
+- [ ] E11.6 (S) — Demo the onboarding skill's `interview` mode: the write-path
       question, "we don't distinguish that" recorded as absence, the overnight
       audience second pass, and the pasted-inventory branch (currently the only
       demonstrable instance of symbolic-parse-before-interpretation, since the
@@ -181,7 +181,7 @@ product and the templates the fallback.
       `event class × audience × channel`, plus conventions, distribution,
       approval chain, workflow language, cadence, voice rules, and a recorded
       `gaps` list
-- [ ] E6.6 (M) — Build `/comms-tune` **capture** mode: infer variants from
+- [ ] E6.6 (M) — Build `/comms-config` **capture** mode: infer variants from
       pasted example notifications; show extraction for confirmation before
       writing; warn once about local storage of staff names/contacts
 - [ ] E6.7 (M) — Build **build** mode: one-question-at-a-time interview,

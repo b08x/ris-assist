@@ -43,10 +43,10 @@ offer it only after confirming an interpreter exists, and never as
 `python3`, which is not a Windows command.
 
 Do not search the filesystem for the site profile. Ask for the path if it
-isn't known — see the `setup` skill.
+isn't known — see the `onboarding` skill.
 
 `Bash` is allowed for the handoff and optional render steps only. Nothing
 here executes against a production system — see `docs/NON-GOALS.md`.
 
 If the site profile is missing or the needed field is unpopulated, say so in one
-line and offer `/setup`. Continue with generic behavior, labelled as untuned.
+line and offer `/onboarding`. Continue with generic behavior, labelled as untuned.

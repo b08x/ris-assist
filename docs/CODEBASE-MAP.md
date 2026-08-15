@@ -26,16 +26,17 @@ RIS Assist is a **documentation-centric plugin** for Claude Desktop, designed to
 ```
 ris-assist/
 ├── plugins/ris-assist/                    # Main plugin content (installed via Claude)
-│   ├── commands/                         # 6 slash commands (entry points)
-│   │   ├── triage.md                    # /triage - Ticket clarification
-│   │   ├── kb-draft.md                 # /kb-draft - Knowledge capture
+│   ├── commands/                         # 7 slash commands (entry points)
+│   │   ├── troubleshoot.md                    # /troubleshoot - Ticket clarification
+│   │   ├── draft-kb.md                 # /draft-kb - Knowledge capture
 │   │   ├── downtime.md                 # /downtime - Communications
+│   │   ├── uptime.md                   # /uptime - Recovery / all-clear communications
 │   │   ├── explain.md                  # /explain - Domain explanation
-│   │   ├── setup.md                    # /setup - Cold-start interview
-│   │   └── comms-tune.md               # /comms-tune - Profile customization
+│   │   ├── onboarding.md                    # /onboarding - Cold-start interview
+│   │   └── comms-config.md               # /comms-config - Profile customization
 │   │
 │   ├── skills/                           # 5 skills (implementation)
-│   │   ├── triage/SKILL.md              # Differential-driven clarification
+│   │   ├── troubleshoot/SKILL.md              # Differential-driven clarification
 │   │   │   └── references/              # (none - logic in SKILL.md)
 │   │   ├── knowledge/SKILL.md          # KB article drafting
 │   │   │   └── references/              # kb-template.md, servicenow-format.md
@@ -44,7 +45,7 @@ ris-assist/
 │   │   │   └── references/              # comms-profile.schema.md, generic-templates.md, register-guide.md
 │   │   ├── explainer/SKILL.md          # Domain concept explanation
 │   │   │   └── references/              # 7 domain reference docs
-│   │   └── setup/SKILL.md               # Site profile building
+│   │   └── onboarding/SKILL.md               # Site profile building
 │   │       └── references/              # site-profile.schema.md
 │   │
 │   ├── agents/                          # Invocable subagents
@@ -98,7 +99,7 @@ ris-assist/
 
 | ADR | Decision | Status | Impact |
 |-----|----------|--------|--------|
-| ADR-0008 | Separate forensics plugin | Implemented | Message forensics is a separate plugin; triage detects need and escalates |
+| ADR-0008 | Separate forensics plugin | Implemented | Message forensics is a separate plugin; troubleshoot detects need and escalates |
 | ADR-0009 | KB article structure | Implemented | Standardized article shape (scope → differential branches → verification → cause → escalation) |
 | ADR-0010 | Word-openable HTML default | Implemented | Manual mode uses HTML that opens in Word for editing |
 
@@ -112,12 +113,13 @@ ris-assist/
 
 | Command | Skill | Purpose | Dependencies |
 |---------|-------|---------|--------------|
-| `/triage` | triage | Differential-driven ticket clarification | None |
-| `/kb-draft` | knowledge | Draft KB articles from resolved tickets | ServiceNow MCP (optional) |
+| `/troubleshoot` | troubleshoot | Differential-driven ticket clarification | None |
+| `/draft-kb` | knowledge | Draft KB articles from resolved tickets | ServiceNow MCP (optional) |
 | `/downtime` | comms | Draft service-impact notifications | Comms profile |
+| `/uptime` | comms | Draft recovery / all-clear notifications | Comms profile |
 | `/explain` | explainer | Explain radiology IT domain concepts | Site profile (optional) |
-| `/setup` | setup | Cold-start interview, profile building | None |
-| `/comms-tune` | comms | Customize comms profiles | Comms profile |
+| `/onboarding` | onboarding | Cold-start interview, profile building | None |
+| `/comms-config` | comms | Customize comms profiles | Comms profile |
 
 **Pattern**: All commands are STUBs that invoke their corresponding skill. The invocation mechanism is **currently implicit** (see [Issue #2](https://github.com/b08x/ris-assist/issues/2)).
 
@@ -125,11 +127,11 @@ ris-assist/
 
 | Skill | Purpose | Key Files | References |
 |-------|---------|-----------|------------|
-| **triage** | Asks discriminating questions to route vague tickets | SKILL.md | None (logic embedded) |
+| **troubleshoot** | Asks discriminating questions to route vague tickets | SKILL.md | None (logic embedded) |
 | **knowledge** | Turns resolved tickets into KB article drafts | SKILL.md | kb-template.md, servicenow-format.md, html_to_docx.py |
 | **comms** | Drafts service notifications (downtime, incidents, updates) | SKILL.md | comms-profile.schema.md, generic-templates.md, register-guide.md |
 | **explainer** | Explains radiology IT concepts at adjustable depth | SKILL.md | 7 domain reference docs |
-| **setup** | Builds site profile via interview or edits | SKILL.md | site-profile.schema.md |
+| **onboarding** | Builds site profile via interview or edits | SKILL.md | site-profile.schema.md |
 
 **Common Pattern**:
 ```
@@ -147,8 +149,8 @@ Each skill maintains its own `references/` directory for domain-specific knowled
 - **knowledge**: Article templates, ServiceNow format guides
 - **comms**: Profile schemas, template examples, registration guides
 - **explainer**: 7 domain concepts (order lifecycle, accession vs order, MWL, report status, topology, vendor platforms, integration standards)
-- **setup**: Site profile schema
-- **triage**: None (logic is self-contained)
+- **onboarding**: Site profile schema
+- **troubleshoot**: None (logic is self-contained)
 
 ---
 
@@ -245,7 +247,7 @@ Profile Field Missing?
 
 | Issue | Description | Impact | Fix |
 |-------|-------------|--------|-----|
-| [#6](https://github.com/b08x/ris-assist/issues/6) | Forensics escalation trigger implicit | High | Explicit `forensics_needed` flag in triage |
+| [#6](https://github.com/b08x/ris-assist/issues/6) | Forensics escalation trigger implicit | High | Explicit `forensics_needed` flag in troubleshoot |
 | [#7](https://github.com/b08x/ris-assist/issues/7) | Gap telemetry + MCP timeouts missing | High | gap-log.json + timeout wrapper |
 
 ---
@@ -286,12 +288,12 @@ flowchart TD
 flowchart LR
     subgraph Skills["Skill Layer"]
         direction TB
-        triage["triage"] -->|differential| comms["comms"]
-        triage -->|ticket data| knowledge["knowledge"]
-        setup["setup"] -->|profile| triage
-        setup -->|profile| comms
-        setup -->|profile| knowledge
-        explainer["explainer"] -.->|domain knowledge| triage
+        troubleshoot["troubleshoot"] -->|differential| comms["comms"]
+        troubleshoot -->|ticket data| knowledge["knowledge"]
+        onboarding["onboarding"] -->|profile| troubleshoot
+        onboarding -->|profile| comms
+        onboarding -->|profile| knowledge
+        explainer["explainer"] -.->|domain knowledge| troubleshoot
         explainer -.->|domain knowledge| comms
     end
     
@@ -301,7 +303,7 @@ flowchart LR
         sn["ServiceNow\n(DEP-1)"]
     end
     
-    triage --> sp
+    troubleshoot --> sp
     comms --> cp
     knowledge --> sn
     
@@ -313,21 +315,21 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph Commands["Command Layer /triage etc."]
-        c1["/triage"]
-        c2["/kb-draft"]
+    subgraph Commands["Command Layer /troubleshoot etc."]
+        c1["/troubleshoot"]
+        c2["/draft-kb"]
         c3["/downtime"]
         c4["/explain"]
-        c5["/setup"]
-        c6["/comms-tune"]
+        c5["/onboarding"]
+        c6["/comms-config"]
     end
     
     subgraph Skills["Skill Layer"]
-        s1["triage/SKILL.md"]
+        s1["troubleshoot/SKILL.md"]
         s2["knowledge/SKILL.md"]
         s3["comms/SKILL.md"]
         s4["explainer/SKILL.md"]
-        s5["setup/SKILL.md"]
+        s5["onboarding/SKILL.md"]
     end
     
     subgraph Config["Configuration"]
@@ -374,7 +376,7 @@ Based on reference frequency and cross-component dependencies:
 | **PERSONA-SPEC.md** | Specification | High | Single source of truth for persona rules (referenced by all skills) |
 | **plugins/ris-assist/commands/*.md** | Commands | High | Entry points for all plugin functionality |
 | **plugins/ris-assist/skills/*/SKILL.md** | Skills | High | Implementation of all capabilities |
-| **site-profile.schema.md** | Schema | Medium | Defines site profile structure (referenced by setup) |
+| **site-profile.schema.md** | Schema | Medium | Defines site profile structure (referenced by onboarding) |
 
 ---
 
@@ -418,14 +420,14 @@ Based on reference frequency and cross-component dependencies:
 |----------|------|-------|----------|
 | **P0** | Foundation | 5 issues | None |
 | **P1** | Resilience | 2 issues | P0 |
-| **P2** | Features | KB pipeline, triage | DEP-1 (ServiceNow MCP) |
+| **P2** | Features | KB pipeline, troubleshoot | DEP-1 (ServiceNow MCP) |
 | **PX** | Parallel | Copilot integration | DEP-2 (BAA/PHI confirmation) |
 
 ### External Dependencies (DEP-#)
 
 | ID | Dependency | Status | Impact |
 |----|------------|--------|--------|
-| DEP-1 | ServiceNow MCP access | Blocked | `/kb-draft` connected mode |
+| DEP-1 | ServiceNow MCP access | Blocked | `/draft-kb` connected mode |
 | DEP-2 | M365 Copilot PHI/BAA | Pending | Copilot integration |
 | DEP-3 | IP/OSS publication approval | Pending | Public release |
 
@@ -439,9 +441,9 @@ Create explicit command-to-skill mapping with JSON Schema validation.
 ```json
 {
   "commands": {
-    "/triage": {
-      "skill": "triage",
-      "entry_point": "plugins/ris-assist/skills/triage/SKILL.md",
+    "/troubleshoot": {
+      "skill": "troubleshoot",
+      "entry_point": "plugins/ris-assist/skills/troubleshoot/SKILL.md",
       "allowed_tools": ["Read", "Write", "grep"]
     }
   }
@@ -458,7 +460,7 @@ Add version fields to PERSONA-SPEC.md and all SKILL.md files with CI validation.
 Create `tests/adr-compliance/` with automated checks for each ADR.
 
 ### 5. Forensics Trigger (P1)
-Add explicit `forensics_needed` flag to triage differential output.
+Add explicit `forensics_needed` flag to troubleshoot differential output.
 
 ### 6. Gap Telemetry (P1)
 Implement `gap-log.json` for tracking skill fallback gaps.
@@ -469,14 +471,14 @@ Implement `gap-log.json` for tracking skill fallback gaps.
 
 Each major component's purpose and constraints:
 
-### `/triage` Command + Skill
+### `/troubleshoot` Command + Skill
 - **Purpose**: Clarify vague tickets via differential diagnosis
 - **Input**: Vague ticket text
 - **Output**: Structured differential with confidence marks, recommended queue
 - **Contract**: Asks one discriminating question at a time; overnight asks change-window question first
 - **Non-Goal**: Does NOT perform message forensics
 
-### `/kb-draft` Command + Skill
+### `/draft-kb` Command + Skill
 - **Purpose**: Convert resolved tickets into KB article drafts
 - **Input**: Resolved incident (manual) or ServiceNow ticket (connected)
 - **Output**: Word-openable HTML article + outstanding items + suggestions
@@ -497,14 +499,14 @@ Each major component's purpose and constraints:
 - **Contract**: Generic claims from references/; site-specific from profile; defaults to shortest answer
 - **Non-Goal**: Does NOT guess if profile lacks detail
 
-### `/setup` Command + Skill
+### `/onboarding` Command + Skill
 - **Purpose**: Build and maintain site profile
 - **Input**: Interview responses or edit requests
 - **Output**: Updated site profile
 - **Contract**: One question at a time; derive deltas from earlier answers
 - **Non-Goal**: Does NOT invent system names, interfaces, or procedures
 
-### `/comms-tune` Command + Skill
+### `/comms-config` Command + Skill
 - **Purpose**: Customize comms profiles
 - **Input**: Template examples or edit requests
 - **Output**: Updated comms profile

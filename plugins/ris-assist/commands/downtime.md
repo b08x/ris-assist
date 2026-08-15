@@ -17,12 +17,12 @@ one at a time, in this order: event class, affected system, scope, audience.
 
 1. Load the site profile and the comms profile from the configured local path.
    - If **no comms profile exists**, say so in one line and offer to run
-     `/comms-tune` to build one. Then continue with the built-in generic
+     `/comms-config` to build one. Then continue with the built-in generic
      templates, labelling the output clearly as *generic — not yet tuned to
      this site*.
    - If the comms profile exists but lacks the requested variant, use the
      closest defined variant, name the substitution explicitly, and offer to
-     capture the missing variant via `/comms-tune`.
+     capture the missing variant via `/comms-config`.
 
 2. Select the template by the three-axis key defined in the comms profile:
    `event class × audience × channel`.

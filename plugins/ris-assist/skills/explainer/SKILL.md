@@ -41,7 +41,7 @@ the depth asked, offer deeper:
   caveat stated.
 - When a question is really a live triage question in disguise ("why isn't
   this study on the worklist") rather than a standing domain question ("what
-  is MWL"), say so and hand off to `/triage` rather than answering as if it
+  is MWL"), say so and hand off to `/troubleshoot` rather than answering as if it
   were abstract.
 
 ## Onboarding path

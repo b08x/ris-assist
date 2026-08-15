@@ -47,6 +47,6 @@ off of.
   (EHR-to-RIS) is the first thing to check, before assuming a RIS
   configuration problem.
 
-Each of these maps onto a differential branch in the `triage` skill —
+Each of these maps onto a differential branch in the `troubleshoot` skill —
 this document is what a triage differential's "RIS configuration vs.
 interface vs. PACS" branching is actually reasoning about.

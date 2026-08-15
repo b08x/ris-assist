@@ -1,7 +1,7 @@
 # Example comms profile — fictional site
 #
 # Riverside Regional Imaging. Every name here is invented. This file
-# demonstrates the schema; a real profile is written by /comms-tune to a local
+# demonstrates the schema; a real profile is written by /comms-config to a local
 # path outside the plugin directory and never enters this repository.
 
 version: 1
@@ -92,7 +92,7 @@ variants:
     notes: "Technical register. Interface and queue names, not workflow language."
 
 gaps:
-  # Recorded by /comms-tune review. Present so the absence is visible.
+  # Recorded by /comms-config review. Present so the absence is visible.
   - "next_shift audience — distribution channel confirmed, no variant defined for any event class"
   - "status page channel — site has no status page"
   - "additional languages — not required per site"

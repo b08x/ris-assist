@@ -48,13 +48,13 @@ recurring issues, shift-change failures. Names, identifiers, and clinical
 details have been replaced through a deterministic scrub map.
 
 SPEAK:
-We're going to run five skills against this data. Triage, downtime
+We're going to run five skills against this data. Troubleshoot, downtime
 communications, knowledge capture, domain explanation, and overnight
 framing. Each one uses an actual dataset record as input.
 
 ---
 
-## Segment 2 — triage, the vague ticket
+## Segment 2 — troubleshoot, the vague ticket
 
 **Screen: dataset record INC0059264 appears. "RA unable to launch Synapse (again)."**
 
@@ -64,7 +64,7 @@ to launch Synapse, again." Sev two. Single workstation. No scope stated in
 the description.
 
 SPEAK:
-The triage skill's first move is scope. One user or many? The answer
+The troubleshoot skill's first move is scope. One user or many? The answer
 collapses four of five branches. Single user — it's workstation or user,
 not interface, not R A S, not PACS.
 
