@@ -199,6 +199,10 @@ product and the templates the fallback.
       untuned in output
 - [x] E6.13 (S) — Author `references/register-guide.md` — clinical vs.
       technical vs. leadership register, with worked examples
+- [x] E6.14 (S) — `/uptime` slash command: resolution-side counterpart to
+      `/downtime` (same comms skill, same profile, same continuity rules),
+      scoped to the moment a service comes back rather than the moment it
+      goes down
 
 Stories served: US-15, US-16, US-17, US-23. New story implied — *as a support
 lead, I want to teach the plugin how my site writes notifications, so drafts

@@ -322,6 +322,7 @@ flowchart TD
         c4["/explain"]
         c5["/onboarding"]
         c6["/comms-config"]
+        c7["/uptime"]
     end
     
     subgraph Skills["Skill Layer"]
@@ -342,6 +343,7 @@ flowchart TD
     c4 -->|maps to| inv
     c5 -->|maps to| inv
     c6 -->|maps to| inv
+    c7 -->|maps to| inv
     
     inv -->|validates| s1
     inv -->|validates| s2
