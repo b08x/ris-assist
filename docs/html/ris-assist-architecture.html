@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIS Assist architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #FDFDF9; --paper-2: #F8F8F0; --ink: #2D3142;
+      --muted: #4F5D75; --soft: #7A8399; --rule: rgba(45,49,66,.12);
+      --accent: #C09241; --purple: #7161A1;
+      --sans: 'Geist', system-ui, sans-serif;
+      --serif: 'Literata', Georgia, serif;
+      --mono: 'Geist Mono', ui-monospace, monospace;
+    }
+    body { background: var(--paper); color: var(--ink); min-height: 100vh; padding: 48px 40px 40px; }
+    .frame { max-width: 1200px; margin: 0 auto; }
+    .eyebrow { color: var(--muted); font: 500 8px var(--mono); letter-spacing: .18em; text-transform: uppercase; margin-bottom: 8px; }
+    h1 { color: var(--ink); font: 600 28px/1.15 var(--serif); letter-spacing: -.02em; margin-bottom: 12px; }
+    .subtitle { color: var(--muted); font: 12px/1.5 var(--sans); max-width: 760px; margin-bottom: 20px; }
+    svg { display: block; width: 100%; min-width: 900px; }
+    .footer { border-top: 1px solid var(--rule); margin-top: 12px; padding-top: 12px; color: var(--soft); font: 8px var(--mono); letter-spacing: .04em; }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <p class="eyebrow">HIGH-LEVEL ARCHITECTURE · RIS ASSIST</p>
+    <h1>From support request to governed draft</h1>
+    <p class="subtitle">RIS Assist is a documentation-first Claude plugin: commands orchestrate shared analyst behavior, site profiles supply local context, and outputs remain drafts for human review.</p>
+    <svg viewBox="0 0 1200 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ris-assist-architecture-title ris-assist-architecture-desc">
+      <title id="ris-assist-architecture-title">RIS Assist architecture</title>
+      <desc id="ris-assist-architecture-desc">Architecture showing a support analyst using Claude Desktop and RIS Assist commands, which draw on shared skills and external site profiles to produce human-reviewed support drafts alongside repository documentation and governance.</desc>
+      <defs>
+        <marker id="ris-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4F5D75"/></marker>
+        <marker id="ris-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#C09241"/></marker>
+        <marker id="ris-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7161A1"/></marker>
+      </defs>
+      <rect width="100%" height="100%" fill="#FDFDF9"/>
+
+      <!-- Trust / responsibility zones -->
+      <rect x="32" y="56" width="220" height="396" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.12)" stroke-width=".8"/>
+      <rect x="268" y="56" width="700" height="396" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.12)" stroke-width=".8"/>
+      <rect x="984" y="56" width="184" height="396" rx="8" fill="rgba(192,146,65,.04)" stroke="rgba(192,146,65,.42)" stroke-width=".8" stroke-dasharray="4,4"/>
+      <rect x="32" y="492" width="1136" height="116" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.12)" stroke-width=".8"/>
+
+      <!-- Zone labels -->
+      <rect x="48" y="60" width="92" height="16" rx="2" fill="#FDFDF9"/><text x="94" y="72" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">HUMAN INPUT</text>
+      <rect x="284" y="60" width="112" height="16" rx="2" fill="#FDFDF9"/><text x="340" y="72" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">PLUGIN RUNTIME</text>
+      <rect x="1000" y="60" width="120" height="16" rx="2" fill="#FDFDF9"/><text x="1060" y="72" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">LOCAL CONTEXT</text>
+      <rect x="48" y="496" width="176" height="16" rx="2" fill="#FDFDF9"/><text x="136" y="508" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">REPOSITORY &amp; GOVERNANCE</text>
+
+      <!-- Connectors: all before nodes -->
+      <path d="M 220,226 H 244 Q 252,226 252,234 V 244 Q 252,252 260,252 H 308" fill="none" stroke="#4F5D75" stroke-width="1.2" marker-end="url(#ris-arrow)"/>
+      <rect x="232" y="204" width="64" height="16" rx="2" fill="#FDFDF9"/><text x="264" y="216" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">REQUEST</text>
+
+      <path d="M 468,252 H 500 Q 508,252 508,260 V 340 Q 508,348 516,348 H 548" fill="none" stroke="#C09241" stroke-width="1.2" marker-end="url(#ris-arrow-accent)"/>
+      <rect x="476" y="276" width="72" height="16" rx="2" fill="#FDFDF9"/><text x="512" y="288" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">INVOKE</text>
+
+      <path d="M 740,252 H 772 Q 780,252 780,244 V 216 Q 780,208 788,208 H 812" fill="none" stroke="#7161A1" stroke-width="1" marker-end="url(#ris-arrow-link)"/>
+      <rect x="748" y="224" width="72" height="16" rx="2" fill="#FDFDF9"/><text x="784" y="236" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace">READ PROFILE</text>
+
+      <path d="M 812,248 H 780 Q 772,248 772,256 V 348 Q 772,356 764,356 H 740" fill="none" stroke="#7161A1" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ris-arrow-link)"/>
+      <rect x="744" y="320" width="88" height="16" rx="2" fill="#FDFDF9"/><text x="788" y="332" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace">LOCALIZE</text>
+
+      <path d="M 644,396 V 428 Q 644,436 652,436 H 828" fill="none" stroke="#4F5D75" stroke-width="1" marker-end="url(#ris-arrow)"/>
+      <rect x="672" y="412" width="72" height="16" rx="2" fill="#FDFDF9"/><text x="708" y="424" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">DRAFT</text>
+
+      <path d="M 916,320 H 944 Q 952,320 952,328 V 364 Q 952,372 960,372 H 1008" fill="none" stroke="#4F5D75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ris-arrow)"/>
+      <rect x="896" y="336" width="72" height="16" rx="2" fill="#FDFDF9"/><text x="932" y="348" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">OPTIONAL</text>
+
+      <path d="M 388,540 V 480 Q 388,472 396,472 H 420 Q 428,472 428,464 V 396" fill="none" stroke="#4F5D75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ris-arrow)"/>
+      <rect x="340" y="460" width="88" height="16" rx="2" fill="#FDFDF9"/><text x="384" y="472" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">CONSTRAINS</text>
+
+      <path d="M 780,540 V 488 Q 780,480 772,480 H 700 Q 692,480 692,472 V 396" fill="none" stroke="#4F5D75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ris-arrow)"/>
+      <rect x="720" y="460" width="88" height="16" rx="2" fill="#FDFDF9"/><text x="764" y="472" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">GOVERNS</text>
+
+      <!-- Nodes -->
+      <g>
+        <rect x="60" y="184" width="160" height="84" rx="6" fill="rgba(79,93,117,.10)" stroke="#7A8399" stroke-width="1"/>
+        <rect x="72" y="196" width="44" height="16" rx="2" fill="transparent" stroke="rgba(79,93,117,.45)"/><text x="94" y="208" text-anchor="middle" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".08em">USER</text>
+        <text x="140" y="232" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Support analyst</text>
+        <text x="140" y="252" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">ticket · incident · question</text>
+      </g>
+
+      <g>
+        <rect x="308" y="204" width="160" height="96" rx="6" fill="#FFFFFF" stroke="#2D3142" stroke-width="1.2"/>
+        <rect x="320" y="216" width="44" height="16" rx="2" fill="transparent" stroke="rgba(45,49,66,.40)"/><text x="342" y="228" text-anchor="middle" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".08em">HOST</text>
+        <text x="388" y="256" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Claude Desktop</text>
+        <text x="388" y="276" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">plugin host</text>
+      </g>
+
+      <g>
+        <rect x="548" y="184" width="192" height="212" rx="6" fill="rgba(192,146,65,.12)" stroke="#C09241" stroke-width="1.2"/>
+        <rect x="564" y="200" width="68" height="16" rx="2" fill="transparent" stroke="rgba(192,146,65,.65)"/><text x="598" y="212" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".08em">PLUGIN</text>
+        <text x="644" y="244" text-anchor="middle" fill="#2D3142" font-size="16" font-weight="600" font-family="'Geist',sans-serif">RIS Assist</text>
+        <text x="644" y="264" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">commands + skills</text>
+        <line x1="576" y1="280" x2="712" y2="280" stroke="rgba(45,49,66,.16)"/>
+        <text x="644" y="304" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif">triage · KB · comms</text>
+        <text x="644" y="324" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif">explain · setup · tune</text>
+        <text x="644" y="360" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">persona · guardrails · references</text>
+      </g>
+
+      <g>
+        <rect x="812" y="172" width="104" height="76" rx="6" fill="#FFFFFF" stroke="#2D3142" stroke-width="1"/>
+        <rect x="824" y="184" width="44" height="16" rx="2" fill="transparent" stroke="rgba(45,49,66,.40)"/><text x="846" y="196" text-anchor="middle" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".08em">CONFIG</text>
+        <text x="864" y="220" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Site profiles</text>
+        <text x="864" y="236" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">outside plugin</text>
+      </g>
+
+      <g>
+        <rect x="828" y="336" width="88" height="72" rx="6" fill="#FFFFFF" stroke="#2D3142" stroke-width="1"/>
+        <rect x="840" y="348" width="44" height="16" rx="2" fill="transparent" stroke="rgba(45,49,66,.40)"/><text x="862" y="360" text-anchor="middle" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".08em">OUTPUT</text>
+        <text x="872" y="384" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Drafts</text>
+        <text x="872" y="400" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">human review</text>
+      </g>
+
+      <g>
+        <rect x="1008" y="184" width="136" height="76" rx="6" fill="rgba(192,146,65,.06)" stroke="rgba(192,146,65,.55)" stroke-width="1"/>
+        <rect x="1020" y="196" width="60" height="16" rx="2" fill="transparent" stroke="rgba(192,146,65,.55)"/><text x="1050" y="208" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".08em">EXTERNAL</text>
+        <text x="1076" y="232" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Local profile path</text>
+        <text x="1076" y="248" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">site + comms context</text>
+      </g>
+
+      <g>
+        <rect x="260" y="532" width="256" height="52" rx="6" fill="#FFFFFF" stroke="#2D3142" stroke-width="1"/>
+        <text x="388" y="554" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Repository documentation</text>
+        <text x="388" y="572" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">ADR · stories · backlog · demos</text>
+      </g>
+      <g>
+        <rect x="628" y="532" width="304" height="52" rx="6" fill="#FFFFFF" stroke="#2D3142" stroke-width="1"/>
+        <text x="780" y="554" text-anchor="middle" fill="#2D3142" font-size="12" font-weight="600" font-family="'Geist',sans-serif">Safety &amp; governance</text>
+        <text x="780" y="572" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">synthetic-only · no PHI · no state changes</text>
+      </g>
+
+      <!-- Legend -->
+      <line x1="32" y1="632" x2="1168" y2="632" stroke="rgba(45,49,66,.12)" stroke-width=".8"/>
+      <text x="32" y="652" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">LEGEND</text>
+      <rect x="116" y="644" width="12" height="12" rx="2" fill="rgba(192,146,65,.12)" stroke="#C09241"/><text x="140" y="654" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace">FOCAL PLUGIN</text>
+      <line x1="276" y1="650" x2="312" y2="650" stroke="#7161A1" stroke-width="1"/><text x="324" y="654" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace">PROFILE / EXTERNAL LINK</text>
+      <line x1="500" y1="650" x2="536" y2="650" stroke="#4F5D75" stroke-width="1" stroke-dasharray="4,3"/><text x="548" y="654" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace">OPTIONAL OR GOVERNANCE RELATION</text>
+      <text x="1168" y="654" text-anchor="end" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">STATIC VIEW · SYNTHETIC DATA POLICY</text>
+    </svg>
+    <p class="footer">RIS ASSIST · ARCHITECTURE OVERVIEW · PROJECT-LOCAL CLINICAL PARCHMENT SKIN</p>
+  </main>
+</body>
+</html>

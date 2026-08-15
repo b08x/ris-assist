@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where comms variant resolution diverges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper:   #fafaf7;
+      --ink:     #373C44;
+      --muted:   #646B79;
+      --soft:    #8891A4;
+      --accent:  #0172AD;
+      --sans:    'Geist', system-ui, sans-serif;
+      --serif:   'Roboto Slab', serif;
+      --mono:    'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1200px; width: 100%; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.6vw + 0.75rem, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .lede {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    svg { width: 100%; min-width: 900px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">RIS Assist · Comms · Paired policy-evaluation traces</p>
+    <h1>Where variant resolution diverges</h1>
+    <p class="lede">One outage, two requests. Trace A — radiologists and techs — finds an exact variant and
+      drafts in the site&rsquo;s voice. Trace B — next shift — finds no variant (it is in the profile&rsquo;s
+      <code>gaps</code>) and substitutes the nearest one, disclosed aloud, rather than fabricating. The policy
+      never stops early: it degrades, so no rule is ever &ldquo;not reached.&rdquo;</p>
+
+    <svg viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="comms-variant-trace-title comms-variant-trace-desc">
+      <title id="comms-variant-trace-title">Where comms variant resolution diverges</title>
+      <desc id="comms-variant-trace-desc">Two downtime requests traverse the same comms generation policy. Trace A (radiologists and techs) resolves an exact variant and drafts in the site's voice; Trace B (next shift) finds no variant in the profile and substitutes the nearest one, disclosed aloud. The first divergence is at the variant-definition check; the audience-register rule is skipped for Trace B because the register has no next-shift row.</desc>
+
+      <rect width="1200" height="720" fill="#fafaf7"/>
+
+      <!-- Trace spines (drawn behind everything) -->
+      <line x1="620" y1="108" x2="620" y2="568" stroke="rgba(55,60,68,0.22)" stroke-width="1"/>
+      <line x1="936" y1="108" x2="936" y2="568" stroke="rgba(55,60,68,0.22)" stroke-width="1"/>
+
+      <!-- Column header -->
+      <text x="72" y="80" fill="#646B79" font-family="'Geist Mono', monospace" font-size="8" letter-spacing="0.14em">ORDERED POLICY</text>
+
+      <!-- Trace headers -->
+      <rect x="488" y="48" width="264" height="60" rx="6" fill="#ffffff" stroke="#373C44"/>
+      <text x="620" y="76" text-anchor="middle" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">Trace A · happy path</text>
+      <text x="620" y="96" text-anchor="middle" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">unplanned · radiologists_and_techs · teams</text>
+
+      <rect x="804" y="48" width="264" height="60" rx="6" fill="#ffffff" stroke="#373C44"/>
+      <text x="936" y="76" text-anchor="middle" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">Trace B · missing variant</text>
+      <text x="936" y="96" text-anchor="middle" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">unplanned · next_shift · in gaps</text>
+
+      <!-- Rule 1 -->
+      <text x="72" y="160" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">1 · Resolve variant key</text>
+      <text x="72" y="180" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">event class × audience × channel — ask once for any missing part</text>
+      <rect x="520" y="140" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="620" y="172" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+      <rect x="836" y="140" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="936" y="172" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+
+      <!-- Rule 2 — first divergence -->
+      <text x="72" y="240" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">2 · Exact variant defined?</text>
+      <text x="72" y="260" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">profile lookup on the three-axis key</text>
+      <rect x="520" y="220" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="620" y="252" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+      <rect x="836" y="220" width="200" height="52" rx="4" fill="rgba(1,114,173,0.08)" stroke="#0172AD" stroke-width="1.2"/>
+      <text x="936" y="252" text-anchor="middle" fill="#0172AD" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">× FAIL</text>
+
+      <!-- First-divergence marker -->
+      <line x1="620" y1="272" x2="620" y2="284" stroke="#0172AD" stroke-width="1.2"/>
+      <line x1="936" y1="272" x2="936" y2="284" stroke="#0172AD" stroke-width="1.2"/>
+      <line x1="620" y1="284" x2="936" y2="284" stroke="#0172AD" stroke-width="1.2"/>
+      <rect x="712" y="288" width="132" height="16" rx="2" fill="#fafaf7"/>
+      <text x="778" y="300" text-anchor="middle" fill="#0172AD" font-family="'Geist Mono', monospace" font-size="8" font-weight="600" letter-spacing="0.12em">FIRST DIVERGENCE</text>
+
+      <!-- Rule 3 -->
+      <text x="72" y="344" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">3 · Select template</text>
+      <text x="72" y="364" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">exact match, else nearest + stated substitution</text>
+      <rect x="520" y="324" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="620" y="346" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+      <text x="620" y="364" text-anchor="middle" fill="#8891A4" font-family="'Geist Mono', monospace" font-size="8">exact</text>
+      <rect x="836" y="324" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="936" y="346" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+      <text x="936" y="364" text-anchor="middle" fill="#8891A4" font-family="'Geist Mono', monospace" font-size="8">nearest · disclosed</text>
+
+      <!-- Rule 4 -->
+      <text x="72" y="424" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">4 · Fill required slots</text>
+      <text x="72" y="444" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">stated facts only — unknown stays [TBD], listed beneath draft</text>
+      <rect x="520" y="404" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="620" y="436" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+      <rect x="836" y="404" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="936" y="436" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+
+      <!-- Rule 5 -->
+      <text x="72" y="504" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">5 · Apply audience register</text>
+      <text x="72" y="524" fill="#646B79" font-family="'Geist Mono', monospace" font-size="9">lead with the action for clinical; site-named read path</text>
+      <rect x="520" y="484" width="200" height="52" rx="4" fill="rgba(55,60,68,0.05)" stroke="#646B79" stroke-width="1"/>
+      <text x="620" y="506" text-anchor="middle" fill="#373C44" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">✓ PASS</text>
+      <text x="620" y="524" text-anchor="middle" fill="#8891A4" font-family="'Geist Mono', monospace" font-size="8">clinical · action-led</text>
+      <rect x="836" y="484" width="200" height="52" rx="4" fill="#fafaf7" stroke="#8891A4" stroke-dasharray="4 4" stroke-width="1"/>
+      <text x="936" y="506" text-anchor="middle" fill="#646B79" font-family="'Geist Mono', monospace" font-size="12" font-weight="600">— SKIPPED</text>
+      <text x="936" y="524" text-anchor="middle" fill="#8891A4" font-family="'Geist Mono', monospace" font-size="8">handoff · adapted</text>
+
+      <!-- Outcomes -->
+      <rect x="488" y="556" width="264" height="56" rx="6" fill="#373C44" stroke="#373C44"/>
+      <text x="620" y="580" text-anchor="middle" fill="#8891A4" font-family="'Geist Mono', monospace" font-size="8" letter-spacing="0.14em">OUTCOME</text>
+      <text x="620" y="600" text-anchor="middle" fill="#fafaf7" font-family="'Geist', sans-serif" font-size="12" font-weight="600">Draft in site voice</text>
+
+      <rect x="804" y="556" width="264" height="56" rx="6" fill="#ffffff" stroke="#373C44"/>
+      <text x="936" y="580" text-anchor="middle" fill="#646B79" font-family="'Geist Mono', monospace" font-size="8" letter-spacing="0.14em">OUTCOME</text>
+      <text x="936" y="600" text-anchor="middle" fill="#373C44" font-family="'Geist', sans-serif" font-size="12" font-weight="600">Substituted · disclosed</text>
+
+      <!-- Legend -->
+      <line x1="72" y1="652" x2="1128" y2="652" stroke="rgba(55,60,68,0.12)" stroke-width="0.8"/>
+      <text x="72" y="672" fill="#373C44" font-family="'Geist Mono', monospace" font-size="8">✓ PASS</text>
+      <text x="176" y="672" fill="#0172AD" font-family="'Geist Mono', monospace" font-size="8">× FAIL</text>
+      <text x="272" y="672" fill="#646B79" font-family="'Geist Mono', monospace" font-size="8">— SKIPPED · rule intentionally bypassed</text>
+      <text x="1128" y="672" text-anchor="end" fill="#8891A4" font-family="'Geist Mono', monospace" font-size="8">no ○ NOT REACHED — the policy degrades instead of stopping</text>
+    </svg>
+  </div>
+</body>
+</html>

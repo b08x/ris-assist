@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge skill workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,0..72,400;1,0..72,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}:root{--paper:#FDFDF9;--paper2:#F8F8F0;--ink:#2D3142;--muted:#4F5D75;--soft:#7A8399;--rule:rgba(45,49,66,.12);--accent:#C09241;--link:#7161A1;--sans:'Geist',system-ui,sans-serif;--serif:'Literata',Georgia,serif;--mono:'Geist Mono',ui-monospace,monospace}body{background:var(--paper);color:var(--ink);padding:48px 40px 40px}.frame{max-width:1200px;margin:auto}.eyebrow{font:500 8px var(--mono);letter-spacing:.18em;color:var(--muted);margin-bottom:8px}.title{font:600 28px/1.15 var(--serif);letter-spacing:-.02em;margin-bottom:12px}.subtitle{font:12px/1.5 var(--sans);color:var(--muted);max-width:900px;margin-bottom:20px}svg{display:block;width:100%;min-width:900px}.footer{border-top:1px solid var(--rule);margin-top:12px;padding-top:12px;color:var(--soft);font:8px var(--mono);letter-spacing:.04em}
+</style>
+</head>
+<body><main class="frame">
+<p class="eyebrow">SWIMLANE · KNOWLEDGE CAPTURE · BACKLOG E7</p>
+<h1 class="title">Resolved worklog to uploadable knowledge artifact</h1>
+<p class="subtitle">Manual mode is the default: the knowledge skill preserves the worklog’s evidence, renders a self-contained HTML article, and hands the final conversion and publication decision to a human.</p>
+<svg viewBox="0 0 1200 880" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="knowledge-swimlane-title knowledge-swimlane-desc">
+<title id="knowledge-swimlane-title">Knowledge skill workflow</title>
+<desc id="knowledge-swimlane-desc">Swimlane workflow showing an analyst providing a resolved worklog, the knowledge skill drafting a triage-first article, local sources supplying templates, rendering producing HTML or DOCX, and a human performing review and ServiceNow upload.</desc>
+<defs>
+<marker id="ks-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4F5D75"/></marker>
+<marker id="ks-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#C09241"/></marker>
+<marker id="ks-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#7161A1"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#FDFDF9"/>
+<!-- lane background and dividers -->
+<rect x="188" y="84" width="972" height="600" rx="8" fill="rgba(45,49,66,.018)" stroke="rgba(45,49,66,.14)"/>
+<line x1="188" y1="204" x2="1160" y2="204" stroke="rgba(45,49,66,.12)"/><line x1="188" y1="324" x2="1160" y2="324" stroke="rgba(45,49,66,.12)"/><line x1="188" y1="444" x2="1160" y2="444" stroke="rgba(45,49,66,.12)"/><line x1="188" y1="564" x2="1160" y2="564" stroke="rgba(45,49,66,.12)"/>
+<!-- lane labels -->
+<text x="32" y="128" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">ANALYST</text><text x="32" y="148" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Source owner</text>
+<text x="32" y="248" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">KNOWLEDGE SKILL</text><text x="32" y="268" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Drafting logic</text>
+<text x="32" y="368" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">LOCAL SOURCES</text><text x="32" y="388" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Profile + references</text>
+<text x="32" y="488" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">RENDERER</text><text x="32" y="508" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">HTML / DOCX</text>
+<text x="32" y="608" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">HUMAN / ITSM</text><text x="32" y="628" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Review + handoff</text>
+<!-- connectors, before nodes -->
+<path d="M296,144 H332 Q340,144 340,152 V224 Q340,232 348,232 H380" fill="none" stroke="#4F5D75" stroke-width="1.2" marker-end="url(#ks-arrow)"/>
+<rect x="304" y="164" width="56" height="16" rx="2" fill="#FDFDF9"/><text x="332" y="176" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">HAND OFF</text>
+<path d="M492,264 H528 Q536,264 536,256 V144 Q536,136 544,136 H576" fill="none" stroke="#7161A1" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ks-link)"/>
+<rect x="500" y="192" width="64" height="16" rx="2" fill="#FDFDF9"/><text x="532" y="204" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace">READ GAPS</text>
+<path d="M676,144 H712 Q720,144 720,152 V232 Q720,240 728,240 H760" fill="none" stroke="#C09241" stroke-width="1.4" marker-end="url(#ks-accent)"/>
+<rect x="684" y="164" width="64" height="16" rx="2" fill="#FDFDF9"/><text x="716" y="176" text-anchor="middle" fill="#C09241" font-size="8" font-family="'Geist Mono',monospace">CONFIRM</text>
+<path d="M864,264 H900 Q908,264 908,272 V472 Q908,480 916,480 H944" fill="none" stroke="#C09241" stroke-width="1.4" marker-end="url(#ks-accent)"/>
+<rect x="872" y="348" width="64" height="16" rx="2" fill="#FDFDF9"/><text x="904" y="360" text-anchor="middle" fill="#C09241" font-size="8" font-family="'Geist Mono',monospace">WRITE</text>
+<path d="M1052,504 H1080 Q1088,504 1088,512 V640 Q1088,648 1096,648 H1120" fill="none" stroke="#C09241" stroke-width="1.4" marker-end="url(#ks-accent)"/>
+<rect x="1040" y="544" width="64" height="16" rx="2" fill="#FDFDF9"/><text x="1072" y="556" text-anchor="middle" fill="#C09241" font-size="8" font-family="'Geist Mono',monospace">REVIEW</text>
+<path d="M676,264 H700 Q708,264 708,272 V352 Q708,360 716,360 H760" fill="none" stroke="#4F5D75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ks-arrow)"/>
+<rect x="680" y="296" width="72" height="16" rx="2" fill="#FDFDF9"/><text x="716" y="308" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">OPTIONAL</text>
+<path d="M864,384 H888 Q896,384 896,392 V644 Q896,652 904,652 H944" fill="none" stroke="#C09241" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#ks-accent)"/>
+<rect x="840" y="520" width="88" height="16" rx="2" fill="#FDFDF9"/><text x="884" y="532" text-anchor="middle" fill="#C09241" font-size="8" font-family="'Geist Mono',monospace">SAVE AS DOCX</text>
+<!-- connected mode branch: intentionally gated -->
+<path d="M864,284 H920 Q928,284 928,672 Q928,680 936,680 H944" fill="none" stroke="#7A8399" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ks-arrow)"/>
+<rect x="868" y="404" width="88" height="16" rx="2" fill="#FDFDF9"/><text x="912" y="416" text-anchor="middle" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">DEP-1 GATED</text>
+<!-- analyst nodes -->
+<rect x="208" y="112" width="88" height="64" rx="6" fill="rgba(79,93,117,.10)" stroke="#7A8399"/><text x="252" y="136" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Provide</text><text x="252" y="152" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">worklog / ticket</text>
+<rect x="976" y="112" width="160" height="64" rx="6" fill="rgba(79,93,117,.10)" stroke="#7A8399"/><text x="1056" y="136" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Confirm or correct</text><text x="1056" y="152" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">facts · gaps · cause</text>
+<!-- skill nodes -->
+<rect x="380" y="224" width="112" height="64" rx="6" fill="#FFFFFF" stroke="#2D3142"/><text x="436" y="248" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Take as given</text><text x="436" y="264" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">no supplementation</text>
+<rect x="576" y="112" width="100" height="64" rx="6" fill="#FFFFFF" stroke="#2D3142"/><text x="626" y="136" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Select</text><text x="626" y="152" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">site or generic</text>
+<rect x="760" y="224" width="104" height="64" rx="6" fill="rgba(192,146,65,.12)" stroke="#C09241" stroke-width="1.4"/><text x="812" y="248" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Draft ladder</text><text x="812" y="264" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">scope → layers → cause</text>
+<rect x="760" y="352" width="104" height="64" rx="6" fill="#FFFFFF" stroke="#2D3142"/><text x="812" y="376" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Checklist</text><text x="812" y="392" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">gaps · suggestions</text>
+<!-- local source nodes -->
+<rect x="544" y="112" width="32" height="64" rx="6" fill="none" stroke="none"/><rect x="560" y="344" width="160" height="64" rx="6" fill="rgba(113,97,161,.06)" stroke="rgba(113,97,161,.55)"/><text x="640" y="368" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace">REFERENCE</text><text x="640" y="388" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">KB template + format</text><text x="640" y="404" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">shape · headings · import rules</text>
+<rect x="560" y="464" width="160" height="64" rx="6" fill="rgba(113,97,161,.06)" stroke="rgba(113,97,161,.55)"/><text x="640" y="488" text-anchor="middle" fill="#7161A1" font-size="8" font-family="'Geist Mono',monospace">SITE CONTEXT</text><text x="640" y="508" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Site profile</text><text x="640" y="524" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">systems · escalation · template</text>
+<!-- renderer -->
+<rect x="944" y="464" width="108" height="64" rx="6" fill="#FFFFFF" stroke="#2D3142"/><text x="998" y="488" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Write HTML</text><text x="998" y="504" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">self-contained</text>
+<rect x="944" y="584" width="108" height="64" rx="6" fill="#FFFFFF" stroke="#2D3142"/><text x="998" y="608" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Optional DOCX</text><text x="998" y="624" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">local renderer</text>
+<!-- human handoff -->
+<rect x="944" y="664" width="192" height="64" rx="6" fill="rgba(192,146,65,.12)" stroke="#C09241" stroke-width="1.4"/><text x="1040" y="688" text-anchor="middle" fill="#2D3142" font-size="12" font-family="'Geist',sans-serif" font-weight="600">Human upload / approval</text><text x="1040" y="704" text-anchor="middle" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">Word → Save As → ServiceNow</text>
+<!-- notes -->
+<rect x="208" y="744" width="928" height="48" rx="6" fill="rgba(192,146,65,.05)" stroke="rgba(192,146,65,.55)" stroke-dasharray="4,4"/><text x="224" y="764" fill="#C09241" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".12em">BOUNDARY</text><text x="316" y="764" fill="#2D3142" font-size="11" font-family="'Geist',sans-serif" font-weight="600">Connected mode reads and submits only when DEP-1 and explicit human approval exist.</text><text x="316" y="780" fill="#4F5D75" font-size="9" font-family="'Geist Mono',monospace">Manual mode remains fully usable; suggestions and outstanding items stay outside the article HTML.</text>
+<!-- legend -->
+<line x1="208" y1="820" x2="1136" y2="820" stroke="rgba(45,49,66,.12)" stroke-width=".8"/><text x="208" y="840" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace" letter-spacing=".14em">LEGEND</text><rect x="284" y="832" width="12" height="12" rx="2" fill="rgba(192,146,65,.12)" stroke="#C09241"/><text x="308" y="842" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace">FOCAL HANDOFF</text><line x1="432" y1="838" x2="468" y2="798" stroke="#7161A1" stroke-width="1" stroke-dasharray="4,3"/><text x="480" y="842" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace">LOCAL SOURCE</text><line x1="596" y1="838" x2="632" y2="798" stroke="#7A8399" stroke-width="1" stroke-dasharray="4,3"/><text x="644" y="842" fill="#4F5D75" font-size="8" font-family="'Geist Mono',monospace">OPTIONAL / DEP-1 GATED</text><text x="1136" y="842" text-anchor="end" fill="#7A8399" font-size="8" font-family="'Geist Mono',monospace">STATIC · PROJECT-LOCAL CLINICAL PARCHMENT</text>
+</svg><p class="footer">RIS ASSIST · KNOWLEDGE SKILL · MANUAL MODE DEFAULT · DEP-1 CONNECTED MODE BOUNDARY</p>
+</main></body></html>

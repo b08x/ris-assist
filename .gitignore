@@ -220,3 +220,6 @@ graphify-out/
 
 scratch/
 reviews/
+
+**/zreadV2/*
+.zread/

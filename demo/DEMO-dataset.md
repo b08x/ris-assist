@@ -619,8 +619,14 @@ data here to tempt it.
 
 **6.2 ServiceNow connected mode.** DEP-1 unresolved. Every turn is manual mode.
 
-**6.3 A live cold-start interview.** No site profile in the corpus; Turn 7
-reviews a pre-populated example.
+**6.3 A live cold-start interview — and this one is not a corpus limitation.**
+It is listed here because a reader will look for it, not because the data is
+what's missing. The interview is built (E2.2); Turn 7 exercises `review` mode
+only, and `edit` mode is not built (E2.3). A scripted run would prove the
+question sequence and the refusal behaviors; it could not prove **elicitation**
+— that the questions get the right answers out of a real analyst at a real
+site. No corpus supplies that, because what it needs is a person with a site to
+answer for. Adding records would not move this one.
 
 **6.4 An empty worklog.** All 70 records have `work_notes` populated; the minimum
 is 142 characters. The nearest available case is `INC0063805`, and it is *thin*,
